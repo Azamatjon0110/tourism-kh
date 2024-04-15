@@ -39,7 +39,10 @@ const about = () => {
 					</h3>
 					<div className='about-wrapper row'>
 						<div className='col-12 mb-4'>
-							<a href='https://www.youtube.com/embed/FaHVunR7YTM?si=74zGmncCoH_Kfb1m'>
+							<a
+								href='https://www.youtube.com/embed/FaHVunR7YTM?si=74zGmncCoH_Kfb1m'
+								target='blank'
+							>
 								<img
 									className=' about-wrapper__img frame-img'
 									src={fes}
@@ -51,6 +54,7 @@ const about = () => {
 							<a
 								className='about-wrapper__loc'
 								href='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d97034.63629933429!2d70.84872294261298!3d40.534245204561294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38baeeeb2e1c3e7f%3A0x816d723cc5842908!2z0JrQvtC60LDQvdC0LCDQpNC10YDQs9Cw0L3RgdC60LDRjyDQntCx0LvQsNGB0YLRjCwg0KPQt9Cx0LXQutC40YHRgtCw0L0!5e0!3m2!1sru!2s!4v1713146512311!5m2!1sru!2s'
+								target='blank'
 							>
 								<iframe
 									className='loc-iframe'
@@ -135,7 +139,10 @@ const about = () => {
 							<img className='about-wrapper__img' src={fes2} alt='' />
 						</div>
 						<div className='col-12'>
-							<a href='https://youtu.be/hoWkDGLKhks?si=Px3FsnqTnQA7-oAd'>
+							<a
+								href='https://youtu.be/hoWkDGLKhks?si=Px3FsnqTnQA7-oAd'
+								target='blank'
+							>
 								<img
 									className='about-wrapper__img frame-img'
 									src={fes1}
