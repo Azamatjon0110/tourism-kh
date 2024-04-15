@@ -7,7 +7,6 @@ import s from '../../assets/images/s.jpg';
 import festival from '/src/assets/images/festival.jpg';
 import x4 from '/src/assets/images/x4.jpg';
 import shape from '../../assets/images/title-shape.png';
-import 'bootstrap/dist/css';
 import './home.css';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
