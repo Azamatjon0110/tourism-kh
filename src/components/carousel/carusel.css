@@ -1,0 +1,54 @@
+.header-top{
+  height: 100vh;
+}
+
+.crs-list{
+  width: 100vw;
+  height: 100vh;
+}
+
+.crs-item{
+  height: inherit;
+}
+
+.crs-box{
+  position: relative;
+  z-index: 4;
+  height: 100vh;
+}
+
+.crs-img{
+  width: 100%;
+  height: 100vh ;
+}
+
+.crs-title{
+  width: 80%;
+  padding-left: 16px;
+  position: absolute;
+  right: 0;
+  bottom:80px;
+  left: 40px;
+  z-index: 2;
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 42px;
+  color: #fff;
+  border-left: 5px solid #fff;
+  text-shadow: 0px 0px 5px #000;
+}
+.react-multiple-carousel__arrow {
+  display: none;
+}
+
+@media screen and (min-width:768px) {
+  .crs-title{
+    font-size: 80px;
+  }
+}
+
+@media screen and (min-width:1200px) {
+  .crs-title{
+    font-size: 96px;
+  }
+}
