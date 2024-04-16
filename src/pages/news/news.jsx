@@ -1,7 +1,6 @@
 import Navbar from '../../components/navbar/navbar';
 import language from '../../assets/lang/language';
 import shape from '/src/assets/images/title-shape.png';
-// import x6 from '/src/assets/images/x8.jpg';
 import festival from '/src/assets/images/festival.jpg';
 import Footer from '../../components/footer/footer.jsx';
 import './news.css';
@@ -25,7 +24,7 @@ const News = () => {
 					</div>
 				</div>
 			</div>
-			<div className='about-wrap'>
+			<div className='about-wrap bg-light'>
 				<div className='container'>
 					<img className='shape mb-2' src={shape} alt='' />
 					<h3 className='about-wrap__title mb-4'>

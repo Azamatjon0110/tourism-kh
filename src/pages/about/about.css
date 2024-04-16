@@ -84,19 +84,16 @@
 .frame-img-box{
   display: block;
 }
-
+/*
 .frame-img{
-  display: block;
   position: relative;
-  /* z-index: 1; */
-}
+} */
 
-.frame-img::before{
+.frame-img-box::before{
   position: absolute;
-  top: 0;
-  /* right: 0; */
-  /* bottom: 0; */
-  left: 0;
+  display: inline-block;
+  top: calc(50% - 25px);
+  left: calc(50% - 25px);
   content:"";
   width:50px;
   height: 50px;
@@ -104,7 +101,7 @@
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  /* z-index: 2; */
+  z-index: 2;
 }
 
 @media screen and (min-width:768px) {

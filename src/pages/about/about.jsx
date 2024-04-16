@@ -7,6 +7,7 @@ import fes1 from '/src/assets/images/fes1.jpg';
 import fes2 from '/src/assets/images/hunar.jpg';
 import Footer from '../../components/footer/footer.jsx';
 import './about.css';
+import { Link } from 'react-router-dom';
 const about = () => {
 	const lang = localStorage.getItem('lang');
 	return (
@@ -38,10 +39,10 @@ const about = () => {
 						{language[lang].about.about_wrap_title}
 					</h3>
 					<div className='about-wrapper row'>
-						<div className='col-12 mb-4'>
-							<a
+						<div className='col-12 mb-4 position-relative'>
+							<Link
 								className='frame-img-box'
-								href='https://www.youtube.com/embed/FaHVunR7YTM?si=74zGmncCoH_Kfb1m'
+								to='https://www.youtube.com/embed/FaHVunR7YTM?si=74zGmncCoH_Kfb1m'
 								target='blank'
 							>
 								<img
@@ -49,20 +50,40 @@ const about = () => {
 									src={fes}
 									alt=''
 								/>
-							</a>
+							</Link>
 						</div>
 						<div className='col-12 col-lg-6 mb-4 mb-lg-5'>
-							<a
-								className='about-wrapper__loc'
-								href='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d97034.63629933429!2d70.84872294261298!3d40.534245204561294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38baeeeb2e1c3e7f%3A0x816d723cc5842908!2z0JrQvtC60LDQvdC0LCDQpNC10YDQs9Cw0L3RgdC60LDRjyDQntCx0LvQsNGB0YLRjCwg0KPQt9Cx0LXQutC40YHRgtCw0L0!5e0!3m2!1sru!2s!4v1713146512311!5m2!1sru!2s'
-								target='blank'
-							>
+							<div style={{ position: 'relative', overflow: 'hidden' }}>
+								<Link
+									to='https://yandex.uz/maps/10332/kokand/?utm_medium=mapframe&utm_source=maps'
+									style={{
+										color: '#eee',
+										fontSize: '12px',
+										position: 'absolute',
+										top: '0px',
+									}}
+								>
+									Коканд
+								</Link>
+								<Link
+									to='https://yandex.uz/maps/geo/771298515/?ll=70.947110%2C40.520388&utm_medium=mapframe&utm_source=maps&z=12.42'
+									style={{
+										color: '#eee',
+										fontSize: '12px',
+										position: 'absolute',
+										top: '14px',
+									}}
+								>
+									Коканд — Яндекс Карты
+								</Link>
 								<iframe
-									className='loc-iframe'
-									src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d97034.63629933429!2d70.84872294261298!3d40.534245204561294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38baeeeb2e1c3e7f%3A0x816d723cc5842908!2z0JrQvtC60LDQvdC0LCDQpNC10YDQs9Cw0L3RgdC60LDRjyDQntCx0LvQsNGB0YLRjCwg0KPQt9Cx0LXQutC40YHRgtCw0L0!5e0!3m2!1sru!2s!4v1713146512311!5m2!1sru!2s'
-									referrerPolicy='no-referrer-when-downgrade'
+									src='https://yandex.uz/map-widget/v1/?ll=70.947110%2C40.520388&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgk3NzEyOTg1MTUSKU_Ku3piZWtpc3RvbiwgRmFyZ8q7b25hIHZpbG95YXRpLCBRb8q7cW9uIgoNf-GNQhUXKCJC&z=12.42'
+									className='frame-loc w-100'
+									height={300}
+									allowFullScreen={true}
+									style={{ position: 'relative' }}
 								></iframe>
-							</a>
+							</div>
 						</div>
 						<div className='col-12 col-lg-6 mb-4 mb-lg-5'>
 							<p className='about-wrapper__text'>
@@ -139,17 +160,18 @@ const about = () => {
 						<div className='col-12 col-lg-6 mb-4 mb-lg-5'>
 							<img className='about-wrapper__img' src={fes2} alt='' />
 						</div>
-						<div className='col-12'>
-							<a
-								href='https://youtu.be/hoWkDGLKhks?si=Px3FsnqTnQA7-oAd'
+						<div className='col-12 position-relative'>
+							<Link
+								to='https://youtu.be/hoWkDGLKhks?si=Px3FsnqTnQA7-oAd'
 								target='blank'
+								className='frame-img-box'
 							>
 								<img
 									className='about-wrapper__img frame-img'
 									src={fes1}
 									alt=''
 								/>
-							</a>
+							</Link>
 						</div>
 					</div>
 				</div>
