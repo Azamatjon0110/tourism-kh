@@ -40,6 +40,7 @@ const about = () => {
 					<div className='about-wrapper row'>
 						<div className='col-12 mb-4'>
 							<a
+								className='frame-img-box'
 								href='https://www.youtube.com/embed/FaHVunR7YTM?si=74zGmncCoH_Kfb1m'
 								target='blank'
 							>
