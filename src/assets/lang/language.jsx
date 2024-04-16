@@ -10,6 +10,10 @@ const language = {
 				home: 'Home',
 				about: 'About',
 				news: 'News',
+				his_pl: 'Historical places',
+				hotel: 'Hotels',
+				gid: 'Guides',
+				media: 'Media',
 				contact: 'Contact',
 			},
 			home_off: {
@@ -49,6 +53,10 @@ const language = {
 				home: 'Asosiy',
 				about: 'Biz haqimizda',
 				news: 'Yangiliklar',
+				his_pl: 'Tarixiy joylar',
+				hotel: 'Mehmonxonalar',
+				gid: 'Gidlar',
+				media: 'Media',
 				contact: "Bog'lanish",
 			},
 			home_off: {
@@ -89,6 +97,10 @@ const language = {
 				home: 'Главное',
 				about: 'O нас',
 				news: 'Новости',
+				his_pl: 'Исторические места',
+				hotel: 'Oтели',
+				gid: 'Гиды',
+				media: 'CМИ',
 				contact: 'Контакты',
 			},
 			home_off: {

@@ -15,9 +15,9 @@ const Navbar = () => {
 		document.querySelector('.desktop-offset').classList.toggle('active');
 	};
 
-	function changeLang(evt) {
+	function changeLang() {
 		// localStorage.setItem('lang', )
-		console.log(evt);
+		// console.log(evt.target);
 	}
 
 	return (
@@ -66,15 +66,34 @@ const Navbar = () => {
 								</Link>
 							</li>
 							<li className='lang-item'>
-								<Link className='lang-btn' to='/news' data-scroll-to>
-									{language[lang].home.navbar.news}
+								<Link
+									className='lang-btn'
+									to='/historical_places'
+									data-scroll-to
+								>
+									{language[lang].home.navbar.his_pl}
 								</Link>
 							</li>
-							{/* <li className='lang-item'>
+							<li className='lang-item'>
+								<Link className='lang-btn' to='/hotels' data-scroll-to>
+									{language[lang].home.navbar.hotel}
+								</Link>
+							</li>
+							<li className='lang-item'>
+								<Link className='lang-btn' to='/guides' data-scroll-to>
+									{language[lang].home.navbar.gid}
+								</Link>
+							</li>
+							<li className='lang-item'>
+								<Link className='lang-btn' to='/media' data-scroll-to>
+									{language[lang].home.navbar.media}
+								</Link>
+							</li>
+							<li className='lang-item'>
 								<Link className='lang-btn' to='/contact' data-scroll-to>
 									{language[lang].home.navbar.contact}
 								</Link>
-							</li> */}
+							</li>
 						</ul>
 					</div>
 				</div>
