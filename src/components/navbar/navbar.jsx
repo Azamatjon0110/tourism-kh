@@ -95,11 +95,11 @@ const Navbar = () => {
 								</ul>
 							</li>
 
-							<li className='lang-item'>
+							{/* <li className='lang-item'>
 								<Link className='lang-btn' to='/contact' data-scroll-to>
 									{language[lang].home.navbar.contact}
 								</Link>
-							</li>
+							</li> */}
 						</ul>
 					</div>
 				</div>
