@@ -64,17 +64,13 @@ const Navbar = () => {
 								<p className='dropdown-c'>{language[lang].home.navbar.about}</p>
 								<ul className='list-ustyled nav-dropdown'>
 									<li className='dropdown-item'>
-										<Link
-											className='dropdown-link d-block'
-											to='/about'
-											data-scroll-to
-										>
+										<Link className='dropdown-link' to='/about' data-scroll-to>
 											{language[lang].about.about_wrap_title}
 										</Link>
 									</li>
 									<li className='dropdown-item'>
 										<Link
-											className='dropdown-link d-block'
+											className='dropdown-link'
 											to='/scholar'
 											data-scroll-to
 										>
@@ -87,11 +83,11 @@ const Navbar = () => {
 								</Link> */}
 							</li>
 							<li className='lang-item dropdown-box'>
-								<p className='dropdown-c'>{language[lang].home.navbar.plan}</p>
+								<p className='planning'>{language[lang].home.navbar.plan}</p>
 								<ul className='list-ustyled nav-dropdown'>
 									<li className='dropdown-item'>
 										<Link
-											className='dropdown-link d-block'
+											className='dropdown-link'
 											to='/historical_places'
 											data-scroll-to
 										>
@@ -99,29 +95,17 @@ const Navbar = () => {
 										</Link>
 									</li>
 									<li className='dropdown-item'>
-										<Link
-											className='dropdown-link d-block'
-											to='/hotels'
-											data-scroll-to
-										>
+										<Link className='dropdown-link' to='/hotels' data-scroll-to>
 											{language[lang].home.navbar.hotel}
 										</Link>
 									</li>
 									<li className='dropdown-item'>
-										<Link
-											className='dropdown-link d-block'
-											to='/guides'
-											data-scroll-to
-										>
+										<Link className='dropdown-link' to='/guides' data-scroll-to>
 											{language[lang].home.navbar.gid}
 										</Link>
 									</li>
 									<li className='dropdown-item'>
-										<Link
-											className='dropdown-link d-block'
-											to='/media'
-											data-scroll-to
-										>
+										<Link className='dropdown-link' to='/media' data-scroll-to>
 											{language[lang].home.navbar.media}
 										</Link>
 									</li>

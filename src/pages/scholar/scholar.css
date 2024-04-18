@@ -1,0 +1,16 @@
+.scholar__box{
+  width: 100%;
+  max-width: 992px;
+  margin: 0 auto;
+}
+
+.scholar__img{
+  display: inline-block !important;
+  width: 400px;
+  height: 300px;
+  margin-right: 8px;
+}
+
+.scholar__text{
+  display: inline-block;
+}

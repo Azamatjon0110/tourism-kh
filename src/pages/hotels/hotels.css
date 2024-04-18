@@ -1,0 +1,26 @@
+.hotel-hero{
+  position: relative;
+  padding: 60px 0;
+  z-index: 1;
+}
+
+.hotel-title{
+  margin-top: 150px;
+  font-size: 45px;
+  font-family: 'Cinzel', serif;
+  overflow-wrap: break-word;
+}
+
+@media screen and (min-width:768px) {
+  .hotel-title{
+    font-size: 60px;
+    overflow-wrap: normal;
+  }
+}
+
+@media screen and (min-width:992px) {
+  .hotel-title{
+    font-size: 80px;
+    overflow-wrap: normal;
+  }
+}

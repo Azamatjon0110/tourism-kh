@@ -36,7 +36,7 @@
 
 .navbar-box{
   position: absolute;
-  width: 75%;
+  width: 80%;
   padding-left: 24px;
   height: 100vh;
   top: 0;
@@ -117,7 +117,7 @@
   position: relative;
   display: inline-block !important;
   margin: 0;
-  padding-right: 12px;
+  padding-right: 30px;
   font-family: 'Cinzel', sans-serif;
   font-size: 20px;
   color: #fff;
@@ -136,7 +136,35 @@
   position: absolute;
   display: inline-block;
   top: calc(50% - 6px);
-  right: -4px;
+  right: 15px;
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-image: url('/src/assets/images/arrow-down.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.planning{
+  position: relative;
+  display: inline-block !important;
+  margin: 0;
+  padding-right: 30px;
+  font-family: 'Cinzel', sans-serif;
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+  background-image: linear-gradient(rgba(0, 0, 0, 0) calc(99% - 2px), #54f12c 3px);
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    transition: background-size 0.5s;
+}
+
+.planning::after{
+  position: absolute;
+  display: inline-block;
+  top: calc(50% - 6px);
+  left: 270px;
   content: '';
   width: 12px;
   height: 12px;
@@ -149,6 +177,7 @@
   padding: 5px;
   margin: 5px 0 0;
   cursor: pointer;
+  overflow-wrap: break-word;
 }
 .dropdown-item:hover{
   background-color: #54f12c;
@@ -159,7 +188,7 @@
   max-width: 300px;
   position: absolute;
   top: 100%;
-  left:  7px;
+  left:  -5px;
   background-color: rgb(243, 243, 243);
   border-radius: 4px;
   list-style: none;
@@ -175,6 +204,8 @@
 }
 
 .dropdown-link{
+  width: 100%;
+  overflow-wrap: break-word;
   color: #080808;
 }
 
@@ -265,6 +296,12 @@
 
 .navbar.light .hamburger-menu .hamburger path {
   stroke: #fff;
+}
+
+@media screen and (min-width:437px) {
+  .planning::after{
+    right: 165px;
+  }
 }
 
 @media only screen and (min-width:576px) {
@@ -391,10 +428,19 @@
     display: inline-block !important;
   }
 
-  .dropdown-c::after{
+  .planning{
+    font-family: sans-serif;
+    color: #080808;
+  }
+
+  .dropdown-c::after, .planning::after{
     background-image: url('/src/assets/images/arrow.svg');
   }
 
+  .planning::after{
+    left: 210px;
+    background-image: url('/src/assets/images/arrow.svg');
+  }
   .logo-box{
     display: none;
   }

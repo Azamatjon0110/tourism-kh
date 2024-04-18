@@ -23,6 +23,49 @@ const Scholar = () => {
 					</div>
 				</div>
 			</div>
+			<div className='scholar'>
+				<div className='container'>
+					<div className='scholar__box'>
+						<h3 className='scolar__title'>Hamza Hakimzoda Niyoziy</h3>
+						<div className='d-flex'>
+							<img
+								className='scholar__img'
+								src='/src/assets/images/niyoziy.jpeg'
+								alt=''
+							/>
+							<p className='scholar__text'>
+								Hamza Hakimzoda — o‘zbek shoiri, dramaturg, jamoat arbobi,
+								O‘zbek SSR xalq shoiri (1926). U mumtoz she’riyat vaznini (Aruz)
+								xalq she’riyati (Barmoq) vazni hisobiga to‘ldirgan. Hamza
+								O‘zbekiston madaniyati tarixi rivojiga nafaqat shoir va
+								dramaturg, balki teatr arbobi, bastakor va musiqachi sifatida
+								ham sezilarli iz qoldirgan. Bugun O‘zbek davlat akademik va
+								drama teatri uning sharafiga nomlangan.1889-yil 22-fevral kuni
+								(6-mart) tabib oilasida tug‘ilgan. Maktabda savod olgach,
+								madrasada saboq oladi. Kambag‘allar uchun bepul maktab tashkil
+								etadi va unda dars beradi. She’r yozishni 1899-yildan, o‘zbek
+								ma’naviyatshunoslari Muqimiy va Furqatlar ijodidan ilhomlanib
+								yoza boshlaydi. Hamzaning inqilob yillaridan oldingi asosiy
+								asari o‘zbek va tojik tillarida yozilgan she’riy “Devon” (1905 -
+								1914) asari vafot etganidan so‘ng nashr etilgan.
+							</p>
+						</div>
+						<p className='scholar-text'></p>
+						<p className='scholar__text'>
+							“Devon”ning ayrim g‘azallarida an’anaviy ayriliq sevgi timsoli
+							bilan bir qatorda, ijtimoiy tengsizlik farqi mavjud. Hamzaning
+							birinchi nashrdan chiqqan “Ramazon” (1914), “Yangi baxt” dostoni
+							(1915), “Zaharlangan hayot” (1916) deb nomlangan asarlari ham
+							ushbu mavzularga uyg‘unlashgan. 1916 – 1919-yillarda Hamza yettita
+							she’riy to‘plamini nashr etadi, ularda shoirning
+							inqilobiy-demokratik ma’naviyatshunoslik yo‘lidan inqilob
+							jangchisi tomon o‘tgani seziladi. “Xushbo‘y atirgul” to‘plamidan
+							joy olgan she’rlari o‘zbek tilidagi proletar she’riyatning ilk
+							namunalariga aylandi.
+						</p>
+					</div>
+				</div>
+			</div>
 			<Footer />
 		</>
 	);

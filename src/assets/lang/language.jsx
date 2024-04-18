@@ -57,7 +57,7 @@ const language = {
 				news: 'Yangiliklar',
 				plan: 'Sayohatni rejalashtirish',
 				his_pl: 'Tarixiy joylar',
-				hotel: 'Mehmonxona',
+				hotel: 'Mehmonxona va mehmon uylar',
 				gid: 'Gidlar',
 				media: 'Media',
 				contact: "Bog'lanish",
@@ -99,7 +99,7 @@ const language = {
 			miyon_mad: 'Miyon Xazrat madrasasi',
 		},
 		hotel: {
-			main_title: 'Mehmonxonalar',
+			main_title: 'Mehmonxonalar va mehmon uylar',
 			main_text:
 				"Bu sahifada Qo'qon shahridagi mehmonxonalar haqida bilib olasiz.",
 		},
