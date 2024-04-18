@@ -53,10 +53,11 @@ const language = {
 			navbar: {
 				home: 'Asosiy',
 				about: 'Biz haqimizda',
+				scholar: 'Allomalar',
 				news: 'Yangiliklar',
 				plan: 'Sayohatni rejalashtirish',
 				his_pl: 'Tarixiy joylar',
-				hotel: 'Mehmonxonalar',
+				hotel: 'Mehmonxona',
 				gid: 'Gidlar',
 				media: 'Media',
 				contact: "Bog'lanish",
@@ -86,6 +87,33 @@ const language = {
 			news_title: 'Yangiliklar',
 			news_box_title:
 				'Qo‘qon shahrida bo‘lib o‘tgan II Xalqaro hunarmandchilik festivali g‘oliblariga diplom va sovg‘alarni tantanali topshirdilar',
+		},
+		historical: {
+			main_text:
+				'Bu sahifada siz Qo`qon shahridagi tarixiy obidalar, qadimgi	me`morchilik namunalari bilan tanishishingiz mumkin.',
+			xd: "Xudoyorxon O'rdasi",
+			jome: 'Jome` masjid ',
+			dahma: 'Dahmai Shohon',
+			qozi: 'Kamol qozi madrasasi',
+			nor_mad: "Norbo'tabiy madrasasi",
+			miyon_mad: 'Miyon Xazrat madrasasi',
+		},
+		hotel: {
+			main_title: 'Mehmonxonalar',
+			main_text:
+				"Bu sahifada Qo'qon shahridagi mehmonxonalar haqida bilib olasiz.",
+		},
+		gid: {
+			main_title: 'Gidlar',
+			main_text:
+				"Bu sahifada Qo'qon shahridagi mehmonxonalar haqida bilib olasiz.",
+		},
+		scholar: {
+			main_title: 'Allomalar',
+			main_text: "Bu sahifada buyuk allomlar haqida ma'lumot beramiz",
+		},
+		media: {
+			main_title: 'Fotogalareya',
 		},
 	},
 	ru: {

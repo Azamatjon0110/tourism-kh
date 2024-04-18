@@ -1,8 +1,8 @@
 import Navbar from '/src/components/navbar/navbar';
 import Footer from '../../components/footer/footer';
 import language from '../../assets/lang/language';
-import './gid.css';
-const Guides = () => {
+import './scholar.css';
+const Scholar = () => {
 	const lang = localStorage.getItem('lang');
 	return (
 		<>
@@ -16,16 +16,16 @@ const Guides = () => {
 						></path>
 					</svg>
 					<div className='about-us'>
-						<h1 className='about-us__title mt-5'>
-							{language[lang].gid.main_title}
+						<h1 className='about-us__title mt-4'>
+							{language[lang].scholar.main_title}
 						</h1>
+						<p className='about-us__text'>{language[lang].scholar.main_text}</p>
 					</div>
 				</div>
 			</div>
-
 			<Footer />
 		</>
 	);
 };
 
-export default Guides;
+export default Scholar;

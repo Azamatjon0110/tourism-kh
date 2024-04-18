@@ -79,9 +79,9 @@ const Home = () => {
 						{arr.map((item) => (
 							<div className='col-12 col-md-6 col-lg-4 news-box' key={item}>
 								<div className='card-news' data-aos='flip-up'>
-									<img className='news-img' src={festival} alt='' />
-									<h3 className='news-title text-center'>Yangilliklar</h3>
-									<p className='news-text text-center'>
+									<img className='news-img text-center' src={festival} alt='' />
+									<h3 className='news-title '>Yangilliklar</h3>
+									<p className='news-text'>
 										21-23 sentyabr kunlari Qo‘qon shahrida bo‘lib o‘tgan
 										ikkinchi Xalqaro hunarmandchilik festivali katta bayram
 										shodiyonasi bilan yakunlandi.
@@ -100,10 +100,8 @@ const Home = () => {
 			</div>
 			<div className='galary'>
 				<div className='container'>
-					<div className=''>
-						<img className='shape' src={shape} alt='' />
-						<h4 className='galary-title'>{language[lang].home.galary_title}</h4>
-					</div>
+					<img className='shape' src={shape} alt='' />
+					<h4 className='galary-title'>{language[lang].home.galary_title}</h4>
 				</div>
 				<Carousel
 					responsive={{

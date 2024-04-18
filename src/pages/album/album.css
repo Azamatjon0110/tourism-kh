@@ -1,0 +1,26 @@
+.album{
+  margin-top: 150px;
+  background-color: rgb(253, 248, 241);
+}
+
+.album__box{
+  padding: 40px 0;
+}
+
+.album__title{
+  margin-bottom: 20px;
+}
+
+.album__img{
+  width: 100%;
+}
+
+@media screen and (min-width:992px) {
+  .album__box{
+    padding: 75px 0;
+  }
+
+  .album__title{
+    margin-bottom: 28px;
+  }
+}
