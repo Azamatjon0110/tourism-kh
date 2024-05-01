@@ -32,7 +32,7 @@ const about = () => {
 					</div>
 				</div>
 			</div>
-			<div className='about-wrap'>
+			<div className='about-wrap '>
 				<div className='container'>
 					<img className='shape mb-2' src={shape} alt='' />
 					<h3 className='about-wrap__title'>
@@ -101,7 +101,11 @@ const about = () => {
 							</p>
 						</div>
 						<div className='col-12 mb-4 mb-lg-5'>
-							<img className='about-wrapper__img mb-4' src={x6} alt='' />
+							<img
+								className='about-wrapper__img mb-2 mb-lg-4'
+								src={x6}
+								alt=''
+							/>
 							<p className='about-wrapper-text'>
 								Qoʻqonning 18-asrgacha boʻlgan siyosiy tarixi haqida maʼlumotlar
 								juda oz. Qoʻqon podsho Rossiyasi qoʻshinlari tomonidan zabt
