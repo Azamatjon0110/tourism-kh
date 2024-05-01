@@ -57,7 +57,7 @@ const language = {
 				news: 'Yangiliklar',
 				plan: 'Sayohatni rejalashtirish',
 				his_pl: 'Tarixiy joylar',
-				hotel: 'Mehmonxona va mehmon uylar',
+				hotel: 'Mehmonxonalar',
 				gid: 'Gidlar',
 				media: 'Media',
 				contact: "Bog'lanish",

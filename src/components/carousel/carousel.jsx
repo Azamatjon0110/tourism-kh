@@ -36,7 +36,7 @@ const Carusel = () => {
 				<Carousel
 					responsive={responsive}
 					pauseOnHover={false}
-					autoPlay={10000}
+					autoPlay={8000}
 					infinite
 					className='crs-list'
 					itemClass='crs-item'
@@ -46,6 +46,7 @@ const Carusel = () => {
 				>
 					{crs.map((item) => (
 						<div className='crs-box' key={item}>
+							<div className='bg-gradient'></div>
 							<h1 className='crs-title'>{language[lang].home.hero_title}</h1>
 							<img className='crs-img' src={item} alt='' />
 						</div>

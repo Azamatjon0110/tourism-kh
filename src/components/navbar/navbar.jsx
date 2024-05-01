@@ -60,7 +60,41 @@ const Navbar = () => {
 									{language[lang].home.navbar.home}
 								</Link>
 							</li>
-							<li className='lang-item dropdown-box'>
+							<li className='lang-item d-block d-lg-none'>
+								<Link className='lang-btn' to='/about' data-scroll-to>
+									{language[lang].about.about_wrap_title}
+								</Link>
+							</li>
+							<li className='lang-item d-block d-lg-none'>
+								<Link className='lang-btn' to='/scholar' data-scroll-to>
+									{language[lang].home.navbar.scholar}
+								</Link>
+							</li>
+							<li className='lang-item d-block d-lg-none'>
+								<Link
+									className='lang-btn'
+									to='/historical_places'
+									data-scroll-to
+								>
+									{language[lang].home.navbar.his_pl}
+								</Link>
+							</li>
+							<li className='lang-item d-block d-lg-none'>
+								<Link className='lang-btn' to='/hotels' data-scroll-to>
+									{language[lang].home.navbar.hotel}
+								</Link>
+							</li>
+							<li className='lang-item d-block d-lg-none'>
+								<Link className='lang-btn' to='/guides' data-scroll-to>
+									{language[lang].home.navbar.gid}
+								</Link>
+							</li>
+							<li className='lang-item d-block d-lg-none'>
+								<Link className='lang-btn' to='/media' data-scroll-to>
+									{language[lang].home.navbar.media}
+								</Link>
+							</li>
+							<li className='lang-item dropdown-box d-none d-lg-block'>
 								<p className='dropdown-c'>{language[lang].home.navbar.about}</p>
 								<ul className='list-ustyled nav-dropdown'>
 									<li className='dropdown-item'>
@@ -82,7 +116,7 @@ const Navbar = () => {
 									{language[lang].home.navbar.about}
 								</Link> */}
 							</li>
-							<li className='lang-item dropdown-box'>
+							<li className='lang-item dropdown-box d-none d-lg-block'>
 								<p className='planning'>{language[lang].home.navbar.plan}</p>
 								<ul className='list-ustyled nav-dropdown'>
 									<li className='dropdown-item'>

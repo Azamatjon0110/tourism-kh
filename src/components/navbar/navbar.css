@@ -90,10 +90,12 @@
 
 
 .lang-btn{
+  display: inline-block;
   margin: 0;
   padding-bottom: 4px;
   font-family: 'Cinzel', sans-serif;
   font-size: 20px;
+  margin-right: 30px;
   color: #fff;
   background-image: linear-gradient(rgba(0, 0, 0, 0) calc(99% - 2px), #54f12c 3px);
     background-repeat: no-repeat;
@@ -103,7 +105,7 @@
 }
 
 .lang-item:hover .lang-btn{
-  color: #080808;
+  color: #fff;
   background-size: 100% 100%;
 }
 
@@ -149,15 +151,19 @@
   position: relative;
   display: inline-block !important;
   margin: 0;
-  padding-right: 30px;
+  /* padding-right: 30px; */
   font-family: 'Cinzel', sans-serif;
   font-size: 20px;
   color: #fff;
   cursor: pointer;
-  background-image: linear-gradient(rgba(0, 0, 0, 0) calc(99% - 2px), #54f12c 3px);
+  background: linear-gradient(rgba(0, 0, 0, 0) calc(99% - 2px), #54f12c 3px);
     background-repeat: no-repeat;
     background-size: 0% 100%;
     transition: background-size 0.5s;
+}
+
+.custom-menu .lang-btn{
+  margin-right: 0;
 }
 
 .planning::after{
@@ -185,10 +191,10 @@
 .nav-dropdown{
   display: none;
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
   position: absolute;
   top: 100%;
-  left:  -5px;
+  left:  11px;
   background-color: rgb(243, 243, 243);
   border-radius: 4px;
   list-style: none;
@@ -204,6 +210,7 @@
 }
 
 .dropdown-link{
+  display: block;
   width: 100%;
   overflow-wrap: break-word;
   color: #080808;
@@ -433,6 +440,10 @@
     color: #080808;
   }
 
+  .planning:hover{
+    background-size: 100% 100%;
+  }
+
   .dropdown-c::after, .planning::after{
     background-image: url('/src/assets/images/arrow.svg');
   }
@@ -453,6 +464,9 @@
 
   .lang-item::before{
     background-color: transparent;
+  }
+  .lang-item:hover .lang-btn{
+    color: #080808;
   }
 
   .lang-btn ,.dropdown-c{
