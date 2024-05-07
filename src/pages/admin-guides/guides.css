@@ -1,0 +1,37 @@
+
+.panel-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.top-search{
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+
+.top-search input{
+  margin-right: 12px;
+}
+
+.btn-action{
+  padding: 2px 8px !important;
+}
+
+.m-title{
+  font-size: 24px;
+  text-align: center;
+}
+
+.modal-footer{
+  justify-content:  center !important;
+}

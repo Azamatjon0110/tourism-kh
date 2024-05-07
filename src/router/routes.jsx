@@ -9,6 +9,8 @@ import Guides from '../pages/gid/gid';
 import Album from '../pages/album/album';
 import Scholar from '../pages/scholar/scholar';
 import Hotel from '../pages/hotel/hotel';
+import Login from '../pages/login/login';
+import MainAdmin from '../pages/admin-main/admin-main';
 function MainRoutes() {
 	return (
 		<Routes>
@@ -22,6 +24,8 @@ function MainRoutes() {
 			<Route path='/news' Component={News} />
 			<Route path='/album' Component={Album} />
 			<Route path='/scholar' Component={Scholar} />
+			<Route path='/login' Component={Login} />
+			<Route path='/admin/*' Component={MainAdmin} />
 		</Routes>
 	);
 }

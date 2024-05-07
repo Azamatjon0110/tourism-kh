@@ -32,7 +32,7 @@
 
 .about-wrap{
   padding: 60px 0;
-  background-color: transparent;
+  background-color: rgb(252, 252, 242);
 }
 
 .about-wrap__title{
@@ -100,10 +100,6 @@
   background-position: center;
   background-repeat: no-repeat;
   z-index: 2;
-}
-
-.about-wrapper{
-  background-color: lavenderblush;
 }
 
 @media screen and (min-width:768px) {
