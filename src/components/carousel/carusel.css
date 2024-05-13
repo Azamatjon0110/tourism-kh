@@ -104,8 +104,8 @@
 }
 
 .crs-img{
-  width: 100vw !important;
-  max-width: 800px;
+  width: 100% !important;
+  max-width: 1000px;
   margin-right: 0;
   margin-left: auto;
   height: 100vh;
