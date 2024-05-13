@@ -191,6 +191,60 @@ const Home = () => {
 											</div>
 										</div>
 									</div>
+									<div
+										className='col-12 col-md-6 col-lg-4'
+										data-scroll
+										data-scroll-speed='3'
+									>
+										<div className='historical-places__card'>
+											<img className='historical-places__img' src={s} alt='' />
+											<div className='historical-places__body'>
+												<h4 className='historical-places__title'>
+													Pir Siddiq majmuasi
+												</h4>
+												<p className='historical-places__text'>
+													Pir Siddiq majmuasi 18-asr oʻrtalarida qurilgan. Vaqt
+													oʻtishi bilan uning yonida masjid, minora, qabri
+													boʻlgan hovli, darvozaxona va kaptarxona kabi meʼmoriy
+													majmua vujudga kelgan va shu sababli majmua
+													“Kaptarlik” – “Kaptar” nomi bilan mashhur...
+												</p>
+												<button
+													className='news-btn'
+													onClick={() => navigate('/album')}
+												>
+													{language[lang].home.news_btn}
+												</button>
+											</div>
+										</div>
+									</div>
+									<div
+										className='col-12 col-md-6 col-lg-4'
+										data-scroll
+										data-scroll-speed='2'
+									>
+										<div className='historical-places__card'>
+											<img className='historical-places__img' src={s} alt='' />
+											<div className='historical-places__body'>
+												<h4 className='historical-places__title'>
+													Pir Siddiq majmuasi
+												</h4>
+												<p className='historical-places__text'>
+													Pir Siddiq majmuasi 18-asr oʻrtalarida qurilgan. Vaqt
+													oʻtishi bilan uning yonida masjid, minora, qabri
+													boʻlgan hovli, darvozaxona va kaptarxona kabi meʼmoriy
+													majmua vujudga kelgan va shu sababli majmua
+													“Kaptarlik” – “Kaptar” nomi bilan mashhur...
+												</p>
+												<button
+													className='news-btn'
+													onClick={() => navigate('/album')}
+												>
+													{language[lang].home.news_btn}
+												</button>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
