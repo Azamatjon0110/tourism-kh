@@ -1,3 +1,14 @@
+.wrapper{
+  position: relative;
+  overflow-x: hidden;
+}
+
+.wrapper .bg-history{
+  margin-top: 0;
+  padding-top: 150px;
+}
+
+
 .about{
   width: 100%;
   padding: 80px 0;
@@ -14,6 +25,12 @@
   width: 100%;
   min-height: 250px;
   max-height: 420px;
+}
+
+.about-info__img{
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
 }
 
 .shape{
@@ -59,7 +76,7 @@
 }
 
 .historical-places__card:hover .historical-places__body{
-  transform: translateY(-200px);
+  transform: translateY(-220px);
 }
 
 
@@ -125,6 +142,33 @@
 }
 
 
+.galary .slick-list{
+  width: 100vw;
+  height: 400px !important;
+}
+
+.galary .slick-track{
+  height: 450px !important;
+}
+
+.galary .slick-slide{
+  width: 100%;
+  max-width: 400px;
+  height: 400px;
+  margin-right: 10px;
+}
+
+.galary .slick-prev{
+  top: 50% !important;
+  left: 25px !important;
+  transform: rotate(-90deg);
+}
+
+.galary .slick-next{
+  top: 50% !important;
+  right:  25px !important;
+  transform: rotate(-90deg);
+}
 
 @media only screen and (min-width:992px) {
   .about{
@@ -149,9 +193,8 @@
 
   .news-img{
     width: 100%;
-    transform: scale(1.2);
+    transform: scale(1.1);
     transition: 0.4s ease-in-out;
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.873749, 0, 1);
   }
 
   .news-box:nth-child(odd) .news-img{
@@ -159,7 +202,7 @@
   }
 
   .news-box:nth-child(even) .news-img{
-    height: 240px;
+    height: 320px;
   }
 
   .card-news:hover .news-title{
@@ -168,5 +211,6 @@
   .card-news:hover .news-img{
     transform: scale(1);
   }
+
 
 }

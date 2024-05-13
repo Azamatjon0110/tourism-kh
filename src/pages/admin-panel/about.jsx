@@ -1,44 +1,53 @@
 import { useEffect, useState } from 'react';
-import './guides.css';
+import './admin.css';
 import api from '../../server/api';
-import ModalGid from '../../components/modal/gid/gid';
-import ModalGidEdit from '../../components/modal/gid/gidEdit';
+// import ModalGid from '../../components/modal/gid';
+import Loading from '../../components/Animation/loading';
 
-const AdminGuides = () => {
+const About = () => {
+	const [load, setLoad] = useState(false);
 	const [guides, setGuides] = useState([]);
-	const [guide, setGuide] = useState({});
-	const [modal, setModal] = useState({});
-	// console.log(guide);
+	const [setModal] = useState({
+		status: 'git_add',
+		elem: {},
+	});
+	const [id] = useState();
 	let body = {
 		search: '',
-		page: 1,
+		pages: 1,
 		limit: 20,
 		current_page: 1,
 	};
+	const remove = () => {
+		setLoad(true);
+		api
+			.delete_gid(id)
+			.then((res) => {
+				setLoad(false);
+				console.log(res);
+			})
+			.catch((err) => {
+				setLoad(false);
+				console.log(err);
+			});
+	};
 	const getGuides = () => {
+		setLoad(true);
 		api
 			.get_guides(body)
 			.then((res) => {
 				setGuides(res.data.data);
-				body.page = res.data.pages;
+				body.pages = res.data.pages;
 				body.limit = res.data.limit;
 				body.current_page = res.data.current_page;
-
-				setModal({
-					status: 'gid_add',
-					elem: {
-						name: '',
-						phone: '',
-						address: '',
-						languages: '',
-					},
-				});
+				setLoad(false);
 			})
 			.catch((err) => {
 				console.log(err);
+				setLoad(false);
 			});
 	};
-	const openModal = (item) => setGuide(item);
+
 	useEffect(() => {
 		getGuides();
 	}, [guides.length]);
@@ -46,25 +55,33 @@ const AdminGuides = () => {
 		<>
 			<div className='d-flex flex-column w-100'>
 				<div className='panel-top py-3 px-4 border border-bottom'>
-					<h3 className='m-0'>Gidlar</h3>
+					<h3 className='m-0'>Biz haqimizda</h3>
 					<div className='top-search'>
 						<input
 							className='form-control mr-3'
 							type='search'
-							placeholder='Qirirish...'
+							placeholder='Qidirish...'
 						/>
 						<i
 							className='fa-solid fa-user-plus fa-xl pointer'
 							data-bs-toggle='modal'
 							data-bs-target='#staticBackdrop'
 							onClick={() => {
-								(modal.status = 'gid_add'), (modal.elem = {});
+								setModal({
+									status: 'gid_add',
+									elem: {
+										name: '',
+										phone: '',
+										address: '',
+										languages: '',
+									},
+								});
 							}}
 						></i>
 					</div>
 				</div>
 				<div className='panel-bottom p-3'>
-					{guides.length > 0 ? (
+					{/* {guides.length > 0 ? (
 						<table className='table'>
 							<thead>
 								<tr>
@@ -88,9 +105,14 @@ const AdminGuides = () => {
 											<button
 												className='btn btn-warning me-2 btn-action open-modal'
 												type='button'
-												onClick={() => openModal(elem)}
+												onClick={() =>
+													setModal({
+														status: 'gid_edit',
+														elem: elem,
+													})
+												}
 												data-bs-toggle='modal'
-												data-bs-target='#staticBackdrop1'
+												data-bs-target='#staticBackdrop'
 											>
 												<i className='fa-solid fa-pen fa-sm text-white'></i>
 											</button>
@@ -98,7 +120,8 @@ const AdminGuides = () => {
 												className='btn btn-danger btn-action'
 												type='button'
 												data-bs-toggle='modal'
-												data-bs-target='#exampleModal'
+												data-bs-target='#about'
+												onClick={() => setId(elem.id)}
 											>
 												<i className='fa-solid fa-trash fa-sm'></i>
 											</button>
@@ -109,16 +132,15 @@ const AdminGuides = () => {
 						</table>
 					) : (
 						<h4 className='text-center'>Ma`lumot topilmadi!</h4>
-					)}
+					)} */}
 				</div>
 			</div>
-			<ModalGid item={modal} />
-			<ModalGidEdit item={{ ...guide }} />
+			{/* <ModalGid item={modal} f={getGuides} /> */}
 			<div
 				className='modal fade'
 				id='exampleModal'
 				tabIndex='-1'
-				aria-labelledby='exampleModalLabel'
+				aria-labelledby='about'
 				aria-hidden='true'
 			>
 				<div className='modal-dialog modal-dialog-centered'>
@@ -134,15 +156,23 @@ const AdminGuides = () => {
 							>
 								Yo`q
 							</button>
-							<button type='button' className='btn btn-success'>
+							<button
+								type='button'
+								className='btn btn-success'
+								onClick={() => remove()}
+								data-bs-dismiss='modal'
+							>
 								Ha
 							</button>
 						</div>
 					</div>
 				</div>
 			</div>
+			<div className={load === true ? 'd-block' : 'd-none'}>
+				<Loading />
+			</div>
 		</>
 	);
 };
 
-export default AdminGuides;
+export default About;

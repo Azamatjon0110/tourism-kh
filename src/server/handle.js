@@ -1,8 +1,10 @@
 import util from './util';
+// import { useNavigate } from 'react-router';
 // import router from "../router/index";
 // import store from '../store';
 
-export default function handleError(error) {
+const handleError = (error) => {
+	// const navigate = useNavigate();
 	const status = error.response?.status;
 	const detail = error.response?.data?.detail;
 	if (error.code == 'ERR_NETWORK') {
@@ -15,6 +17,8 @@ export default function handleError(error) {
 			} else util.toast('warning', detail);
 		} else if (status == 401) {
 			// store.dispatch('setUser', null);
-			// router.push('/sign-in');
+			// navigate('/login');
 		}
-}
+};
+
+export default handleError;

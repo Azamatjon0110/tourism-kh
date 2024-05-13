@@ -1,38 +1,74 @@
 // import { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
+import Loading from '/src/components/Animation/loading';
 import './gid.css';
 
-import handleError from '../../../server/handle';
-import api from '../../../server/api';
-const ModalGidEdit = (item) => {
-	// console.log(item);
-	// const { name, address, phone, languages } = item.item.elem;
-	// console.log(name, address, phone, languages);
-	const { handleSubmit, register } = useForm({
+import api from '../../server/api';
+import { useState } from 'react';
+import util from '../../server/util';
+const ModalGid = (item) => {
+	// console.log(f);
+	// const ref = useRef();
+	// const token = localStorage.getItem('token');
+	const [load, setLoad] = useState(false);
+	// useCallback(() => {
+	// 	// getGuides
+	// }, [second]);
+
+	const { handleSubmit, register, reset } = useForm({
 		defaultValues: {
-			// name: item.item.elem.name,
-			// phone: item.item.elem.phone,
-			// address: item.item.elem.address,
-			// languages: item.item.elem.languages,
+			name: item.item.elem.name,
+			phone: item.item.elem.phone,
+			address: item.item.elem.address,
+			languages: item.item.elem.languages,
 		},
 	});
-	console.log(item);
 	const submit = (data) => {
-		api
-			.create_gid(data)
-			.then((res) => {
-				console.log(res);
-			})
-			.catch((err) => {
-				handleError(err);
-			});
+		setLoad(true);
+		// console.log(getGuide);
+		if (item.item.status == 'git_add') {
+			api
+				.create_gid(data)
+				.then((res) => {
+					console.log(res);
+					reset();
+					setLoad(false);
+					util.toast('success', res.message);
+					item.getGuides();
+				})
+				.catch((err) => {
+					console.log(err);
+
+					util.toast('warning', err.message);
+					setLoad(false);
+				});
+		} else {
+			setLoad(true);
+			api
+				.update_gid({
+					id: item.item.elem.id,
+					name: data.name,
+					phone: data.phone,
+					address: data.address,
+					languages: data.languages,
+				})
+				.then(() => {
+					reset();
+					item.getGuides();
+					setLoad(false);
+				})
+				.catch((err) => {
+					setLoad(false);
+					console.log(err);
+				});
+		}
 	};
 	return (
 		<>
 			<div
 				className='modal fade'
-				id='staticBackdrop1'
+				id='staticBackdrop'
 				data-bs-backdrop='static'
 				data-bs-keyboard='false'
 				tabIndex='-1'
@@ -44,7 +80,9 @@ const ModalGidEdit = (item) => {
 						<div className='modal-content'>
 							<div className='modal-header'>
 								<h1 className='modal-title fs-5' id='staticBackdropLabel'>
-									Gidni o`zgartirish
+									{item.item.status == 'gid_add'
+										? "Gid qo'shish"
+										: "Gidni o'zgartirish"}
 								</h1>
 								<button
 									type='button'
@@ -59,6 +97,7 @@ const ModalGidEdit = (item) => {
 									<input
 										className='form-control'
 										type='text'
+										defaultValue={item.item.elem.name}
 										placeholder='Ism familiya'
 										{...register('name', { required: true })}
 									/>
@@ -68,7 +107,7 @@ const ModalGidEdit = (item) => {
 									<input
 										className='form-control'
 										type='text'
-										// value={body.item.elem.address}
+										defaultValue={item.item.elem.address}
 										{...register('address', { required: true })}
 										placeholder='Manzil'
 									/>
@@ -82,8 +121,8 @@ const ModalGidEdit = (item) => {
 										<input
 											className='form-control'
 											type='tel'
+											defaultValue={item.item.elem.phone}
 											maxLength={9}
-											defaultValue={name}
 											{...register('phone', { required: true })}
 										/>
 									</div>
@@ -93,7 +132,8 @@ const ModalGidEdit = (item) => {
 									<input
 										className='form-control'
 										type='text'
-										placeholder='Tillar'
+										defaultValue={item.item.elem.languages}
+										placeholder="O'zbek, rus, ingliz ..."
 										{...register('languages', { required: true })}
 									/>
 								</label>
@@ -103,10 +143,11 @@ const ModalGidEdit = (item) => {
 									type='button'
 									className='btn btn-danger'
 									data-bs-dismiss='modal'
+									onClick={() => reset()}
 								>
 									Rad etish
 								</button>
-								<button type='submit' className='btn btn-success'>
+								<button type='submit' className='btn btn-success sc'>
 									Saqlash
 								</button>
 							</div>
@@ -114,8 +155,11 @@ const ModalGidEdit = (item) => {
 					</div>
 				</form>
 			</div>
+			<div className={load === true ? 'd-block' : 'd-none'}>
+				<Loading />
+			</div>
 		</>
 	);
 };
 
-export default ModalGidEdit;
+export default ModalGid;

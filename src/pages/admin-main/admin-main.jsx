@@ -1,9 +1,14 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './admin.css';
 import AdminRoutes from '/src/router/mainRoutes';
 import shape from '/src/assets/images/title-shape.png';
 
 const MainAdmin = () => {
+	const navigate = useNavigate();
+	const removeToken = () => {
+		localStorage.removeItem('token');
+		navigate('/login');
+	};
 	return (
 		<>
 			<div className='admin-box'>
@@ -13,91 +18,95 @@ const MainAdmin = () => {
 						<h3>Khokand</h3>
 					</div>
 					<ul className='sidebar__list'>
-						<li className='sidebar__item '>
-							<NavLink
-								to='/admin/about'
-								className={({ isActive }) =>
-									isActive ? 'active sidebar__link' : ' sidebar__link'
-								}
-							>
-								<i className='fa-solid navbar-icons fa-globe'></i>
-								About
-							</NavLink>
-						</li>
 						<li className='sidebar__item'>
 							<NavLink
 								to='/admin/users'
 								className={({ isActive }) =>
-									isActive ? 'active sidebar__link' : ' sidebar__link'
+									isActive ? 'active-a sidebar__link' : ' sidebar__link'
 								}
 							>
 								<i className='fa-solid navbar-icons fa-users'></i>
-								Users
+								Adminlar
 							</NavLink>
 						</li>
 						<li className='sidebar__item'>
 							<NavLink
 								to='/admin/guides'
 								className={({ isActive }) =>
-									isActive ? 'active sidebar__link' : ' sidebar__link'
+									isActive ? 'active-a sidebar__link' : ' sidebar__link'
 								}
 							>
 								<i className='fa-solid navbar-icons fa-people-group'></i>
-								Guides
+								Gidlar
 							</NavLink>
 						</li>
-
+						<li className='sidebar__item '>
+							<NavLink
+								to='/admin/about'
+								className={({ isActive }) =>
+									isActive ? 'active-a sidebar__link' : ' sidebar__link'
+								}
+							>
+								<i className='fa-solid navbar-icons fa-globe'></i>
+								Biz haqimizda
+							</NavLink>
+						</li>
 						<li className='sidebar__item'>
 							<NavLink
 								to='/admin/museum'
 								className={({ isActive }) =>
-									isActive ? 'active sidebar__link' : ' sidebar__link'
+									isActive ? 'active-a sidebar__link' : ' sidebar__link'
 								}
 							>
 								<i className='fa-solid navbar-icons fa-landmark'></i>
-								Museum
-							</NavLink>
-						</li>
-						<li className='sidebar__item'>
-							<NavLink
-								to='/admin/news'
-								className={({ isActive }) =>
-									isActive ? 'active sidebar__link' : ' sidebar__link'
-								}
-							>
-								<i className='fa-regular navbar-icons fa-newspaper'></i>
-								News
-							</NavLink>
-						</li>
-						<li className='sidebar__item'>
-							<NavLink
-								to='/admin/hotels'
-								className={({ isActive }) =>
-									isActive ? 'active sidebar__link' : ' sidebar__link'
-								}
-							>
-								<i className='fa-solid navbar-icons fa-hotel'></i>
-								Hotels
+								Tarixiy joylar
 							</NavLink>
 						</li>
 						<li className='sidebar__item'>
 							<NavLink
 								to='/admin/scholars'
 								className={({ isActive }) =>
-									isActive ? 'active sidebar__link' : ' sidebar__link'
+									isActive ? 'active-a sidebar__link' : ' sidebar__link'
 								}
 							>
 								<i className='fa-solid navbar-icons fa-user-graduate'></i>
 								Allomalar
 							</NavLink>
 						</li>
+						<li className='sidebar__item'>
+							<NavLink
+								to='/admin/news'
+								className={({ isActive }) =>
+									isActive ? 'active-a sidebar__link' : ' sidebar__link'
+								}
+							>
+								<i className='fa-regular navbar-icons fa-newspaper'></i>
+								Yangiliklar
+							</NavLink>
+						</li>
+						<li className='sidebar__item'>
+							<NavLink
+								to='/admin/hotels'
+								className={({ isActive }) =>
+									isActive ? 'active-a sidebar__link' : ' sidebar__link'
+								}
+							>
+								<i className='fa-solid navbar-icons fa-hotel'></i>
+								Mehmonxonalar
+							</NavLink>
+						</li>
 					</ul>
-					<p className='sitebar__link sitebar__item rounded-5 border-c mb-0'>
+					<p
+						className='sitebar__link sitebar__item rounded-5 border-c mb-0'
+						onClick={removeToken}
+					>
 						<i className='fa-solid fa-right-from-bracket me-2'></i>
 						Chiqish
 					</p>
 				</nav>
-				<AdminRoutes />
+				<div className='admin-main'>
+					<AdminRoutes />
+				</div>
 			</div>
 		</>
 	);

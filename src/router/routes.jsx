@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/home/home';
-import about from '../pages/about/about';
+import About from '../pages/about/about';
 import News from '../pages/news/news';
 import Historical from '../pages/historical-pl/historical';
 import Hotels from '../pages/hotels/hotels';
@@ -15,7 +15,7 @@ function MainRoutes() {
 	return (
 		<Routes>
 			<Route path='/' Component={Home} />
-			<Route path='/about' Component={about} />
+			<Route path='/about' Component={About} />
 			<Route path='/historical_places' Component={Historical} />
 			<Route path='/hotels' Component={Hotels} />
 			<Route path='/hotel' Component={Hotel} />

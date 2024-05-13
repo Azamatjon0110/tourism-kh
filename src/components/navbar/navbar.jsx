@@ -56,41 +56,37 @@ const Navbar = () => {
 					<div className='site-menu'>
 						<ul className='lang-list'>
 							<li className='lang-item'>
-								<Link className='lang-btn' to='/' data-scroll-to>
+								<Link className='lang-btn' to='/'>
 									{language[lang].home.navbar.home}
 								</Link>
 							</li>
 							<li className='lang-item d-block d-lg-none'>
-								<Link className='lang-btn' to='/about' data-scroll-to>
+								<Link className='lang-btn' to='/about'>
 									{language[lang].about.about_wrap_title}
 								</Link>
 							</li>
 							<li className='lang-item d-block d-lg-none'>
-								<Link className='lang-btn' to='/scholar' data-scroll-to>
+								<Link className='lang-btn' to='/scholar'>
 									{language[lang].home.navbar.scholar}
 								</Link>
 							</li>
 							<li className='lang-item d-block d-lg-none'>
-								<Link
-									className='lang-btn'
-									to='/historical_places'
-									data-scroll-to
-								>
+								<Link className='lang-btn' to='/historical_places'>
 									{language[lang].home.navbar.his_pl}
 								</Link>
 							</li>
 							<li className='lang-item d-block d-lg-none'>
-								<Link className='lang-btn' to='/hotels' data-scroll-to>
+								<Link className='lang-btn' to='/hotels'>
 									{language[lang].home.navbar.hotel}
 								</Link>
 							</li>
 							<li className='lang-item d-block d-lg-none'>
-								<Link className='lang-btn' to='/guides' data-scroll-to>
+								<Link className='lang-btn' to='/guides'>
 									{language[lang].home.navbar.gid}
 								</Link>
 							</li>
 							<li className='lang-item d-block d-lg-none'>
-								<Link className='lang-btn' to='/media' data-scroll-to>
+								<Link className='lang-btn' to='/media'>
 									{language[lang].home.navbar.media}
 								</Link>
 							</li>
@@ -98,21 +94,17 @@ const Navbar = () => {
 								<p className='dropdown-c'>{language[lang].home.navbar.about}</p>
 								<ul className='list-ustyled nav-dropdown'>
 									<li className='dropdown-item'>
-										<Link className='dropdown-link' to='/about' data-scroll-to>
+										<Link className='dropdown-link' to='/about'>
 											{language[lang].about.about_wrap_title}
 										</Link>
 									</li>
 									<li className='dropdown-item'>
-										<Link
-											className='dropdown-link'
-											to='/scholar'
-											data-scroll-to
-										>
+										<Link className='dropdown-link' to='/scholar'>
 											{language[lang].home.navbar.scholar}
 										</Link>
 									</li>
 								</ul>
-								{/* <Link className='lang-btn' to='/about' data-scroll-to>
+								{/* <Link className='lang-btn' to='/about'>
 									{language[lang].home.navbar.about}
 								</Link> */}
 							</li>
@@ -120,26 +112,22 @@ const Navbar = () => {
 								<p className='planning'>{language[lang].home.navbar.plan}</p>
 								<ul className='list-ustyled nav-dropdown'>
 									<li className='dropdown-item'>
-										<Link
-											className='dropdown-link'
-											to='/historical_places'
-											data-scroll-to
-										>
+										<Link className='dropdown-link' to='/historical_places'>
 											{language[lang].home.navbar.his_pl}
 										</Link>
 									</li>
 									<li className='dropdown-item'>
-										<Link className='dropdown-link' to='/hotels' data-scroll-to>
+										<Link className='dropdown-link' to='/hotels'>
 											{language[lang].home.navbar.hotel}
 										</Link>
 									</li>
 									<li className='dropdown-item'>
-										<Link className='dropdown-link' to='/guides' data-scroll-to>
+										<Link className='dropdown-link' to='/guides'>
 											{language[lang].home.navbar.gid}
 										</Link>
 									</li>
 									<li className='dropdown-item'>
-										<Link className='dropdown-link' to='/media' data-scroll-to>
+										<Link className='dropdown-link' to='/media'>
 											{language[lang].home.navbar.media}
 										</Link>
 									</li>
@@ -147,7 +135,7 @@ const Navbar = () => {
 							</li>
 
 							{/* <li className='lang-item'>
-								<Link className='lang-btn' to='/contact' data-scroll-to>
+								<Link className='lang-btn' to='/contact'>
 									{language[lang].home.navbar.contact}
 								</Link>
 							</li> */}

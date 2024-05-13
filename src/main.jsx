@@ -5,12 +5,16 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
+import { Provider } from 'react-redux';
+import { store } from './redux/store.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<App />
+			<Provider store={store}>
+				<App />
+			</Provider>
 		</BrowserRouter>
 	</React.StrictMode>
 );

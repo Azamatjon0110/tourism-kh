@@ -1,7 +1,7 @@
 import Navbar from '/src/components/navbar/navbar';
 import Footer from '../../components/footer/footer';
-import x3 from '/src/assets/images/x9.jpg';
-import x2 from '/src/assets/images/x4.jpg';
+import x3 from '/src/assets/m-images/bg32.jpg';
+import x2 from '/src/assets/m-images/bg3.jpg';
 import './album.css';
 const Album = () => {
 	return (
@@ -10,70 +10,67 @@ const Album = () => {
 			<div className='album'>
 				<div className='container'>
 					<div className='album__box'>
-						<h2 className='album__title'>Xudoyorxon o`rdasi</h2>
+						<h2 className='album__title'>Pir Siddiq majmuasi</h2>
 						<div className='row'>
 							<div className='col-lg-5 mb-3'>
-								<img className='album__img' src={x3} alt='' />
+								<img className='album__img' src={x2} alt='' />
 							</div>
 							<div className='col-12 col-lg-7 mb-3'>
 								<p className='album__text'>
-									Qoʻqon turli nomlar bilan 10-asrdan maʼlum boʻlgan, ammo uning
-									gullagan davri XVIII asrga, yaʼni shahar Qoʻqon xonligining
-									poytaxtiga aylanganiga toʻgʻri keladi. Qo`qon qadimiy
-									tuzilishni saqlab qolgan, u yangi va eski qismlardan iborat.
-									Yangi shahar 19-asrda to`yingan edi. savdo korxonalari,
-									maʼmuriy binolar, banklar, sanoatchilarning qasrlari,
-									shaharning eski qismida xon saroyi – Oʻrda, xalq turar-joy
-									meʼmorchiligi yodgorliklari, masjidlar, madrasalar va
-									yodgorlik binolari 19—20-asr boshlarigacha saqlanib qolgan. .
-									Shaharning asosiy diqqatga sazovor joylaridan biri – Urda –
-									XIX asrning ikkinchi yarmida qurilgan Xudoyorxon saroyi.
-									Qurilish sun`iy tepalikda olib borildi. Taxminan 4 gektar
-									to`rtburchaklar maydonini egallagan saroy ko`p hovlili
-									kompozitsiyadir. Keng rampa sharqqa qaragan portal bilan
-									ta`kidlangan asosiy kirish eshigiga olib boradi. Portalning
-									kirish joyi (darvozaxona) tepasida arabcha harflar bilan
-									“Arkchi oliy Said Muhammad Xudoyorxon” (Said Muhammad
-									Xudoyorxonning yuqori xonalari) degan katta yozuv bor.
-									1876-yilda kapitan N. N. Voronets, keyinroq topograf A. I.
-									Borisovskiy tomonidan tuzilgan Qo‘qon O‘rdasining bosh
-									rejalarida ko‘rinib turibdiki, saroy oldida asosiy o‘qda
-									mustahkamlangan darvozalari bo‘lgan yopiq maydon bo‘lgan, u
-									bog‘ va bog‘lar bilan o‘ralgan edi. devor bilan o`ralgan edi.
-									Yuzdan ortiq xonalarni o`z ichiga olgan saroyning murakkab
-									rejasi to`rtburchakka (65 X 138 m) mos keladi. Old va yashash
-									joylari funktsional jihatdan ajralib turardi. Saroyning
-									birinchi yarmida atrofi ayvonli old hovli, qabulxona (kurinish
-									xona), xazina (zarrinxona) va alohida hovlili masjid boʻlgan.
-									Markaziy qismida qabulxona (salomxona) uchun kichik zal, xon
-									uchun bir guruh turar joy (shohnishin) va omborlar bilan
-									jihozlangan xoʻjalik hovlisi qurilgan.
+									Pir Siddiq majmuasi 18-asr oʻrtalarida qurilgan. Vaqt oʻtishi
+									bilan uning yonida masjid, minora, qabri boʻlgan hovli,
+									darvozaxona va kaptarxona kabi meʼmoriy majmua vujudga kelgan
+									va shu sababli majmua “Kaptarlik” – “Kaptar” nomi bilan
+									mashhur. Portal-gumbali darvozaxona orqasida, tepasida toʻrt
+									qavatli kaptarxona boʻlgan ayvon qurilgan. Majmuaning sharqiy
+									qismida ko‘chaga ochiq ayvon masjidi va minorasi qad
+									rostlagan. Hovlining orqa tomonida shimolga qaratilgan maqbara
+									bo‘lib, unda go‘yoki “muqaddas” Pir Siddiq dafn etilgan. Uning
+									nomi bilan bogʻliq afsona bor, bu mahalliy aholi orasida keng
+									tarqalgan. Marg‘ilonlik oqsoqollar bir paytlar Pir Siddiq
+									kofirlardan yashirinib, g‘orga yashiringani, kaptarlar uya
+									qilib, ular bilan birga kirish eshigini devor bilan o‘rab
+									olgani haqida gapirib berishdi. Gʻorga yetib borgan
+									taʻqibchilar uyalarida jimgina oʻtirgan kaptarlarni koʻrib,
+									odam bu erda yashirina olmaydi, aks holda qushlar
+									tashvishlanar edi, deb qaror qilib, oʻtib ketishdi. Shu tarzda
+									kaptarlar avliyoni qutqardi va shuning uchun ham kaptarlarni
+									mahalliy aholi hurmat qilishadi.
 								</p>
 							</div>
 
 							<div className='col-12 col-lg-7 mb-3'>
 								<p className='album__text'>
-									Saroyning ikkinchi yarmini bir-biriga bog`langan uchta hovlili
-									haram egallagan, bu erda xonning 3-4 qonuniy xotini va
-									xizmatkorlari bilan 40 ta kanizak yashagan. 1878-yilda
-									Qo‘qonga tashrif buyurgan Mari Burdonning “Parijdan
-									Samarqandgacha” kitobidagi rasmlarga qaraganda, haram binolari
-									ikki qavatli bo‘lib, yozgi ayvonlar, ayvonlar va yuqori
-									qavatdagi o‘tish joylaridan iborat bo‘lgan. Дворец Худояр-хана
-									Saroy me’mor Usto Mir Ubaydulla rahbarligida mahalliy
-									hunarmandlar mulla Suyarqul, Usto Solixo‘ja va buxorolik Usto
-									Fozixo‘jalar tomonidan barpo etilgan. Kuygan g`isht asosiy
-									qurilish materiali bo`lib xizmat qilgan. Bino fasadlari va
-									interyerining me’moriy dizayni Xudoyorxonning ehtiyotkorligi
-									va ziqnaligini o‘zida aks ettirgan. Bosh fasad, darvozaxona va
-									asosiy zallarni mo‘l-ko‘l bezatib, qolgan binolarni pardozlash
-									bilan shug‘ullanmadi. Sharqiy jabhaning markazida portal
-									o`rnatildi, uning yon tomonida dekorativ chiroqli minoralar
-									joylashgan bo`lib, u asosiy kirish eshigini ta`kidlaydi.
+									{' '}
+									Majmuaning o‘zagi Pir Siddiq maqbarasi bir kamerali portal
+									maqbaradir. Rejada toʻrtburchak (11,8 X 11 m); chiqib turuvchi
+									portal lansetli qabr toshlari joylashgan kvadrat kamera bilan
+									birlashtirilgan - sagana. Palataning tekis shiftini toʻrtta
+									yogʻoch ustunlar qoʻllab-quvvatlaydi, ulardan birining poyasi,
+									poydevori va bosh qismi oʻyilgan naqshlar bilan bezatilgan.
+									Farg‘ona vodiysining boshqa bir kamerali maqbaralarida
+									bo‘lgani kabi gumbaz qabrning dastlabki qoplamasi bo‘lib
+									xizmat qilgan bo‘lishi mumkin. Maqbaraning meʼmoriy
+									kompozitsiyasining oʻziga xos xususiyati Fargʻona portali
+									boʻlib, u XVIII-XIX asrlarda yodgorlik binolarida keng
+									tarqalgan. vodiy boʻylab. Bu ekranga oʻxshaydi - rivojlangan,
+									bezakli dasht. Vizual barqarorlik unga portaldan ancha katta,
+									engil gumbazli chiroqlar bilan toʻldirilgan nozik burchak
+									ustunlari bilan beriladi. Poydevordagi ustunlar dumaloq koʻza
+									shakliga ega - kuzagi. Ularning tanasi ganchga oʻyilgan
+									geometrik naqsh bilan bezatilgan. Portalning markazida sayoz
+									naqshli toʻrtburchaklar bilan hoshiyalangan kirish joyi
+									boʻlgan uchli tokcha joylashgan. Ramkaning gorizontal qismida
+									ikki qavatli boʻshliqlar qurilgan boʻlib, ularning ustki
+									qismida turli naqshli dekorativ shlyapa panjaralari (pand jar)
+									boʻlgan galereya (revak) qurilgan. Portal ganchdan yasalgan
+									figurali parapet (qoʻngʻir) bilan qoplangan. Kirish tepasida
+									toʻrtburchak shakldagi chuqurcha joylashgan boʻlib, qurilgan
+									sanasi hijriy 1155 (1742) boʻlgan.
 								</p>
 							</div>
 							<div className='col-lg-5 mb-3'>
-								<img className='album__img' src={x2} alt='' />
+								<img className='album__img' src={x3} alt='' />
 							</div>
 						</div>
 					</div>

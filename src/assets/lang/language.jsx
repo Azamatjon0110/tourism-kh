@@ -90,7 +90,7 @@ const language = {
 		},
 		historical: {
 			main_text:
-				'Bu sahifada siz Qo`qon shahridagi tarixiy obidalar, qadimgi	me`morchilik namunalari bilan tanishishingiz mumkin.',
+				'Bu sahifada siz Marg`ilon shahridagi tarixiy obidalar, qadimgi	me`morchilik namunalari bilan tanishishingiz mumkin.',
 			xd: "Xudoyorxon O'rdasi",
 			jome: 'Jome` masjid ',
 			dahma: 'Dahmai Shohon',
@@ -101,7 +101,7 @@ const language = {
 		hotel: {
 			main_title: 'Mehmonxonalar va mehmon uylar',
 			main_text:
-				"Bu sahifada Qo'qon shahridagi mehmonxonalar haqida bilib olasiz.",
+				"Bu sahifada Marg'ilon shahridagi mehmonxonalar haqida bilib olasiz.",
 		},
 		gid: {
 			main_title: 'Gidlar',

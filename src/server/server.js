@@ -1,13 +1,16 @@
 import axios from 'axios';
 import baseurl from './baseurl';
+// import { useSelector } from 'react-redux';
 import handleError from './handle';
+// import useDispatch from 'react-redux';
+// import { getLoading } from '../redux/loading/loadingActions';
+// import { createSelector } from 'reselect';
+// const selectValues = createSelector((state) => state.token.token);
 
-export default async function server(
-	endpoint = '',
-	method = 'get',
-	data = null
-) {
-	let token = localStorage.getItem('token');
+const Server = async (endpoint = '', method = 'get', data = null) => {
+	const token = localStorage.getItem('token');
+	// const dispatch = useDispatch();
+	// let { token } = useSelector(selectValues);
 	let result, error;
 
 	await axios
@@ -25,11 +28,13 @@ export default async function server(
 			handleError(err);
 		})
 		.finally(() => {
-			// store.dispatch('setLoading', false);
+			// dispatch(getLoading(false));
 		});
 
 	return new Promise((resolve, reject) => {
 		if (result) resolve(result);
 		else reject(error);
 	});
-}
+};
+
+export default Server;

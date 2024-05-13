@@ -14,7 +14,7 @@
 }
 .navbar{
   position: absolute !important;
-  z-index: 2;
+  z-index: 7 !important;
   width: 100%;
   display: flex;
   align-items: center;
@@ -354,7 +354,7 @@
     position: absolute !important;
     width: 100%;
     padding: 18px 36px;
-    z-index: 2;
+    z-index: 7;
     flex-wrap: nowrap !important;
   }
   .desktop{

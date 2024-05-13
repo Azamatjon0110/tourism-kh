@@ -2,23 +2,38 @@ import { useState } from 'react';
 import './login.css';
 import { useNavigate } from 'react-router';
 import api from '../../server/api';
-
+import Loading from '../../components/Animation/loading';
+import { useDispatch } from 'react-redux';
+import { getToken } from '../../redux/token/tokenAction';
 const Login = () => {
+	const dispatch = useDispatch();
 	const [name, SetUsername] = useState();
 	const [password, SetPassword] = useState();
+	const [load, setLoad] = useState(false);
+
 	const body = {
 		username: name,
 		password: password,
 	};
+
 	const navigate = useNavigate();
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
-		api.token(body).then((res) => {
-			if (res.status == 200) {
-				localStorage.setItem('token', JSON.stringify(res.data.access_token));
-				navigate('/admin/about');
-			}
-		});
+		setLoad(true);
+		api
+			.token(body)
+			.then((res) => {
+				if (res.status == 200) {
+					localStorage.setItem('token', res.data.access_token);
+					dispatch(getToken(res.data.access_token));
+					setLoad(false);
+					navigate('/admin/about');
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+				setLoad(false);
+			});
 	};
 	return (
 		<>
@@ -43,6 +58,9 @@ const Login = () => {
 						</button>
 					</div>
 				</form>
+			</div>
+			<div className={load === true ? 'd-block' : 'd-none'}>
+				<Loading />
 			</div>
 		</>
 	);
