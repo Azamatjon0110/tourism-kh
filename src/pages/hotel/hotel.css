@@ -2,9 +2,17 @@
   width: 100%;
   height: 300px;
 }
-
+.back{
+  clear: both;
+  cursor: pointer;
+}
 @media screen and (min-width:768px) {
-  .hotel__img{
+  .hotel{
+    width: 100%;
     /* width: 516px; */
+  }
+
+  .hotel__img{
+    float: none;
   }
 }

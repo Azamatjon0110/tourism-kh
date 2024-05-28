@@ -1,7 +1,7 @@
 import { GET_LANGUAGE, REMOVE_LANGUAGE } from './langTypes';
 
 const initialState = {
-	lang: localStorage.getItem('lang') || 'uz',
+	lang: localStorage.getItem('lang') || 'UZB',
 };
 export const LangReducer = (state = initialState, action) => {
 	switch (action.type) {

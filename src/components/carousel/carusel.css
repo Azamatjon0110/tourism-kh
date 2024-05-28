@@ -1,6 +1,7 @@
 
 .header-top{
   position: relative;
+  display: block;
 }
 
 .slick-track{
@@ -45,7 +46,8 @@
 }
 
 .slick-prev, .slick-next {
-  z-index: 2;
+  position: absolute;
+  z-index:  3 !important;
   top: 90% !important;
   display: block;
   width: 55px !important;
@@ -94,7 +96,7 @@
   left: 50px;
 }
 .img-box{
-  position: absolute;
+  position: relative;
   top: 0;
   z-index: 0;
 }

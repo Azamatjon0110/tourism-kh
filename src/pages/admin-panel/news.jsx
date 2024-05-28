@@ -9,13 +9,13 @@ import { useSelector } from 'react-redux';
 import pi from '/src/assets/m-images/pl.jpg';
 import { useNavigate } from 'react-router';
 
-const About = () => {
+const News = () => {
 	const baseUrl = 'http://test.m14.uz/';
 	const lang = useSelector((state) => state.lang.lang);
 	const token = useSelector((state) => state.token.token);
 	const location = useNavigate();
 	const [load, setLoad] = useState(false);
-	const [about, setAbout] = useState([]);
+	const [news, setNews] = useState([]);
 	const [id, setId] = useState();
 	let body = {
 		language: lang,
@@ -23,18 +23,17 @@ const About = () => {
 		pages: 1,
 		limit: 20,
 		current_page: 1,
-		status: true,
 	};
 	const remove = () => {
 		setLoad(true);
 		axios
-			.delete(`http://test.m14.uz/about/delete?id=${id}`, {
+			.delete(`http://test.m14.uz/news/delete?id=${id}`, {
 				headers: { Authorization: `Bearer ${token}` },
 			})
 			.then((res) => {
 				setLoad(false);
 				util.toast('success', res.message);
-				getAbout();
+				getNews();
 			})
 			.catch((err) => {
 				setLoad(false);
@@ -42,15 +41,16 @@ const About = () => {
 				util.toast('warning', err.message);
 			});
 	};
-	const getAbout = () => {
+	const getNews = () => {
 		setLoad(true);
 		api
-			.get_about(body)
+			.get_news(body)
 			.then((res) => {
-				console.log(body);
-				setAbout(res.data.data);
-				body.current_page = res.data.current_page;
+				setNews(res.data.data);
+				console.log(news);
 				body.pages = res.data.pages;
+				body.limit = res.data.limit;
+				body.current_page = res.data.current_page;
 				setLoad(false);
 			})
 			.catch((err) => {
@@ -59,13 +59,13 @@ const About = () => {
 			});
 	};
 	useEffect(() => {
-		getAbout();
-	}, [about.length]);
+		getNews();
+	}, [news.length]);
 	return (
 		<>
 			<div className='d-flex flex-column w-100'>
 				<div className='panel-top py-3 px-4 border border-bottom'>
-					<h3 className='m-0'>Biz haqimizda</h3>
+					<h3 className='m-0'>Yangiliklar</h3>
 					<div className='top-search'>
 						<input
 							className='form-control mr-3'
@@ -78,7 +78,7 @@ const About = () => {
 							onClick={() => {
 								location({
 									pathname: '/admin/plus',
-									search: 'q=about',
+									search: 'q=news',
 								});
 							}}
 						>
@@ -87,9 +87,9 @@ const About = () => {
 					</div>
 				</div>
 				<div className='panel-bottom p-3'>
-					{about.length > 0 ? (
+					{news.length > 0 ? (
 						<div className='row'>
-							{about.map((item, index) => (
+							{news.map((item, index) => (
 								<div className='col-3 mb-3' key={index}>
 									<div className='card'>
 										<div className='card-body'>
@@ -104,6 +104,8 @@ const About = () => {
 												}
 												alt=''
 											/>
+											<h3 className='card-title text-center'>{item.title}</h3>
+											<p className='card-text'>{item.address}</p>
 										</div>
 										<div className='card-footer d-flex justify-content-end'>
 											<button
@@ -119,7 +121,7 @@ const About = () => {
 												onClick={() => {
 													location({
 														pathname: '/admin/editNews',
-														search: `q=about&id=${item.id}`,
+														search: `q=news&id=${item.id}`,
 													});
 												}}
 											>
@@ -275,4 +277,4 @@ const About = () => {
 	);
 };
 
-export default About;
+export default News;

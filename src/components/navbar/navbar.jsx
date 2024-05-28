@@ -22,166 +22,163 @@ const Navbar = () => {
 
 	return (
 		<nav className='navbar'>
-			<div className='mobile-offset'>
-				<Link to='/' className='logo'>
-					<img className='logo-site' src={logo} alt='Logo' />
-				</Link>
+			<div className='container'>
+				<div className='mobile-offset'>
+					<Link to='/' className='logo'>
+						<img className='logo-site' src={logo} alt='Logo' />
+					</Link>
 
-				<div className='navbar-box'>
-					<div className='logo-box'>
-						<Link to='/' className='logo'>
-							<img className='logo-site' src={logo} alt='Logo' />
-						</Link>
-					</div>
-					<div className='custom-menu'>
-						<ul className='lang-list'>
-							<li className='lang-item'>
-								<p className='lang-btn' onClick={changeLang(EventTarget)}>
-									{language[lang].home.sel_lang.uz}
-								</p>
-							</li>
-							<li className='lang-item'>
-								<p className='lang-btn' onClick={changeLang(EventTarget)}>
-									{language[lang].home.sel_lang.ru}
-								</p>
-							</li>
-							<li className='lang-item'>
-								<p className='lang-btn' onClick={changeLang(EventTarget)}>
-									{language[lang].home.sel_lang.en}
-								</p>
-							</li>
-						</ul>
-					</div>
+					<div className='navbar-box'>
+						<div className='logo-box'>
+							<Link to='/' className='logo'>
+								<img className='logo-site' src={logo} alt='Logo' />
+							</Link>
+						</div>
+						<div className='custom-menu'>
+							<ul className='lang-list'>
+								<li className='lang-item'>
+									<p className='lang-btn' onClick={changeLang(EventTarget)}>
+										{language[lang].home.sel_lang.uz}
+									</p>
+								</li>
+								<li className='lang-item'>
+									<p className='lang-btn' onClick={changeLang(EventTarget)}>
+										{language[lang].home.sel_lang.ru}
+									</p>
+								</li>
+								<li className='lang-item'>
+									<p className='lang-btn' onClick={changeLang(EventTarget)}>
+										{language[lang].home.sel_lang.en}
+									</p>
+								</li>
+							</ul>
+						</div>
 
-					<div className='site-menu'>
-						<ul className='lang-list'>
-							<li className='lang-item'>
-								<Link className='lang-btn' to='/'>
-									{language[lang].home.navbar.home}
-								</Link>
-							</li>
-							<li className='lang-item d-block d-lg-none'>
-								<Link className='lang-btn' to='/about'>
-									{language[lang].about.about_wrap_title}
-								</Link>
-							</li>
-							<li className='lang-item d-block d-lg-none'>
-								<Link className='lang-btn' to='/scholar'>
-									{language[lang].home.navbar.scholar}
-								</Link>
-							</li>
-							<li className='lang-item d-block d-lg-none'>
-								<Link className='lang-btn' to='/historical_places'>
-									{language[lang].home.navbar.his_pl}
-								</Link>
-							</li>
-							<li className='lang-item d-block d-lg-none'>
-								<Link className='lang-btn' to='/hotels'>
-									{language[lang].home.navbar.hotel}
-								</Link>
-							</li>
-							<li className='lang-item d-block d-lg-none'>
-								<Link className='lang-btn' to='/guides'>
-									{language[lang].home.navbar.gid}
-								</Link>
-							</li>
-							<li className='lang-item d-block d-lg-none'>
-								<Link className='lang-btn' to='/media'>
-									{language[lang].home.navbar.media}
-								</Link>
-							</li>
-							<li className='lang-item dropdown-box d-none d-lg-block'>
-								<p className='dropdown-c'>{language[lang].home.navbar.about}</p>
-								<ul className='list-ustyled nav-dropdown'>
-									<li className='dropdown-item'>
-										<Link className='dropdown-link' to='/about'>
-											{language[lang].about.about_wrap_title}
-										</Link>
-									</li>
-									<li className='dropdown-item'>
-										<Link className='dropdown-link' to='/scholar'>
-											{language[lang].home.navbar.scholar}
-										</Link>
-									</li>
-								</ul>
-								{/* <Link className='lang-btn' to='/about'>
+						<div className='site-menu'>
+							<ul className='lang-list'>
+								<li className='lang-item'>
+									<Link className='lang-btn' to='/'>
+										{language[lang].home.navbar.home}
+									</Link>
+								</li>
+								<li className='lang-item d-block d-lg-none'>
+									<Link className='lang-btn' to='/about'>
+										{language[lang].about.about_wrap_title}
+									</Link>
+								</li>
+
+								<li className='lang-item d-block d-lg-none'>
+									<Link className='lang-btn' to='/historical_places'>
+										{language[lang].home.navbar.his_pl}
+									</Link>
+								</li>
+								<li className='lang-item d-block d-lg-none'>
+									<Link className='lang-btn' to='/hotels'>
+										{language[lang].home.navbar.hotel}
+									</Link>
+								</li>
+								<li className='lang-item d-block d-lg-none'>
+									<Link className='lang-btn' to='/guides'>
+										{language[lang].home.navbar.gid}
+									</Link>
+								</li>
+								<li className='lang-item d-block d-lg-none'>
+									<Link className='lang-btn' to='/media'>
+										{language[lang].home.navbar.media}
+									</Link>
+								</li>
+								<li className='lang-item dropdown-box d-none d-lg-block'>
+									<p className='dropdown-c'>
+										{language[lang].home.navbar.about}
+									</p>
+									<ul className='list-ustyled nav-dropdown'>
+										<li className='dropdown-item'>
+											<Link className='dropdown-link' to='/about'>
+												{language[lang].about.about_wrap_title}
+											</Link>
+										</li>
+									</ul>
+									{/* <Link className='lang-btn' to='/about'>
 									{language[lang].home.navbar.about}
 								</Link> */}
-							</li>
-							<li className='lang-item dropdown-box d-none d-lg-block'>
-								<p className='planning'>{language[lang].home.navbar.plan}</p>
-								<ul className='list-ustyled nav-dropdown'>
-									<li className='dropdown-item'>
-										<Link className='dropdown-link' to='/historical_places'>
-											{language[lang].home.navbar.his_pl}
-										</Link>
-									</li>
-									<li className='dropdown-item'>
-										<Link className='dropdown-link' to='/hotels'>
-											{language[lang].home.navbar.hotel}
-										</Link>
-									</li>
-									<li className='dropdown-item'>
-										<Link className='dropdown-link' to='/guides'>
-											{language[lang].home.navbar.gid}
-										</Link>
-									</li>
-									<li className='dropdown-item'>
-										<Link className='dropdown-link' to='/media'>
-											{language[lang].home.navbar.media}
-										</Link>
-									</li>
-								</ul>
-							</li>
+								</li>
+								<li className='lang-item dropdown-box d-none d-lg-block'>
+									<p className='planning'>{language[lang].home.navbar.plan}</p>
+									<ul className='list-ustyled nav-dropdown'>
+										<li className='dropdown-item'>
+											<Link className='dropdown-link' to='/historical_places'>
+												{language[lang].home.navbar.his_pl}
+											</Link>
+										</li>
+										<li className='dropdown-item'>
+											<Link className='dropdown-link' to='/hotels'>
+												{language[lang].home.navbar.hotel}
+											</Link>
+										</li>
+										<li className='dropdown-item'>
+											<Link className='dropdown-link' to='/guides'>
+												{language[lang].home.navbar.gid}
+											</Link>
+										</li>
+										<li className='dropdown-item'>
+											<Link className='dropdown-link' to='/media'>
+												{language[lang].home.navbar.media}
+											</Link>
+										</li>
+									</ul>
+								</li>
 
-							{/* <li className='lang-item'>
+								{/* <li className='lang-item'>
 								<Link className='lang-btn' to='/contact'>
 									{language[lang].home.navbar.contact}
 								</Link>
 							</li> */}
-						</ul>
+							</ul>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div className='desktop-offset'>
-				<Link to='/' className='logo'>
-					<img className='logo-site' src={logo} alt='Logo' />
-				</Link>
-				<img className='ds-img' src={x7} alt='' />
-				<p className='ds-description'>
-					Xudoyorxon o`rdasi - XIX asrga tegishli tarixiy yodgorlik sanalib
-					hozirgi kunda madaniy meros obyektlari qatoriga kiradi
-				</p>
-				<h3 className='ds-time-title'>{language[lang].home.home_off.open}</h3>
-				<div className='week-days'>
-					<p className='week-item'>{language[lang].home.home_off.week_days}:</p>
-					<p className='week-item'> 09:00 - 18:00</p>
-				</div>
-				<div className='week-days'>
-					<p className='week-item'>
-						{language[lang].home.home_off.weekDay_rest}:
+				<div className='desktop-offset'>
+					<Link to='/' className='logo'>
+						<img className='logo-site' src={logo} alt='Logo' />
+					</Link>
+					<img className='ds-img' src={x7} alt='' />
+					<p className='ds-description'>
+						Xudoyorxon o`rdasi - XIX asrga tegishli tarixiy yodgorlik sanalib
+						hozirgi kunda madaniy meros obyektlari qatoriga kiradi
 					</p>
-					<p className='week-item'>10:00 - 18:00</p>
+					<h3 className='ds-time-title'>{language[lang].home.home_off.open}</h3>
+					<div className='week-days'>
+						<p className='week-item'>
+							{language[lang].home.home_off.week_days}:
+						</p>
+						<p className='week-item'> 09:00 - 18:00</p>
+					</div>
+					<div className='week-days'>
+						<p className='week-item'>
+							{language[lang].home.home_off.weekDay_rest}:
+						</p>
+						<p className='week-item'>10:00 - 18:00</p>
+					</div>
 				</div>
-			</div>
-			<div className='hamburger-menu mobile' onClick={ToggleNavbar}>
-				<svg className='hamburger' width='30' height='30' viewBox='0 0 30 30'>
-					<path className='line line-top' d='M0,9h30' />
-					<path className='line line-center' d='M0,15h30' />
-					<path className='line line-bottom' d='M0,21h30' />
-				</svg>
-			</div>
-			<div className='hamburger-menu desktop' onClick={ToggleNavbarDs}>
-				<svg
-					className='hamburger-ds'
-					width='30'
-					height='30'
-					viewBox='0 0 30 30'
-				>
-					<path className='line line-top' d='M0,9h30' />
-					<path className='line line-center' d='M0,15h30' />
-					<path className='line line-bottom' d='M0,21h30' />
-				</svg>
+				<div className='hamburger-menu mobile' onClick={ToggleNavbar}>
+					<svg className='hamburger' width='30' height='30' viewBox='0 0 30 30'>
+						<path className='line line-top' d='M0,9h30' />
+						<path className='line line-center' d='M0,15h30' />
+						<path className='line line-bottom' d='M0,21h30' />
+					</svg>
+				</div>
+				<div className='hamburger-menu desktop' onClick={ToggleNavbarDs}>
+					<svg
+						className='hamburger-ds'
+						width='30'
+						height='30'
+						viewBox='0 0 30 30'
+					>
+						<path className='line line-top' d='M0,9h30' />
+						<path className='line line-center' d='M0,15h30' />
+						<path className='line line-bottom' d='M0,21h30' />
+					</svg>
+				</div>
 			</div>
 		</nav>
 	);

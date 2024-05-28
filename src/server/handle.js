@@ -15,9 +15,12 @@ const handleError = (error) => {
 				// store.dispatch('setUser', null);
 				// router.push("/sign-in");
 			} else util.toast('warning', detail);
+		} else if (status == 402) {
+			// store.dispatch('setUser', null);
+			location.replace('/login');
 		} else if (status == 401) {
 			// store.dispatch('setUser', null);
-			// navigate('/login');
+			location.replace('/login');
 		}
 };
 

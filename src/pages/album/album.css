@@ -1,11 +1,9 @@
-.album{
+.album_wrap{
+  height: 100%;
   margin-top: 150px;
   background-color: rgb(253, 248, 241);
 }
 
-.album__box{
-  padding: 40px 0;
-}
 
 .album__title{
   margin-bottom: 20px;
@@ -16,11 +14,19 @@
 }
 
 @media screen and (min-width:992px) {
-  .album__box{
-    padding: 75px 0;
-  }
+
 
   .album__title{
     margin-bottom: 28px;
   }
+
+  .album__img{
+    float: left;
+    width: 40%;
+    margin-right: 16px;
+    }
+
+    .hotel__text{
+      clear: none;
+    }
 }

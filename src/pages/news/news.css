@@ -1,4 +1,5 @@
 .news-bg{
+  margin-bottom: 120px;
   padding-top: 80px;
   padding-bottom: 150px;
 }
@@ -7,14 +8,37 @@
 .news_box {
   position: relative;
   padding-top: 120px;
-  z-index: 1;
+  z-index: 4;
 }
 
 .news-box__title{
-  /* margin-bottom: 30px; */
   font-size: 56px;
   font-weight: 400;
   font-family: 'Cinzel', serif;
   line-height: 1;
   text-wrap: wrap;
+}
+
+.news-wrapper{
+  width: 100%;
+}
+
+.news-box__img{
+  width: 100%;
+  float: none;
+}
+
+
+@media screen and (min-width:1024px) {
+  .news-wrapper__img{
+    width: 40%;
+    margin-right: 16px;
+    float: none;
+  }
+
+  .news-wrapper__text{
+    clear: both;
+    width: 100%;
+  }
+
 }

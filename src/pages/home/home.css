@@ -1,6 +1,7 @@
 .wrapper{
   position: relative;
   overflow-x: hidden;
+  height: auto;
 }
 
 .wrapper .bg-history{

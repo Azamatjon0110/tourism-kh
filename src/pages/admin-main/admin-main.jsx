@@ -15,7 +15,7 @@ const MainAdmin = () => {
 				<nav className='admin-nav'>
 					<div className='d-flex align-items-center mb-4 justify-content-center'>
 						<img className='admin-title-shape' src={shape} alt='' />
-						<h3>Khokand</h3>
+						<h3 className='mb-0 text-white'>Margilan</h3>
 					</div>
 					<ul className='sidebar__list'>
 						<li className='sidebar__item'>
@@ -59,7 +59,7 @@ const MainAdmin = () => {
 								}
 							>
 								<i className='fa-solid navbar-icons fa-landmark'></i>
-								Tarixiy joylar
+								Muzeylar
 							</NavLink>
 						</li>
 						<li className='sidebar__item'>
@@ -95,11 +95,41 @@ const MainAdmin = () => {
 								Mehmonxonalar
 							</NavLink>
 						</li>
+						<li className='sidebar__item'>
+							<NavLink
+								to='/admin/media'
+								className={({ isActive }) =>
+									isActive ? 'active-a sidebar__link' : ' sidebar__link'
+								}
+							>
+								<i className='fa-solid fa-photo-film navbar-icons'></i>
+								Media
+							</NavLink>
+						</li>
+						<li className='sidebar__item'>
+							<NavLink
+								to='/admin/language'
+								className={({ isActive }) =>
+									isActive ? 'active-a sidebar__link' : ' sidebar__link'
+								}
+							>
+								<i className='fa-solid navbar-icons fa-language'></i>
+								Tillar
+							</NavLink>
+						</li>
+						<li className='sidebar__item'>
+							<NavLink
+								to='/admin/menu'
+								className={({ isActive }) =>
+									isActive ? 'active-a sidebar__link' : ' sidebar__link'
+								}
+							>
+								<i className='fa-solid fa-bars navbar-icons'></i>
+								Menu
+							</NavLink>
+						</li>
 					</ul>
-					<p
-						className='sitebar__link sitebar__item rounded-5 border-c mb-0'
-						onClick={removeToken}
-					>
+					<p className='sitebar__logout' onClick={removeToken}>
 						<i className='fa-solid fa-right-from-bracket me-2'></i>
 						Chiqish
 					</p>

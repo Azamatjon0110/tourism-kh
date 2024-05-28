@@ -5,11 +5,17 @@
   justify-content: space-between;
 }
 
+.card-img{
+  width: 100%;
+  height: 150px !important;
+}
+
 .top-search{
   width: 100%;
   max-width: 300px;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   margin-right: 0;
   margin-left: auto;
 }
@@ -18,6 +24,10 @@
   cursor: pointer;
 }
 
+.panel-bottom{
+  height: 100%;
+  overflow-y: auto;
+}
 
 .top-search input{
   margin-right: 12px;
@@ -85,4 +95,89 @@
 
 .modal .modal-footer{
   justify-content: center !important;
+}
+
+.img-load{
+  width: 100%;
+  max-width: 500px;
+  padding: 10px;
+  height: 250px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+}
+
+#editorjs {
+  background: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  /* min-height: 0; */
+  /* height: 400px; */
+}
+
+.codex-editor__redactor{
+  margin-right: 0;
+}
+
+.h-image{
+  width: 100%;
+  max-width: 500px;
+  height: 230px;
+}
+
+.quill{
+  margin-bottom: 16px;
+}
+
+.edit-box{
+  height: 100%;
+  overflow-y: scroll;
+}
+
+#fullpage {
+  display: none;
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: contain;
+  background-repeat: no-repeat no-repeat;
+  background-position: center center;
+  background-color: black;
+}
+
+.menu-wrap .ql-toolbar {
+  display: none;
+}
+.menu-wrap .ql-toolbar.ql-snow + .ql-container.ql-snow{
+  border-top: 1px solid #ccc !important;
+  border-radius: 6px;
+}
+
+.media_img{
+  width: 100%;
+  height: 300px !important;
+}
+
+.media-wrap{
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.btn-gr{
+  position: absolute;
+  width: 100%;
+  display: flex;
+  transition: 0.4s ease;
+  justify-content:center ;
+  background-color: hsla(0, 0%, 0%, 0.3);
+  transform: translateY(100px);
+}
+
+.media-wrap:hover .btn-gr{
+  transform: translateY(-38px);
 }

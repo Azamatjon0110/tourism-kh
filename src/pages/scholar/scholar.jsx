@@ -1,5 +1,3 @@
-import Navbar from '/src/components/navbar/navbar';
-import Footer from '../../components/footer/footer';
 import language from '../../assets/lang/language';
 import './scholar.css';
 import { useEffect, useRef } from 'react';
@@ -26,7 +24,6 @@ const Scholar = () => {
 	return (
 		<>
 			<div className='wrapper' ref={scrollRef} data-scroll-section>
-				<Navbar />
 				<div className='bg-history'>
 					<div className='container'>
 						<svg width='580' height='400' className='svg-morph'>
@@ -88,7 +85,6 @@ const Scholar = () => {
 						</div>
 					</div>
 				</div>
-				<Footer />
 			</div>
 		</>
 	);

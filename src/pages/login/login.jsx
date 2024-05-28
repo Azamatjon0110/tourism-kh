@@ -27,7 +27,7 @@ const Login = () => {
 					localStorage.setItem('token', res.data.access_token);
 					dispatch(getToken(res.data.access_token));
 					setLoad(false);
-					navigate('/admin/about');
+					navigate('/admin/users');
 				}
 			})
 			.catch((err) => {

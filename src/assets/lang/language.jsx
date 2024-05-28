@@ -43,7 +43,7 @@ const language = {
 				'Qo‘qon shahrida bo‘lib o‘tgan II Xalqaro hunarmandchilik festivali g‘oliblariga diplom va sovg‘alarni tantanali topshirdilar',
 		},
 	},
-	uz: {
+	UZB: {
 		home: {
 			sel_lang: {
 				uz: "O'zb",
@@ -76,7 +76,7 @@ const language = {
 				'Copyright © O‘zbekiston Respublikasi Turizm va madaniy meros	vazirligi, Farg‘ona viloyati Turizm va madaniy meros bosh	boshqarmasi.',
 			ft_title: 'ALOQALARIMIZ',
 			ct_text: 'Manzil:',
-			ct_loc: "Qo'qon Farg'ona",
+			ct_loc: "Marg`ilon Farg'ona",
 			ft_link: 'COHUB dasturchilari tomonidan yaratilgan sayt',
 		},
 		about: {

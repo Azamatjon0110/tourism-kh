@@ -5,35 +5,33 @@ import Loading from '../../components/Animation/loading';
 import util from '../../server/util';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-// import { useForm } from 'react-hook-form';
 import pi from '/src/assets/m-images/pl.jpg';
 import { useNavigate } from 'react-router';
 
-const Allomalar = () => {
+const Museums = () => {
 	const baseUrl = 'http://test.m14.uz/';
 	const lang = useSelector((state) => state.lang.lang);
 	const token = useSelector((state) => state.token.token);
 	const location = useNavigate();
 	const [load, setLoad] = useState(false);
-	const [scholar, setScholar] = useState([]);
+	const [museums, setMuseums] = useState([]);
 	const [id, setId] = useState();
 	let body = {
 		language: lang,
 		search: '',
 		pages: 1,
 		limit: 20,
-		current_page: 1,
 	};
 	const remove = () => {
 		setLoad(true);
 		axios
-			.delete(`http://test.m14.uz/allomalar/delete?id=${id}`, {
+			.delete(`http://test.m14.uz/museums/delete?id=${id}`, {
 				headers: { Authorization: `Bearer ${token}` },
 			})
 			.then((res) => {
 				setLoad(false);
 				util.toast('success', res.message);
-				getScholar();
+				getMuseums();
 			})
 			.catch((err) => {
 				setLoad(false);
@@ -41,12 +39,13 @@ const Allomalar = () => {
 				util.toast('warning', err.message);
 			});
 	};
-	const getScholar = () => {
+	const getMuseums = () => {
 		setLoad(true);
 		api
-			.get_scholar(body)
+			.get_museums(body)
 			.then((res) => {
-				setScholar(res.data.data);
+				console.log(res.data.data);
+				setMuseums(res.data.data);
 				body.pages = res.data.pages;
 				body.limit = res.data.limit;
 				body.current_page = res.data.current_page;
@@ -57,39 +56,37 @@ const Allomalar = () => {
 				setLoad(false);
 			});
 	};
+
 	useEffect(() => {
-		getScholar();
-	}, [scholar.length]);
+		getMuseums();
+	}, [museums.length]);
 	return (
 		<>
 			<div className='d-flex flex-column w-100'>
 				<div className='panel-top py-3 px-4 border border-bottom'>
-					<h3 className='m-0'>Allomalar</h3>
+					<h3 className='m-0'>Muzeylar va tarixiy joylar</h3>
 					<div className='top-search'>
 						<input
 							className='form-control mr-3'
 							type='search'
 							placeholder='Qidirish...'
 						/>
-						<button
-							type='button'
-							className='btn btn-light d-flex align-items-center'
+						<i
+							className='fa-solid fa-plus fa-xl pointer'
 							onClick={() => {
 								location({
-									pathname: '/admin/addScholar',
-									search: 'q=scholars',
+									pathname: '/admin/add',
+									search: 'q=museums',
 								});
 							}}
-						>
-							Qo`shish <i className='fa-solid ms-1 fa-plus fa-xl pointer'></i>
-						</button>
+						></i>
 					</div>
 				</div>
 				<div className='panel-bottom p-3'>
-					{scholar.length > 0 ? (
+					{museums.length > 0 ? (
 						<div className='row'>
-							{scholar.map((item, index) => (
-								<div className='col-4 mb-3' key={index}>
+							{museums.map((item, index) => (
+								<div className='col-3 mb-3' key={index}>
 									<div className='card'>
 										<div className='card-body'>
 											<img
@@ -97,7 +94,7 @@ const Allomalar = () => {
 												width={400}
 												height={200}
 												src={
-													item.pictures?.length > 0
+													item.pictures.length > 0
 														? baseUrl + item.pictures[0].image_url
 														: `${pi}`
 												}
@@ -119,8 +116,8 @@ const Allomalar = () => {
 												className='btn btn-warning '
 												onClick={() => {
 													location({
-														pathname: '/admin/editScholar',
-														search: `q=scholar&id=${item.id}`,
+														pathname: '/admin/edit',
+														search: `q=museums&id=${item.id}`,
 													});
 												}}
 											>
@@ -170,4 +167,4 @@ const Allomalar = () => {
 	);
 };
 
-export default Allomalar;
+export default Museums;

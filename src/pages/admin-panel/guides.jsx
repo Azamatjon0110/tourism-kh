@@ -22,6 +22,7 @@ const AdminGuides = () => {
 		pages: 1,
 		limit: 20,
 		current_page: 1,
+		status: true,
 	};
 	if (isOpen == true) {
 		document.querySelector('.modal-box').classList.add('active-m');
@@ -50,18 +51,6 @@ const AdminGuides = () => {
 				console.log(err);
 				util.toast('warning', err.message);
 			});
-		// api
-		// 	.delete_gid(id)
-		// 	.then((res) => {
-		// 		setLoad(false);
-		// 		util.toast('success', res.message);
-		// 		getGuides();
-		// 	})
-		// 	.catch((err) => {
-		// 		setLoad(false);
-		// 		console.log(err);
-		// 		util.toast('warning', err.message);
-		// 	});
 	};
 	const getGuides = () => {
 		setLoad(true);
@@ -86,16 +75,17 @@ const AdminGuides = () => {
 			api
 				.create_gid(data)
 				.then((res) => {
-					console.log(res);
 					reset();
-					setLoad(false);
+					setOpen(false);
 					util.toast('success', res.message);
 					getGuides();
+					setLoad(false);
 				})
 				.catch((err) => {
 					console.log(err);
-					util.toast('warning', err.message);
 					setLoad(false);
+					setOpen(false);
+					util.toast('warning', err.message);
 				});
 		} else {
 			setLoad(true);
@@ -110,11 +100,13 @@ const AdminGuides = () => {
 				.then(() => {
 					reset();
 					getGuides();
+					setOpen(false);
 					setLoad(false);
 				})
 				.catch((err) => {
-					setLoad(false);
 					console.log(err);
+					setOpen(false);
+					setLoad(false);
 				});
 		}
 	};
@@ -137,8 +129,9 @@ const AdminGuides = () => {
 							className='fa-solid fa-user-plus fa-xl pointer'
 							onClick={() => {
 								// ref.current.getGuides();
+								setOpen(true);
 								setModal({
-									status: 'gid_add',
+									status: 'git_add',
 									elem: {
 										name: '',
 										phone: '',
@@ -146,7 +139,6 @@ const AdminGuides = () => {
 										languages: '',
 									},
 								});
-								setOpen(true);
 							}}
 						></i>
 					</div>
@@ -287,7 +279,16 @@ const AdminGuides = () => {
 								>
 									Rad etish
 								</button>
-								<button type='submit' className='btn btn-success sc'>
+								<button
+									type='submit'
+									className='btn btn-success sc'
+									onClick={() => {
+										setOpen(false);
+										document
+											.querySelector('.modal-box')
+											.classList.remove('active-m');
+									}}
+								>
 									Saqlash
 								</button>
 							</div>

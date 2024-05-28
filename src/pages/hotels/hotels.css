@@ -12,6 +12,12 @@
   overflow-wrap: break-word;
 }
 
+
+.hotel_hero{
+  position: absolute;
+  z-index: 5;
+}
+
 @media screen and (min-width:768px) {
   .hotel-title{
     font-size: 60px;

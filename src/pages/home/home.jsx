@@ -26,10 +26,12 @@ import { useSelector } from 'react-redux';
 import LocomotiveScroll from 'locomotive-scroll';
 import Carusel from '../../components/carousel/carousel.jsx';
 import Slider from 'react-slick';
+// import Preloaded from '/src/assets/images/preloader.png';
 const Home = () => {
 	const lang = useSelector((state) => state.lang.lang);
 	const [arr, setArr] = useState([]);
 	const [arrMedia, setArrMedia] = useState([]);
+	// const [news, setNews] = useState([]);
 	const [textArr] = useState([
 		{
 			id: 1,
@@ -68,6 +70,7 @@ const Home = () => {
 	}
 	useEffect(() => {
 		a();
+
 		const scroll = new LocomotiveScroll({
 			el: scrollRef.current,
 			smooth: true,
@@ -194,7 +197,7 @@ const Home = () => {
 									<div
 										className='col-12 col-md-6 col-lg-4'
 										data-scroll
-										data-scroll-speed='3'
+										data-scroll-speed='0'
 									>
 										<div className='historical-places__card'>
 											<img className='historical-places__img' src={s} alt='' />
@@ -221,7 +224,7 @@ const Home = () => {
 									<div
 										className='col-12 col-md-6 col-lg-4'
 										data-scroll
-										data-scroll-speed='2'
+										data-scroll-speed='1'
 									>
 										<div className='historical-places__card'>
 											<img className='historical-places__img' src={s} alt='' />

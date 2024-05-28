@@ -9,6 +9,7 @@ import handleError from './handle';
 
 const Server = async (endpoint = '', method = 'get', data = null) => {
 	const token = localStorage.getItem('token');
+	// console.log(token);
 	// const dispatch = useDispatch();
 	// let { token } = useSelector(selectValues);
 	let result, error;

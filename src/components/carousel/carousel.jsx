@@ -29,15 +29,6 @@ const settingsV = {
 	// 	console.log('after change', currentSlide);
 	// },
 };
-const settingsG = {
-	dots: true,
-	infinite: true,
-	autoplay: true,
-	speed: 500,
-	autoplaySpeed: 2000,
-	slidesToShow: 1,
-	slidesToScroll: 1,
-};
 // const responsive = {
 // 	superLargeDesktop: {
 // 		// the naming can be any, depends on you.
@@ -80,25 +71,22 @@ const Carusel = () => {
 	// }, []);
 	return (
 		<>
-			<div className='header-top'>
+			<div className=''>
 				<Navbar />
-				<div className='position-relative'></div>
-				<div className='slider-container'>
-					<Slider {...settingsG}>
-						{crs.map((item) => (
-							<div className='crs-box' key={item}>
-								<svg width='580' height='400' className='svg-morph'>
-									<path
-										id='svg_morph'
-										d='m261,30.4375c0,0 114,6 151,75c37,69 37,174 6,206.5625c-31,32.5625 -138,11.4375 -196,-19.5625c-58,-31 -86,-62 -90,-134.4375c12,-136.5625 92,-126.5625 129,-127.5625z'
-									></path>
-								</svg>
-								<h1 className='crs-title'>Marg`ilon</h1>
-							</div>
-						))}
-					</Slider>
-					<div className='back-gradient'></div>
-					<div className='img-box'>
+				{/* <div className='position-relative'></div> */}
+				<div className='back-gradient'>
+					<div className='crs-box'>
+						<svg width='580' height='400' className='svg-morph'>
+							<path
+								id='svg_morph'
+								d='m261,30.4375c0,0 114,6 151,75c37,69 37,174 6,206.5625c-31,32.5625 -138,11.4375 -196,-19.5625c-58,-31 -86,-62 -90,-134.4375c12,-136.5625 92,-126.5625 129,-127.5625z'
+							></path>
+						</svg>
+						<h1 className='crs-title'>Marg`ilon</h1>
+					</div>
+				</div>
+				<div className='img-box '>
+					<div className='slider-container'>
 						<Slider {...settingsV}>
 							{crs.map((item) => (
 								<div className='wrap-position' key={item}>

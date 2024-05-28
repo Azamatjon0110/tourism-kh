@@ -210,7 +210,9 @@ const Admins = () => {
 									className='btn-close'
 									onClick={() => {
 										setOpen(false);
-										document.querySelector;
+										document
+											.querySelector('.modal-box')
+											.classList.remove('active-m');
 									}}
 									aria-label='Close'
 								></button>
@@ -262,7 +264,9 @@ const Admins = () => {
 									className='btn btn-danger me-2'
 									onClick={() => {
 										setOpen(false);
-										document.querySelector;
+										document
+											.querySelector('.modal-box')
+											.classList.remove('active-m');
 									}}
 								>
 									Rad etish
