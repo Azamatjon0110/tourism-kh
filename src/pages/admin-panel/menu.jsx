@@ -6,8 +6,7 @@ import util from '../../server/util';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import ReactQuill from 'react-quill';
-import baseurl from '../../server/baseurl';
-// import axios from 'axios';
+import Logo from './logo';
 
 const Menu = () => {
 	const lang = useSelector((state) => state.lang.lang);
@@ -15,11 +14,7 @@ const Menu = () => {
 	const [menu, setMenu] = useState([]);
 	const [language, setLanguage] = useState([]);
 	const [isOpen, setOpen] = useState(false);
-	const [isOpenLogo, setOpenLogo] = useState(false);
 	const [id, setId] = useState(false);
-	const [img, setImg] = useState();
-	const [file, setFile] = useState();
-	const [logo, setLogo] = useState({});
 	const [modal, setModal] = useState({
 		status: 'modal_add',
 	});
@@ -54,10 +49,6 @@ const Menu = () => {
 	};
 	if (isOpen == true) {
 		document.querySelector('.modal-box').classList.add('active-m');
-	}
-
-	if (isOpenLogo == true) {
-		document.querySelector('.modal-logo').classList.add('active-m');
 	}
 
 	const getMenu = () => {
@@ -105,25 +96,11 @@ const Menu = () => {
 				bodyLang.pages = res.data.pages;
 				bodyLang.limit = res.data.limit;
 				bodyLang.current_page = res.data.current_page;
-				getLogo();
 				setLoad(false);
 			})
 			.catch((err) => {
 				console.log(err);
 				setLoad(false);
-			});
-	};
-
-	const getLogo = () => {
-		api
-			.get_logo()
-			.then((res) => {
-				setLogo(res.data);
-				setLoad(false);
-			})
-			.catch((err) => {
-				setLoad(false);
-				console.log(err);
 			});
 	};
 
@@ -172,33 +149,6 @@ const Menu = () => {
 		}
 	};
 
-	const changeLogo = (evt) => {
-		setImg(URL.createObjectURL(evt.target.files[0]));
-		setFile(evt.target.files[0]);
-	};
-
-	const updateLogo = (evt) => {
-		evt.preventDefault();
-		setLoad(true);
-		console.log(file);
-		// axios
-		// 	.put(`logo/update?source=${logo.source}&id=${logo.id}`)
-		// 	.update_logo({
-		// 		id: logo.id,
-		// 		source: logo.source,
-		// 		file: file,
-		// 	})
-		// 	.then((res) => {
-		// 		getLogo();
-		// 		util.toast('success', res.message);
-		// 		setLoad(false);
-		// 		reset();
-		// 	})
-		// 	.catch((err) => {
-		// 		setLoad(false);
-		// 		console.log(err);
-		// 	});
-	};
 	useEffect(() => {
 		getMenu();
 	}, [menu.length]);
@@ -222,30 +172,7 @@ const Menu = () => {
 					</div>
 				</div>
 				<div className='panel-bottom p-3'>
-					{logo.id > 0 ? (
-						<div className='logotip-box d-flex align-items-center border-bottom'>
-							<img
-								width={200}
-								height={120}
-								src={baseurl + logo.image_url}
-								alt=''
-							/>
-							<button
-								type='button'
-								onClick={() => {
-									setOpenLogo(true);
-									document
-										.querySelector('.modal-logo')
-										.classList.add('active-m');
-								}}
-							>
-								<i className='fa-solid fa-arrows-rotate me-1'></i>
-								Alishtirish
-							</button>
-						</div>
-					) : (
-						''
-					)}
+					<Logo />
 					{menu.length > 0 ? (
 						<table className='table'>
 							<thead>
@@ -362,73 +289,6 @@ const Menu = () => {
 										setOpen(false);
 										document
 											.querySelector('.modal-box')
-											.classList.remove('active-m');
-										reset();
-									}}
-								>
-									Rad etish
-								</button>
-								<button type='submit' className='btn btn-success sc'>
-									Saqlash
-								</button>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-
-			<div className='modal-box modal-logo'>
-				<form className='' onSubmit={updateLogo}>
-					<div className='modal-c'>
-						<div className='modal-bodyy'>
-							<div className='modal-header'>
-								<h1 className='modal-title fs-5' id='staticBackdropLabel'>
-									Logoni o`zgartirish
-								</h1>
-								<button
-									type='button'
-									className='btn-close'
-									onClick={() => {
-										setOpenLogo(false);
-										document
-											.querySelector('.modal-logo')
-											.classList.remove('active-m');
-									}}
-								></button>
-							</div>
-							<div className='modal-body'>
-								{logo.id > 0 ? (
-									<div className='logotip-box d-flex align-items-center border-bottom'>
-										<img
-											width={200}
-											height={120}
-											src={img ? img : baseurl + logo.image_url}
-											alt=''
-										/>
-										<label>
-											<input
-												type='file'
-												{...register('logo')}
-												onChange={changeLogo}
-												className='visually-hidden'
-												required
-											/>
-											<i className='fa-solid fa-arrows-rotate me-1'></i>
-											Alishtirish
-										</label>
-									</div>
-								) : (
-									''
-								)}
-							</div>
-							<div className='modal-footer'>
-								<button
-									type='button'
-									className='btn btn-danger me-2'
-									onClick={() => {
-										setOpenLogo(false);
-										document
-											.querySelector('.modal-logo')
 											.classList.remove('active-m');
 										reset();
 									}}
