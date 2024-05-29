@@ -1,16 +1,33 @@
-import logo from '/src/assets/logo.svg';
+// import logo from '/src/assets/logo.svg';
 import { Link } from 'react-router-dom';
-import language from '/src/assets/lang/language';
+// import language from '/src/assets/lang/language';
 // import x6 from '/src/assets/images/x8.jpg';
 import x7 from '/src/assets/images/x10.jpg';
 import './navbar.css';
+import { useEffect, useState } from 'react';
+import api from '../../server/api';
+import baseurl from '../../server/baseurl';
+import { useSelector } from 'react-redux';
+import { Hidden } from '@mui/material';
 const Navbar = () => {
-	const lang = localStorage.getItem('lang');
+	const [logo, setLogo] = useState();
+	const [offset, setOffset] = useState();
+	const [language, setLanguage] = useState();
+
+	const [museum, setMuseum] = useState({});
+	const [home, setMain] = useState({});
+	const [hotel, setHotel] = useState({});
+	const [media, setMedia] = useState({});
+	const [history, setHistory] = useState({});
+	const [plan, setPlan] = useState({});
+	const [gid, setGid] = useState({});
+	const lang = useSelector((state) => state.lang.lang);
 	const ToggleNavbar = () => {
 		document.querySelector('.hamburger').classList.toggle('active');
 		document.querySelector('.navbar').classList.toggle('active');
 	};
 	const ToggleNavbarDs = () => {
+		document.body.classList.toggle('body-over');
 		document.querySelector('.hamburger-ds').classList.toggle('active');
 		document.querySelector('.desktop-offset').classList.toggle('active');
 	};
@@ -20,37 +37,108 @@ const Navbar = () => {
 		// console.log(evt.target);
 	}
 
+	const body = {
+		language: lang,
+		pages: 1,
+		limit: 40,
+		status: true,
+	};
+
+	const getLanguage = () => {
+		api
+			.get_lang(body)
+			.then((res) => {
+				const lg = res.data.data;
+				lg.reverse();
+				setLanguage(lg);
+				getSettings();
+			})
+			.catch((err) => console.log(err));
+	};
+
+	const getLogo = () => {
+		api
+			.get_logo()
+			.then((res) => {
+				setLogo(res.data);
+				console.log(res);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	const getSettings = () => {
+		api
+			.get_menu(body)
+			.then((res) => {
+				console.log(res.data);
+				res.data.data.map((elem) => {
+					if (elem.key == 'museum') {
+						setMuseum(elem);
+					} else if (elem.key == 'Asosiy') {
+						setMain(elem);
+					} else if (elem.key == 'hotel') {
+						setHotel(elem);
+					} else if (elem.key == 'gid') {
+						setGid(elem);
+					} else if (elem.key == 'offset') {
+						setOffset(elem);
+					} else if (elem.key == 'media') {
+						setMedia(elem);
+					} else if (elem.key == 'history') {
+						setHistory(elem);
+					} else if (elem.key == 'plan') {
+						setPlan(elem);
+					}
+					getLogo();
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	useEffect(() => {
+		getLanguage();
+	}, []);
+
 	return (
 		<nav className='navbar'>
 			<div className='container'>
 				<div className='mobile-offset'>
 					<Link to='/' className='logo'>
-						<img className='logo-site' src={logo} alt='Logo' />
+						<img
+							className='logo-site'
+							src={logo?.id > 0 ? baseurl + logo.image_url : ''}
+							alt='Logo'
+						/>
 					</Link>
 
 					<div className='navbar-box'>
 						<div className='logo-box'>
 							<Link to='/' className='logo'>
-								<img className='logo-site' src={logo} alt='Logo' />
+								<img
+									className='logo-site'
+									src={logo?.id > 0 ? baseurl + logo.image_url : ''}
+									alt='Logo'
+								/>
 							</Link>
 						</div>
 						<div className='custom-menu'>
 							<ul className='lang-list'>
-								<li className='lang-item'>
-									<p className='lang-btn' onClick={changeLang(EventTarget)}>
-										{language[lang].home.sel_lang.uz}
-									</p>
-								</li>
-								<li className='lang-item'>
-									<p className='lang-btn' onClick={changeLang(EventTarget)}>
-										{language[lang].home.sel_lang.ru}
-									</p>
-								</li>
-								<li className='lang-item'>
-									<p className='lang-btn' onClick={changeLang(EventTarget)}>
-										{language[lang].home.sel_lang.en}
-									</p>
-								</li>
+								{language?.length > 0
+									? language.map((elem) => (
+											<li className='lang-item' key={elem.id}>
+												<p
+													className='lang-btn'
+													onClick={changeLang(EventTarget)}
+												>
+													{elem.key}
+												</p>
+											</li>
+									  ))
+									: ''}
 							</ul>
 						</div>
 
@@ -58,71 +146,147 @@ const Navbar = () => {
 							<ul className='lang-list'>
 								<li className='lang-item'>
 									<Link className='lang-btn' to='/'>
-										{language[lang].home.navbar.home}
+										{home?.texts?.length > 0 ? (
+											<div
+												dangerouslySetInnerHTML={{
+													__html: home?.texts[0].text,
+												}}
+											></div>
+										) : (
+											''
+										)}
+									</Link>
+								</li>
+								<li className='lang-item dropdown-box d-none d-lg-block'>
+									<Link className='lang-btn' to='/about'>
+										{history?.texts?.length > 0 ? (
+											<div
+												dangerouslySetInnerHTML={{
+													__html: history?.texts[0].text,
+												}}
+											></div>
+										) : (
+											''
+										)}
 									</Link>
 								</li>
 								<li className='lang-item d-block d-lg-none'>
 									<Link className='lang-btn' to='/about'>
-										{language[lang].about.about_wrap_title}
+										{museum?.texts?.length > 0 ? (
+											<div
+												dangerouslySetInnerHTML={{
+													__html: museum?.texts[0].text,
+												}}
+											></div>
+										) : (
+											''
+										)}
 									</Link>
 								</li>
 
 								<li className='lang-item d-block d-lg-none'>
-									<Link className='lang-btn' to='/historical_places'>
-										{language[lang].home.navbar.his_pl}
-									</Link>
-								</li>
-								<li className='lang-item d-block d-lg-none'>
 									<Link className='lang-btn' to='/hotels'>
-										{language[lang].home.navbar.hotel}
+										{hotel?.texts?.length > 0 ? (
+											<div
+												dangerouslySetInnerHTML={{
+													__html: hotel?.texts[0].text,
+												}}
+											></div>
+										) : (
+											''
+										)}
 									</Link>
 								</li>
 								<li className='lang-item d-block d-lg-none'>
 									<Link className='lang-btn' to='/guides'>
-										{language[lang].home.navbar.gid}
+										{gid?.texts?.length > 0 ? (
+											<div
+												dangerouslySetInnerHTML={{
+													__html: gid?.texts[0].text,
+												}}
+											></div>
+										) : (
+											''
+										)}
 									</Link>
 								</li>
 								<li className='lang-item d-block d-lg-none'>
 									<Link className='lang-btn' to='/media'>
-										{language[lang].home.navbar.media}
+										{media?.texts?.length > 0 ? (
+											<div
+												dangerouslySetInnerHTML={{
+													__html: media?.texts[0].text,
+												}}
+											></div>
+										) : (
+											''
+										)}
 									</Link>
 								</li>
+
 								<li className='lang-item dropdown-box d-none d-lg-block'>
-									<p className='dropdown-c'>
-										{language[lang].home.navbar.about}
+									<p className='planning'>
+										{plan?.texts?.length > 0 ? (
+											<div
+												dangerouslySetInnerHTML={{
+													__html: plan?.texts[0].text,
+												}}
+											></div>
+										) : (
+											''
+										)}
 									</p>
 									<ul className='list-ustyled nav-dropdown'>
 										<li className='dropdown-item'>
-											<Link className='dropdown-link' to='/about'>
-												{language[lang].about.about_wrap_title}
-											</Link>
-										</li>
-									</ul>
-									{/* <Link className='lang-btn' to='/about'>
-									{language[lang].home.navbar.about}
-								</Link> */}
-								</li>
-								<li className='lang-item dropdown-box d-none d-lg-block'>
-									<p className='planning'>{language[lang].home.navbar.plan}</p>
-									<ul className='list-ustyled nav-dropdown'>
-										<li className='dropdown-item'>
 											<Link className='dropdown-link' to='/historical_places'>
-												{language[lang].home.navbar.his_pl}
+												{museum?.texts?.length > 0 ? (
+													<div
+														dangerouslySetInnerHTML={{
+															__html: museum?.texts[0].text,
+														}}
+													></div>
+												) : (
+													''
+												)}
 											</Link>
 										</li>
 										<li className='dropdown-item'>
 											<Link className='dropdown-link' to='/hotels'>
-												{language[lang].home.navbar.hotel}
+												{hotel?.texts?.length > 0 ? (
+													<div
+														dangerouslySetInnerHTML={{
+															__html: hotel?.texts[0].text,
+														}}
+													></div>
+												) : (
+													''
+												)}
 											</Link>
 										</li>
 										<li className='dropdown-item'>
 											<Link className='dropdown-link' to='/guides'>
-												{language[lang].home.navbar.gid}
+												{gid?.texts?.length > 0 ? (
+													<div
+														dangerouslySetInnerHTML={{
+															__html: gid?.texts[0].text,
+														}}
+													></div>
+												) : (
+													''
+												)}
 											</Link>
 										</li>
 										<li className='dropdown-item'>
 											<Link className='dropdown-link' to='/media'>
-												{language[lang].home.navbar.media}
+												{media?.texts?.length > 0 ? (
+													<div
+														dangerouslySetInnerHTML={{
+															__html: media?.texts[0].text,
+														}}
+													></div>
+												) : (
+													''
+												)}
 											</Link>
 										</li>
 									</ul>
@@ -139,26 +303,23 @@ const Navbar = () => {
 				</div>
 				<div className='desktop-offset'>
 					<Link to='/' className='logo'>
-						<img className='logo-site' src={logo} alt='Logo' />
+						<img
+							className='logo-site'
+							src={logo?.id > 0 ? baseurl + logo.image_url : ''}
+							alt='Logo'
+						/>
 					</Link>
 					<img className='ds-img' src={x7} alt='' />
-					<p className='ds-description'>
-						Xudoyorxon o`rdasi - XIX asrga tegishli tarixiy yodgorlik sanalib
-						hozirgi kunda madaniy meros obyektlari qatoriga kiradi
-					</p>
-					<h3 className='ds-time-title'>{language[lang].home.home_off.open}</h3>
-					<div className='week-days'>
-						<p className='week-item'>
-							{language[lang].home.home_off.week_days}:
-						</p>
-						<p className='week-item'> 09:00 - 18:00</p>
-					</div>
-					<div className='week-days'>
-						<p className='week-item'>
-							{language[lang].home.home_off.weekDay_rest}:
-						</p>
-						<p className='week-item'>10:00 - 18:00</p>
-					</div>
+					{offset?.texts?.length > 0 ? (
+						<div
+							className='text-white'
+							dangerouslySetInnerHTML={{
+								__html: offset?.texts[0].text,
+							}}
+						></div>
+					) : (
+						''
+					)}
 				</div>
 				<div className='hamburger-menu mobile' onClick={ToggleNavbar}>
 					<svg className='hamburger' width='30' height='30' viewBox='0 0 30 30'>

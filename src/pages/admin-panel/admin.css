@@ -81,7 +81,11 @@
 }
 
 .active-m .modal-bodyy{
-  transform: translateY(100px);
+  transform: translateY(70px);
+}
+
+.menu-body p{
+  margin-bottom: 0;
 }
 
 
@@ -148,13 +152,6 @@
   background-color: black;
 }
 
-.menu-wrap .ql-toolbar {
-  display: none;
-}
-.menu-wrap .ql-toolbar.ql-snow + .ql-container.ql-snow{
-  border-top: 1px solid #ccc !important;
-  border-radius: 6px;
-}
 
 .media_img{
   width: 100%;

@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 import './admin.css';
 import api from '../../server/api';
 import util from '../../server/util';
-import axios from 'axios';
+// import axios from 'axios';
 import Loading from '../../components/Animation/loading';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import handleError from '../../server/handle';
 
 const Language = () => {
-	const token = useSelector((state) => state.token.token);
+	// const token = useSelector((state) => state.token.token);
 	const [language, setLanguage] = useState([]);
-	const [id, setId] = useState();
+	// const [id, setId] = useState();
 	const [load, setLoad] = useState(false);
 	const [modal, setModal] = useState({
 		status: 'lang_add',
@@ -42,23 +42,23 @@ const Language = () => {
 			default: modal.elem.default,
 		},
 	});
-	const remove = () => {
-		setLoad(true);
-		axios
-			.delete(`http://test.m14.uz/language/delete?id=${id}`, {
-				headers: { Authorization: `Bearer ${token}` },
-			})
-			.then((res) => {
-				setLoad(false);
-				util.toast('success', res.message);
-				getLanguage();
-			})
-			.catch((err) => {
-				setLoad(false);
-				console.log(err);
-				util.toast('warning', err.message);
-			});
-	};
+	// const remove = () => {
+	// 	setLoad(true);
+	// 	axios
+	// 		.delete(`http://test.m14.uz/language/delete?id=${id}`, {
+	// 			headers: { Authorization: `Bearer ${token}` },
+	// 		})
+	// 		.then((res) => {
+	// 			setLoad(false);
+	// 			util.toast('success', res.message);
+	// 			getLanguage();
+	// 		})
+	// 		.catch((err) => {
+	// 			setLoad(false);
+	// 			console.log(err);
+	// 			util.toast('warning', err.message);
+	// 		});
+	// };
 	const handleRadioChange = (id) => {
 		language.map((elem) => {
 			if (elem.id != id) {
@@ -135,7 +135,7 @@ const Language = () => {
 							type='search'
 							placeholder='Qidirish...'
 						/>
-						<i
+						{/* <i
 							className='fa-solid fa-plus fa-xl pointer'
 							onClick={() => {
 								setModal({
@@ -149,7 +149,7 @@ const Language = () => {
 								});
 								setOpen(true);
 							}}
-						></i>
+						></i> */}
 					</div>
 				</div>
 				<div className='panel-bottom p-3'>
@@ -202,7 +202,7 @@ const Language = () => {
 											>
 												<i className='fa-solid fa-pen fa-sm text-white'></i>
 											</button>
-											<button
+											{/* <button
 												className='btn btn-danger btn-action'
 												type='button'
 												data-bs-toggle='modal'
@@ -210,7 +210,7 @@ const Language = () => {
 												onClick={() => setId(elem.id)}
 											>
 												<i className='fa-solid fa-trash fa-sm'></i>
-											</button>
+											</button> */}
 										</td>
 									</tr>
 								))}
@@ -220,7 +220,7 @@ const Language = () => {
 						<h4 className='text-center'>Ma`lumot topilmadi!</h4>
 					)}
 				</div>
-				<div
+				{/* <div
 					className='modal fade'
 					id='exampleModal'
 					tabIndex='-1'
@@ -251,7 +251,7 @@ const Language = () => {
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> */}
 				<div className='modal-box'>
 					<form className='' onSubmit={handleSubmit(submit)}>
 						<div className='modal-c'>

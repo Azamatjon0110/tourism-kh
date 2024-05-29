@@ -4,14 +4,12 @@ import shape from '/src/assets/images/title-shape.png';
 import festival from '/src/assets/images/festival.jpg';
 import Footer from '../../components/footer/footer.jsx';
 import './news.css';
-import { useEffect, useRef, useState } from 'react';
-import LocomotiveScroll from 'locomotive-scroll';
+import { useEffect, useState } from 'react';
 import api from '../../server/api.js';
 import handleError from '../../server/handle.js';
 import Loading from '../../components/Animation/loading.jsx';
 const News = () => {
 	const lang = localStorage.getItem('lang');
-	const scrollRef = useRef();
 	const [news, setNews] = useState([]);
 	const [load, setLoad] = useState(false);
 	const body = {
@@ -37,24 +35,10 @@ const News = () => {
 	};
 	useEffect(() => {
 		getNews();
-		const scroll = new LocomotiveScroll({
-			el: scrollRef.current,
-			smooth: true,
-			class: 'is-inview',
-			getSpeed: true,
-			getDirection: true,
-			smartphone: {
-				smooth: false,
-			},
-			tablet: {
-				smooth: false,
-			},
-		});
-		return () => scroll.destroy();
 	}, [news.length]);
 	return (
 		<>
-			<div className='wrapper' ref={scrollRef} data-scroll-section>
+			<div className=''>
 				<Navbar />
 				<div className='news-bg'>
 					<div className='container'>

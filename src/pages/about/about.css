@@ -55,7 +55,7 @@
 
 
 .svg-morph path {
-  fill: #94ffc4;
+  fill: #7e2cf1;
   animation-name: svg-morph;
   -webkit-animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
   -moz-animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);

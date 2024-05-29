@@ -70,6 +70,7 @@ const Addnews = () => {
 		defaultValues: {
 			texts: [{ text: '', language: '' }],
 			file: '',
+			link: '',
 		},
 	});
 
@@ -107,13 +108,14 @@ const Addnews = () => {
 		data.texts.map((elem, i) => {
 			data.texts[i].language = languages[i].key;
 		});
+		console.log(data);
 		if (query == 'news') {
 			api
 				.create_news({
 					texts: data.texts,
 					videos: [
 						{
-							text: '',
+							text: data.link,
 						},
 					],
 				})
@@ -130,14 +132,14 @@ const Addnews = () => {
 								if (res1.status == 200) {
 									util.toast('success', res1.data.data);
 									reset();
-									// setImg({});
-									setFile('');
+									setImg(null);
+									setFile(null);
 									setLoad(false);
 								}
 							})
 							.catch((err) => {
 								handleError(err);
-								// setLoad(false);
+								setLoad(false);
 							});
 					}
 				})
@@ -219,6 +221,14 @@ const Addnews = () => {
 							</label>
 						</div>
 						<div className='col-8'>
+							{/* <label className='w-100 mb-3'>
+								Video linki
+								<input
+									type='text'
+									{...register('link')}
+									className='form-control w-100'
+								/>
+							</label> */}
 							{fields.map((field, index) => (
 								<div key={field.id}>
 									{languages.length > 0 ? languages[index].name : ''}

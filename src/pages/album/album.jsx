@@ -64,14 +64,14 @@ const Album = () => {
 	}, []);
 	return (
 		<>
-			<div className='wrapper' ref={scrollRef} data-scroll-section>
+			<div className='wrapper' ref={scrollRef} data-scroll-container>
 				<Navbar />
 				<div className='album_wrap py-5'>
 					<div className='container'>
 						<p className='back' onClick={() => navigate(-1)}>
 							<i className='fa-regular fa-hand-point-left'></i> orqaga
 						</p>
-						<div className='album__box'>
+						<div className=''>
 							<img
 								className=' album__img'
 								src={
@@ -98,9 +98,9 @@ const Album = () => {
 				</div>
 
 				<Footer />
-			</div>
-			<div className={load === true ? 'd-block' : 'd-none'}>
-				<Loading />
+				<div className={load === true ? 'd-block' : 'd-none'}>
+					<Loading />
+				</div>
 			</div>
 		</>
 	);

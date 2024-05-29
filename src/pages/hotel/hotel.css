@@ -2,8 +2,17 @@
   width: 100%;
   height: 300px;
 }
+
+.hotel{
+  padding: 30px;
+  margin-top: 150px;
+  background-color: rgba(250, 235, 215, 0.921);
+}
+
+.hotel__wrap{
+  width: 100%;
+}
 .back{
-  clear: both;
   cursor: pointer;
 }
 @media screen and (min-width:768px) {
@@ -13,6 +22,6 @@
   }
 
   .hotel__img{
-    float: none;
+    float: left;
   }
 }

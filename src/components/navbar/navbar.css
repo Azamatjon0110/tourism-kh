@@ -97,7 +97,7 @@
   font-size: 20px;
   margin-right: 30px;
   color: #fff;
-  background-image: linear-gradient(rgba(0, 0, 0, 0) calc(99% - 2px), #54f12c 3px);
+  background-image: linear-gradient(rgba(0, 0, 0, 0) calc(99% - 2px), #7e2cf1 3px);
     background-repeat: no-repeat;
     background-size: 0% 100%;
     transition: background-size 0.5s;
@@ -124,7 +124,7 @@
   font-size: 20px;
   color: #fff;
   cursor: pointer;
-  background-image: linear-gradient(rgba(0, 0, 0, 0) calc(99% - 2px), #54f12c 3px);
+  background-image: linear-gradient(rgba(0, 0, 0, 0) calc(99% - 2px), #7e2cf1 3px);
     background-repeat: no-repeat;
     background-size: 0% 100%;
     transition: background-size 0.5s;
@@ -156,7 +156,7 @@
   font-size: 20px;
   color: #fff;
   cursor: pointer;
-  background: linear-gradient(rgba(0, 0, 0, 0) calc(99% - 2px), #54f12c 3px);
+  background: linear-gradient(rgba(0, 0, 0, 0) calc(99% - 2px), #7e2cf1 3px);
     background-repeat: no-repeat;
     background-size: 0% 100%;
     transition: background-size 0.5s;
@@ -186,7 +186,8 @@
   overflow-wrap: break-word;
 }
 .dropdown-item:hover{
-  background-color: #54f12c;
+  color: #fff;
+  background-color: #7e2cf1;
 }
 .nav-dropdown{
   display: none;
@@ -342,6 +343,10 @@
 
 }
 
+.lang-item p{
+  margin-bottom: 0;
+}
+
 
 @media only screen and (min-width:992px) {
 
@@ -383,9 +388,14 @@
     transform: translate(0);
   }
 
+  .body-over {
+    overflow-y: hidden !important;
+  }
+
   .desktop-offset .logo{
     display: block !important;
     width: 100% !important;
+    max-width: 280px;
     padding-left: 56px;
     height: 120px;
     margin-bottom: 8px;
@@ -495,7 +505,7 @@
     font-size: 26px;
     font-family: 'Cinzel', serif;
     margin-bottom: 15px;
-    color: #94ffc4;
+    color: #7e2cf1;
   }
 
   .week-days{

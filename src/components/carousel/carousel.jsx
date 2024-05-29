@@ -1,6 +1,6 @@
 import x1 from '/src/assets/m-images/bg3.jpg';
-import x2 from '/src/assets/m-images/bg2.jfif';
-import x3 from '/src/assets/m-images/bg1.jpg';
+import x2 from '/src/assets/s2.jpg';
+import x3 from '/src/assets/s1.jpg';
 import './carusel.css';
 import { useState } from 'react';
 // import language from '../../assets/lang/language';
@@ -16,18 +16,11 @@ const settingsV = {
 	infinite: true,
 	autoplay: true,
 	speed: 500,
-	autoplaySpeed: 4000,
+	autoplaySpeed: 7000,
 	slidesToShow: 1,
 	slidesToScroll: 1,
 	vertical: true,
 	verticalSwiping: true,
-	// fade: true,
-	// beforeChange: function (currentSlide, nextSlide) {
-	// 	console.log('before change', currentSlide, nextSlide);
-	// },
-	// afterChange: function (currentSlide) {
-	// 	console.log('after change', currentSlide);
-	// },
 };
 // const responsive = {
 // 	superLargeDesktop: {
@@ -74,29 +67,29 @@ const Carusel = () => {
 			<div className=''>
 				<Navbar />
 				{/* <div className='position-relative'></div> */}
-				<div className='back-gradient'>
-					<div className='crs-box'>
-						<svg width='580' height='400' className='svg-morph'>
-							<path
-								id='svg_morph'
-								d='m261,30.4375c0,0 114,6 151,75c37,69 37,174 6,206.5625c-31,32.5625 -138,11.4375 -196,-19.5625c-58,-31 -86,-62 -90,-134.4375c12,-136.5625 92,-126.5625 129,-127.5625z'
-							></path>
-						</svg>
-						<h1 className='crs-title'>Marg`ilon</h1>
-					</div>
-				</div>
-				<div className='img-box '>
-					<div className='slider-container'>
-						<Slider {...settingsV}>
-							{crs.map((item) => (
-								<div className='wrap-position' key={item}>
-									<img className='crs-img' src={item} alt='' />
-								</div>
-							))}
-						</Slider>
-					</div>
+				{/* <div className='back-gradient'> */}
+				<div className='crs-box'>
+					<svg width='580' height='400' className='svg-morph'>
+						<path
+							id='svg_morph'
+							d='m261,30.4375c0,0 114,6 151,75c37,69 37,174 6,206.5625c-31,32.5625 -138,11.4375 -196,-19.5625c-58,-31 -86,-62 -90,-134.4375c12,-136.5625 92,-126.5625 129,-127.5625z'
+						></path>
+					</svg>
+					<h1 className='crs-title'>Marg`ilon</h1>
 				</div>
 			</div>
+			<div className='img-box '>
+				<div className='slider-container'>
+					<Slider {...settingsV}>
+						{crs.map((item) => (
+							<div className='wrap-position' key={item}>
+								<img className='crs-img' src={item} alt='' />
+							</div>
+						))}
+					</Slider>
+				</div>
+			</div>
+			{/* </div> */}
 		</>
 	);
 };

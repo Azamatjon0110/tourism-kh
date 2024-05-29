@@ -56,7 +56,7 @@ const Guides = () => {
 	}, []);
 	return (
 		<>
-			<div className='wrapper' ref={scrollRef} data-scroll-section>
+			<div className='wrapper' ref={scrollRef} data-scroll-container>
 				<Navbar />
 				<div className='bg-history'>
 					<div className='container'>

@@ -31,7 +31,7 @@ const About = () => {
 	}, []);
 	return (
 		<>
-			<div className='wrapper' ref={scrollRef} data-scroll-section>
+			<div className='wrapper' ref={scrollRef} data-scroll-container>
 				<Navbar />
 				<div className='bg-about'>
 					<div className='container'>

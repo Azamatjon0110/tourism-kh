@@ -1,21 +1,22 @@
 import { useEffect, useState } from 'react';
 import api from '../../server/api';
-import { useSelector } from 'react-redux';
 
-import baseurl from '../../server/baseurl';
-import axios from 'axios';
-import Loading from '../../components/Animation/loading';
 import util from '../../server/util';
-import { useForm } from 'react-hook-form';
+import baseurl from '../../server/baseurl';
+// import { useSelector } from 'react-redux';
+// import axios from 'axios';
+// import axios from 'axios';
+// import { useSelector } from 'react-redux';
+// import { useForm } from 'react-hook-form';
 const Logo = () => {
-	const { handleSubmit, reset, register } = useForm({
-		logo: '',
-	});
-	const [load, setLoad] = useState(false);
-	const token = useSelector((state) => state.token.token);
+	// const token = useSelector((state) => state.token.token);
+	// const {  reset, register } = useForm({
+	// 	logo: '',
+	// });
+	// const token = useSelector((state) => state.token.token);
 	const [img, setImg] = useState();
-	const [file, setFile] = useState();
-	const [logo, setLogo] = useState({});
+	const [file, setFile] = useState(null);
+	const [logo, setLogo] = useState(null);
 
 	const [isOpenLogo, setOpenLogo] = useState(false);
 
@@ -28,43 +29,49 @@ const Logo = () => {
 			.get_logo()
 			.then((res) => {
 				setLogo(res.data);
-				console.log(logo);
-				setLoad(false);
 			})
 			.catch((err) => {
-				setLoad(false);
 				console.log(err);
 			});
 	};
-	const changeLogo = (evt) => {
-		setFile(evt.target.files[0]);
-		setImg(URL.createObjectURL(evt.target.files[0]));
-		console.log(file);
+	const changeLogo = (event) => {
+		const fileImage = event.target.files[0];
+		if (fileImage) {
+			setFile(fileImage);
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				setImg(reader.result);
+			};
+			reader.readAsDataURL(fileImage);
+		}
 	};
 
-	const updateLogo = () => {
-		const form_data = new FormData();
-		form_data.append('file', file);
-		axios
-			.put(
-				`${baseurl}logo/update?source=${logo.source}&id=${logo.id}`,
-				{ files: [form_data] },
-				{
-					headers: { Authorization: `Bearer ${token}` },
-				}
-			)
+	const updateLogo = (evt) => {
+		evt.preventDefault();
+		console.log(file);
+		const formData = new FormData();
+		formData.append('files', file);
+		// axios
+		// 	.put(
+		// 		`${baseurl}logo/update?source=${logo.source}&id=${logo.id}`,
+		// 		{ files: [formData] },
+		// 		{
+		// 			headers: { Authorization: `Bearer ${token}` },
+		// 		}
+		// 	)
+		api
+			.update_logo({ source: logo.source, id: logo.id, files: file })
 			.then((res) => {
+				setImg();
+				console.log(res);
 				getLogo();
 				util.toast('success', res.message);
-				setLoad(false);
 				document.querySelector('.modal-logo').classList.remove('active-m');
 				setOpenLogo(false);
-				setImg();
-				reset();
+				// reset();
 			})
 			.catch((err) => {
 				setOpenLogo(false);
-				setLoad(false);
 				console.log(err);
 			});
 	};
@@ -73,11 +80,18 @@ const Logo = () => {
 	}, []);
 	return (
 		<>
-			{logo.id > 0 ? (
-				<div className='logotip-box d-flex align-items-center border-bottom'>
-					<img width={200} height={120} src={baseurl + logo.image_url} alt='' />
+			{logo ? (
+				<div className='logotip-box d-flex align-items-center border-bottom mb-2 pb-2'>
+					<img
+						className='me-2'
+						width={200}
+						height={120}
+						src={baseurl + logo.image_url}
+						alt=''
+					/>
 					<button
 						type='button'
+						className='btn'
 						onClick={() => {
 							setOpenLogo(true);
 							document.querySelector('.modal-logo').classList.add('active-m');
@@ -87,7 +101,7 @@ const Logo = () => {
 						Alishtirish
 					</button>
 					<div className='modal-box modal-logo'>
-						<form className='' onSubmit={handleSubmit(updateLogo)}>
+						<form className='' onSubmit={updateLogo}>
 							<div className='modal-c'>
 								<div className='modal-bodyy'>
 									<div className='modal-header'>
@@ -109,6 +123,7 @@ const Logo = () => {
 										{logo.id > 0 ? (
 											<div className='logotip-box d-flex align-items-center border-bottom'>
 												<img
+													className='me-2'
 													width={200}
 													height={120}
 													src={img ? img : baseurl + logo.image_url}
@@ -117,7 +132,7 @@ const Logo = () => {
 												<label>
 													<input
 														type='file'
-														{...register('logo')}
+														// {...register('logo', { required: true })}
 														onChange={changeLogo}
 														className='visually-hidden'
 														required
@@ -139,7 +154,7 @@ const Logo = () => {
 												document
 													.querySelector('.modal-logo')
 													.classList.remove('active-m');
-												reset();
+												// reset();
 											}}
 										>
 											Rad etish
@@ -151,10 +166,6 @@ const Logo = () => {
 								</div>
 							</div>
 						</form>
-					</div>
-
-					<div className={load === true ? 'd-block' : 'd-none'}>
-						<Loading />
 					</div>
 				</div>
 			) : (

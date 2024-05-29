@@ -3,7 +3,6 @@ import Footer from '../../components/footer/footer';
 import language from '../../assets/lang/language';
 import './hotels.css';
 import { useNavigate } from 'react-router-dom';
-import m1 from '/src/assets/m-images/m1.jpg';
 import { useEffect, useRef, useState } from 'react';
 import LocomotiveScroll from 'locomotive-scroll';
 import api from '../../server/api';
@@ -53,10 +52,10 @@ const Hotels = () => {
 			},
 		});
 		return () => scroll.destroy();
-	}, []);
+	}, [hotels.length]);
 	return (
 		<>
-			<div className='wrapper' ref={scrollRef} data-scroll-section>
+			<div className='wrapper' ref={scrollRef} data-scroll-container>
 				<Navbar />
 				<div className='bg-history'>
 					<div className='container'>

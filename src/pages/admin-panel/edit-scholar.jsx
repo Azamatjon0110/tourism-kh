@@ -12,14 +12,14 @@ import Loading from '../../components/Animation/loading';
 import { useSelector } from 'react-redux';
 import util from '../../server/util';
 import handleError from '../../server/handle';
-import pi from '/src/assets/m-images/pl.jpg';
 import baseurl from '../../server/baseurl';
+// import baseurl from '../../server/baseurl';
 const EditScholar = () => {
 	const lang = useSelector((state) => state.lang.lang);
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [load, setLoad] = useState(false);
-	const [file, setFile] = useState();
+	const [fileImage, setFile] = useState();
 	const [image, setImg] = useState({});
 	const [languages, setLanguages] = useState([]);
 
@@ -83,9 +83,16 @@ const EditScholar = () => {
 		current_page: 1,
 	};
 
-	const loadFile = (event) => {
-		setFile(event.target.files[0]);
-		setImg(URL.createObjectURL(event.target.files[0]));
+	const loadFile = (evt) => {
+		const file = evt.target.files[0];
+		if (file) {
+			setFile(file);
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				setImg(reader.result);
+			};
+			reader.readAsDataURL(file);
+		}
 	};
 
 	const getLanguage = () => {
@@ -109,7 +116,7 @@ const EditScholar = () => {
 					fullname: res.data.fullname,
 					age: res.data.age,
 				});
-				// setImg(res.data.pictures[0].image_url);
+				setImg(res.data.pictures[0].image_url);
 				getLanguage();
 			})
 			.catch((err) => {
@@ -139,7 +146,7 @@ const EditScholar = () => {
 						const body = {
 							source: res.data.source,
 							source_id: res.data.source_id,
-							file: file,
+							file: fileImage,
 						};
 						api
 							.create_img(body)
@@ -181,21 +188,20 @@ const EditScholar = () => {
 					<form className='row' onSubmit={handleSubmit(submit)}>
 						<div className='col-4'>
 							<div className='img-load'>
-								{file ? (
-									<img className='h-image' src={baseurl + image} alt='' />
+								{fileImage != null ? (
+									<img className='h-image' src={image} alt='' />
 								) : (
-									<img className='h-image' src={pi} alt='' />
+									<img className='h-image' src={baseurl + image} alt='' />
 								)}
 							</div>
 							<label className='d-flex  justify-content-center  pointer'>
 								<input
 									className='visually-hidden'
 									type='file'
-									{...register('file')}
 									onChange={loadFile}
 									required
 								/>
-								{file ? 'Rasmni alishtirish ' : 'Rasm qo‘shish'}
+								Rasmni alishtirish
 							</label>
 						</div>
 						<div className='col-8'>

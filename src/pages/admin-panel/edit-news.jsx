@@ -1,26 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-// import List from '@editorjs/editorjs';
-// import Paragraph from '@editorjs/editorjs';
-// import Quill from 'quill';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
-// import axios from 'axios';
 import api from '../../server/api';
 import Loading from '../../components/Animation/loading';
 import { useSelector } from 'react-redux';
 import util from '../../server/util';
-import handleError from '../../server/handle';
-import pi from '/src/assets/m-images/pl.jpg';
 import baseurl from '../../server/baseurl';
 const EditNews = () => {
 	const lang = useSelector((state) => state.lang.lang);
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [load, setLoad] = useState(false);
-	const [file, setFile] = useState();
-	const [image, setImg] = useState({});
+	const [file, setFile] = useState(null);
+	const [image, setImg] = useState(null);
 	const [languages, setLanguages] = useState([]);
 
 	const queryBox = location.search.split('&');
@@ -74,6 +68,7 @@ const EditNews = () => {
 		defaultValues: {
 			texts: [{ text: '', language: '' }],
 			file: '',
+			link: '',
 		},
 	});
 
@@ -92,8 +87,15 @@ const EditNews = () => {
 	};
 
 	const loadFile = (event) => {
-		setFile(event.target.files[0]);
-		setImg(URL.createObjectURL(event.target.files[0]));
+		const file = event.target.files[0];
+		if (file) {
+			setFile(file);
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				setImg(reader.result);
+			};
+			reader.readAsDataURL(file);
+		}
 	};
 
 	const getFunctions = () => {
@@ -102,12 +104,13 @@ const EditNews = () => {
 			api
 				.news_single(id)
 				.then((res) => {
+					console.log(res);
 					reset({
-						file: res.data.pictures[0].image_url,
+						file: res.data.pictures[0]?.image_url,
 						texts: res.data.texts,
+						link: res.data.videos[0].video_url,
 					});
-					setFile(res.data.pictures[0].image_url);
-					setImg(res.data.pictures[0].image_url);
+					setImg(res.data.pictures[0]?.image_url);
 					setLoad(false);
 				})
 				.catch((err) => {
@@ -121,7 +124,6 @@ const EditNews = () => {
 						file: res.data.pictures[0].image_url,
 						texts: res.data.texts,
 					});
-					setFile(res.data.pictures[0].image_url);
 					setImg(res.data.pictures[0].image_url);
 					setLoad(false);
 				})
@@ -142,42 +144,40 @@ const EditNews = () => {
 			});
 	};
 	const submit = (data) => {
-		// setLoad(true);
 		data.texts.map((elem, i) => {
 			data.texts[i].language = languages[i].key;
 		});
+		console.log(data);
 		if (query == 'news') {
 			api
 				.update_news({
 					id: id,
 					texts: data.texts,
-					videos: [
-						{
-							text: '',
-						},
-					],
+					videos: [],
 				})
 				.then((res) => {
 					if (res.status == 200) {
+						console.log(res);
 						const body = {
 							source: res.data.source,
 							source_id: res.data.source_id,
 							file: file,
 						};
 						api
-							.create_img(body)
+							.update_img(body)
 							.then((res1) => {
 								if (res1.status == 200) {
 									util.toast('success', res1.data.data);
 									reset();
 									// setImg({});
-									setFile('');
+									navigate(-1);
+									setFile(null);
 									setLoad(false);
 								}
 							})
 							.catch((err) => {
-								handleError(err);
-								// setLoad(false);
+								util.toastError('warning', err.message);
+								setLoad(false);
 							});
 					}
 				})
@@ -204,24 +204,31 @@ const EditNews = () => {
 					<form className='row' onSubmit={handleSubmit(submit)}>
 						<div className='col-4'>
 							<div className='img-load'>
-								{file ? (
-									<img className='h-image' src={baseurl + image} alt='' />
+								{file != null ? (
+									<img className='h-image' src={image} alt='' />
 								) : (
-									<img className='h-image' src={pi} alt='' />
+									<img className='h-image' src={baseurl + image} alt='' />
 								)}
 							</div>
 							<label className='d-flex  justify-content-center  pointer'>
 								<input
 									className='visually-hidden'
 									type='file'
-									{...register('file', { required: true })}
+									{...register('file')}
 									onChange={loadFile}
-									required
 								/>
-								{file ? 'Rasmni alishtirish ' : 'Rasm qo‘shish'}
+								Rasmni alishtirish
 							</label>
 						</div>
 						<div className='col-8'>
+							{/* <label className='w-100 mb-3'>
+								Video linki
+								<input
+									type='text'
+									{...register('link')}
+									className='form-control w-100'
+								/>
+							</label> */}
 							{fields.map((field, index) => (
 								<div key={field.id}>
 									{languages.length > 0 ? languages[index].name : ''}

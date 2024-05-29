@@ -7,7 +7,8 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import ReactQuill from 'react-quill';
 import Logo from './logo';
-
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 const Menu = () => {
 	const lang = useSelector((state) => state.lang.lang);
 	const [load, setLoad] = useState(false);
@@ -18,10 +19,36 @@ const Menu = () => {
 	const [modal, setModal] = useState({
 		status: 'modal_add',
 	});
+	const modules = {
+		toolbar: [
+			[{ header: '1' }, { header: '2' }, { font: [] }],
+			[{ size: [] }],
+			['bold', 'italic', 'underline', 'strike', 'blockquote'],
+
+			['link'],
+			['clean'],
+		],
+	};
+
+	const formats = [
+		'header',
+		'font',
+		'size',
+		'bold',
+		'italic',
+		'underline',
+		'strike',
+		'blockquote',
+		'list',
+		'bullet',
+		'indent',
+		'link',
+		'image',
+		'video',
+	];
 	// const [isOpenEdit, setOpenEdit] = useState(false);
 	const { handleSubmit, register, reset, control } = useForm({
 		defaultValues: {
-			logo: '',
 			key: '',
 			texts: [{ text: '', language: '' }],
 		},
@@ -48,7 +75,7 @@ const Menu = () => {
 		status: true,
 	};
 	if (isOpen == true) {
-		document.querySelector('.modal-box').classList.add('active-m');
+		document.querySelector('.modal-menu').classList.add('active-m');
 	}
 
 	const getMenu = () => {
@@ -75,6 +102,7 @@ const Menu = () => {
 		api
 			.menu_single(id)
 			.then((res) => {
+				console.log(res.data);
 				setOpen(true);
 				reset({
 					key: res.data.key,
@@ -106,16 +134,17 @@ const Menu = () => {
 
 	const submit = (data) => {
 		data.texts.map((elem, i) => {
-			data.texts[i].language = language[i].key;
+			elem.language = language[i].key;
 		});
+		console.log(data);
 		setLoad(true);
-		if (modal.status == 'modal_add') {
+		if (modal.status == 'menu_add') {
 			api
 				.create_menu(data)
 				.then((res) => {
 					reset();
 					setOpen(false);
-					document.querySelector('.modal-box').classList.remove('active-m');
+					document.querySelector('.modal-menu').classList.remove('active-m');
 					util.toast('success', res.message);
 					reset();
 					getMenu();
@@ -127,7 +156,7 @@ const Menu = () => {
 					setOpen(false);
 					util.toast('warning', err.message);
 				});
-		} else {
+		} else if (modal.status == 'menu_edit') {
 			setLoad(true);
 			api
 				.update_menu({
@@ -166,7 +195,11 @@ const Menu = () => {
 						<i
 							className='fa-solid fa-plus fa-xl pointer'
 							onClick={() => {
+								getMenu();
+								reset({ texts: [{ text: '', language: '' }], key: '' });
 								setOpen(true);
+								document.querySelector('.modal-menu').classList.add('active-m');
+								setModal({ status: 'menu_add' });
 							}}
 						></i>
 					</div>
@@ -183,20 +216,28 @@ const Menu = () => {
 									<th scope='col'></th>
 								</tr>
 							</thead>
-							<tbody className='gid-body'>
+							<tbody className='gid-body menu-body'>
 								{menu.map((elem, index) => (
 									<tr key={elem.id}>
 										<th scope='row'>{index + 1}</th>
 										<td>{elem.key}</td>
-										<td className='d-flex'>
-											{elem.texts.map((item) => item.language)}:
-											{elem.texts.map((item) => (
-												<div
-													key={item}
-													dangerouslySetInnerHTML={{
-														__html: item.text,
-													}}
-												></div>
+										<td className=''>
+											{elem.texts.map((item, i) => (
+												<div className='d-flex' key={i}>
+													<div
+														className='d-block'
+														dangerouslySetInnerHTML={{
+															__html: item.language,
+														}}
+													></div>
+													<span className='mx-1'>:</span>
+													<div
+														className='d-block'
+														dangerouslySetInnerHTML={{
+															__html: item.text,
+														}}
+													></div>
+												</div>
 											))}
 										</td>
 										<td>
@@ -204,6 +245,7 @@ const Menu = () => {
 												className='btn btn-warning me-2 btn-action open-modal'
 												type='button'
 												onClick={() => {
+													setModal({ status: 'menu_edit' });
 													getSingle(elem.id);
 												}}
 											>
@@ -217,16 +259,23 @@ const Menu = () => {
 					) : (
 						<h4 className='text-center'>Ma`lumot topilmadi!</h4>
 					)}
+					<Stack spacing={2}>
+						<Pagination
+							count={body.pages}
+							onChange={getMenu}
+							page={body.current_page}
+						/>
+					</Stack>
 				</div>
 			</div>
 
-			<div className='modal-box'>
+			<div className='modal-box modal-menu'>
 				<form className='' onSubmit={handleSubmit(submit)}>
 					<div className='modal-c'>
 						<div className='modal-bodyy'>
 							<div className='modal-header'>
 								<h1 className='modal-title fs-5' id='staticBackdropLabel'>
-									{modal.status == 'modal_add'
+									{modal.status == 'menu_add'
 										? 'Menu qo`shish'
 										: 'Menuni o`zgartirish'}
 								</h1>
@@ -236,12 +285,19 @@ const Menu = () => {
 									onClick={() => {
 										setOpen(false);
 										document
-											.querySelector('.modal-box')
+											.querySelector('.modal-menu')
 											.classList.remove('active-m');
 									}}
 								></button>
 							</div>
-							<div className='modal-body'>
+							<div
+								className='modal-body'
+								style={{
+									maxHeight: 500,
+									overflowY: 'auto',
+									padding: 12,
+								}}
+							>
 								<label className='form-label d-block'>
 									Nomi:
 									<input
@@ -251,16 +307,18 @@ const Menu = () => {
 										{...register('key', { required: true })}
 									/>
 								</label>
-
 								{fields.map((field, index) => (
-									<div className='menu-wrap' key={field.id}>
+									<div key={field.id}>
 										{language.length > 0 ? language[index]?.name : ''}
+										{/* {field.language} */}
 										<Controller
 											name={`texts.${index}.text`}
 											control={control}
 											defaultValue={field.text}
 											render={({ field }) => (
 												<ReactQuill
+													modules={modules}
+													formats={formats}
 													value={field.value}
 													onChange={field.onChange}
 													theme='snow'
@@ -288,7 +346,7 @@ const Menu = () => {
 									onClick={() => {
 										setOpen(false);
 										document
-											.querySelector('.modal-box')
+											.querySelector('.modal-menu')
 											.classList.remove('active-m');
 										reset();
 									}}

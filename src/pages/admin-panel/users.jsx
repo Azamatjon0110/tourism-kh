@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 // import Modal from '../../components/modal/modal';
 import { useForm } from 'react-hook-form';
+import baseurl from '../../server/baseurl';
 
 const Admins = () => {
 	const token = useSelector((state) => state.token.token);
@@ -57,7 +58,7 @@ const Admins = () => {
 	const remove = () => {
 		setLoad(true);
 		axios
-			.delete(`http://test.m14.uz/user/delete?id=${id}`, {
+			.delete(`${baseurl}user/delete?id=${id}`, {
 				headers: { Authorization: `Bearer ${token}` },
 			})
 			.then((res) => {

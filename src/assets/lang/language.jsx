@@ -1,5 +1,5 @@
 const language = {
-	en: {
+	ENG: {
 		home: {
 			sel_lang: {
 				uz: 'Uzb',
@@ -116,7 +116,7 @@ const language = {
 			main_title: 'Fotogalareya',
 		},
 	},
-	ru: {
+	RUS: {
 		home: {
 			sel_lang: {
 				uz: 'Узб',

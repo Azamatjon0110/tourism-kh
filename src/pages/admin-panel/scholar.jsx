@@ -8,9 +8,9 @@ import { useSelector } from 'react-redux';
 // import { useForm } from 'react-hook-form';
 import pi from '/src/assets/m-images/pl.jpg';
 import { useNavigate } from 'react-router';
+import baseurl from '../../server/baseurl';
 
 const Allomalar = () => {
-	const baseUrl = 'http://test.m14.uz/';
 	const lang = useSelector((state) => state.lang.lang);
 	const token = useSelector((state) => state.token.token);
 	const location = useNavigate();
@@ -27,7 +27,7 @@ const Allomalar = () => {
 	const remove = () => {
 		setLoad(true);
 		axios
-			.delete(`http://test.m14.uz/allomalar/delete?id=${id}`, {
+			.delete(`${baseurl}allomalar/delete?id=${id}`, {
 				headers: { Authorization: `Bearer ${token}` },
 			})
 			.then((res) => {
@@ -51,6 +51,7 @@ const Allomalar = () => {
 				body.limit = res.data.limit;
 				body.current_page = res.data.current_page;
 				setLoad(false);
+				console.log(scholar);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -98,7 +99,7 @@ const Allomalar = () => {
 												height={200}
 												src={
 													item.pictures?.length > 0
-														? baseUrl + item.pictures[0].image_url
+														? baseurl + item.pictures[0].image_url
 														: `${pi}`
 												}
 												alt=''

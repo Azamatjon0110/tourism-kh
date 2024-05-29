@@ -18,8 +18,8 @@ const AddScholar = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [load, setLoad] = useState(false);
-	const [file, setFile] = useState();
-	const [image, setImg] = useState({});
+	const [file, setFile] = useState(null);
+	const [image, setImg] = useState(null);
 	const [languages, setLanguages] = useState([]);
 
 	const query = location.search.slice(3);
@@ -87,8 +87,15 @@ const AddScholar = () => {
 	};
 
 	const loadFile = (event) => {
-		setFile(event.target.files[0]);
-		setImg(URL.createObjectURL(event.target.files[0]));
+		const file = event.target.files[0];
+		if (file) {
+			setFile(file);
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				setImg(reader.result);
+			};
+			reader.readAsDataURL(file);
+		}
 	};
 
 	const getLanguage = () => {
@@ -102,37 +109,34 @@ const AddScholar = () => {
 			});
 	};
 	const submit = (data) => {
-		// setLoad(true);
+		setLoad(true);
 		data.texts.map((elem, i) => {
 			data.texts[i].language = languages[i].key;
 		});
-		console.log(data);
 		if (query == 'scholars') {
 			api
 				.create_scholar({
 					fullname: data.fullname,
 					age: data.age,
 					texts: data.texts,
-					videos: [
-						{
-							text: '',
-						},
-					],
+					videos: [],
 				})
 				.then((res) => {
+					console.log(file);
 					if (res.status == 200) {
 						const body = {
 							source: res.data.source,
 							source_id: res.data.source_id,
 							file: file,
 						};
+						console.log(body);
 						api
 							.create_img(body)
 							.then((res1) => {
 								if (res1.status == 200) {
 									util.toast('success', res1.data.data);
 									reset();
-									setFile('');
+									setFile(null);
 									setLoad(false);
 								}
 							})

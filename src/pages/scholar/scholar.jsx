@@ -1,29 +1,14 @@
 import language from '../../assets/lang/language';
 import './scholar.css';
 import { useEffect, useRef } from 'react';
-import LocomotiveScroll from 'locomotive-scroll';
+// import LocomotiveScroll from 'locomotive-scroll';
 const Scholar = () => {
 	const lang = localStorage.getItem('lang');
 	const scrollRef = useRef();
-	useEffect(() => {
-		const scroll = new LocomotiveScroll({
-			el: scrollRef.current,
-			smooth: true,
-			class: 'is-inview',
-			getSpeed: true,
-			getDirection: true,
-			smartphone: {
-				smooth: false,
-			},
-			tablet: {
-				smooth: false,
-			},
-		});
-		return () => scroll.destroy();
-	}, []);
+	useEffect(() => {}, []);
 	return (
 		<>
-			<div className='wrapper' ref={scrollRef} data-scroll-section>
+			<div className='wrapper' ref={scrollRef} data-scroll-container>
 				<div className='bg-history'>
 					<div className='container'>
 						<svg width='580' height='400' className='svg-morph'>

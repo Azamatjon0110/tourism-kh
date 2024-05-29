@@ -17,7 +17,7 @@ export default {
 	language(p = query) {
 		const search = p.search ? `search=${p.search}` : ``;
 		return server(
-			`language?${search}&page=${p.pages}&limit=${p.limit}&status=true`
+			`language?${search}&page=${p.pages}&limit=${p.limit}&status=true&default=true`
 		);
 	},
 	// user
@@ -91,8 +91,9 @@ export default {
 	// Languages
 	get_lang(p = query) {
 		const search = p.search ? `search=${p.search}` : ``;
+		const def = p.id ? `default=${p.default} ` : ``;
 		return server(
-			`language?page=${p.pages}&limit=${p.limit}&${search}&status=${p.status}`
+			`language?page=${p.pages}&limit=${p.limit}&${search}&status=${p.status}&${def}`
 		);
 	},
 	create_lang(data) {
@@ -112,6 +113,15 @@ export default {
 		return server(
 			`picture/add?source=${data.source}&source_id=${data.source_id}`,
 			'post',
+			form_data
+		);
+	},
+	update_img(data) {
+		let form_data = new FormData();
+		form_data.append('file', data.file);
+		return server(
+			`picture/update?source=${data.source}&source_id=${data.source_id}`,
+			'put',
 			form_data
 		);
 	},
@@ -220,7 +230,8 @@ export default {
 
 	update_logo(data) {
 		let form_data = new FormData();
-		form_data.append('file', data.file);
-		return server(`logo/update?source=${data.source}&id=${data.id}`, 'post', form_data);
+		form_data.append('files', data.files);
+		console.log(form_data);
+		return server(`logo/update?source=LOGO&id=13`, 'put', [form_data]);
 	},
 };

@@ -61,19 +61,18 @@ const Hotel = () => {
 		});
 		return () => scroll.destroy();
 	}, []);
-	// const lang = localStorage.getItem('lang');
 	return (
 		<>
-			<div className='wrapper' ref={scrollRef} data-scroll-section>
+			<div className='wrapper' ref={scrollRef} data-scroll-container>
 				<Navbar />
-				<div className='bg-history'>
+				<div className='hotel'>
 					<div className='container'>
 						<p className='back' onClick={() => navigate(-1)}>
 							<i className='fa-regular fa-hand-point-left'></i> orqaga
 						</p>
-						<div className='hotel'>
+						<div className='album__box'>
 							<img
-								className='news-wrapper__img'
+								className='album__img'
 								src={
 									hotel.pictures.length > 0
 										? baseurl + hotel?.pictures[0].image_url
@@ -81,17 +80,18 @@ const Hotel = () => {
 								}
 								alt=''
 							/>
-
-							<h3>{hotel?.title}</h3>
-							{hotel.texts.length > 0 ? (
-								<div
-									dangerouslySetInnerHTML={{
-										__html: hotel?.texts[0].text,
-									}}
-								></div>
-							) : (
-								''
-							)}
+							<div className='album__text'>
+								<h3>{hotel?.title}</h3>
+								{hotel.texts.length > 0 ? (
+									<div
+										dangerouslySetInnerHTML={{
+											__html: hotel?.texts[0].text,
+										}}
+									></div>
+								) : (
+									''
+								)}
+							</div>
 						</div>
 					</div>
 				</div>
