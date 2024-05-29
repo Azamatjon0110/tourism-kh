@@ -10,7 +10,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 // import { useEffect } from 'react';
-import Navbar from '../navbar/navbar';
+// import Navbar from '../navbar/navbar';
 const settingsV = {
 	dots: true,
 	infinite: true,
@@ -65,9 +65,6 @@ const Carusel = () => {
 	return (
 		<>
 			<div className=''>
-				<Navbar />
-				{/* <div className='position-relative'></div> */}
-				{/* <div className='back-gradient'> */}
 				<div className='crs-box'>
 					<svg width='580' height='400' className='svg-morph'>
 						<path
@@ -89,7 +86,6 @@ const Carusel = () => {
 					</Slider>
 				</div>
 			</div>
-			{/* </div> */}
 		</>
 	);
 };

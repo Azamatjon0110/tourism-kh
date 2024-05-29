@@ -8,14 +8,14 @@ import { useEffect, useState } from 'react';
 import api from '../../server/api';
 import baseurl from '../../server/baseurl';
 import { useSelector } from 'react-redux';
-import { Hidden } from '@mui/material';
+// import { Hidden } from '@mui/material';
 const Navbar = () => {
 	const [logo, setLogo] = useState();
 	const [offset, setOffset] = useState();
 	const [language, setLanguage] = useState();
 
 	const [museum, setMuseum] = useState({});
-	const [home, setMain] = useState({});
+	const [main, setMain] = useState({});
 	const [hotel, setHotel] = useState({});
 	const [media, setMedia] = useState({});
 	const [history, setHistory] = useState({});
@@ -61,7 +61,6 @@ const Navbar = () => {
 			.get_logo()
 			.then((res) => {
 				setLogo(res.data);
-				console.log(res);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -130,10 +129,7 @@ const Navbar = () => {
 								{language?.length > 0
 									? language.map((elem) => (
 											<li className='lang-item' key={elem.id}>
-												<p
-													className='lang-btn'
-													onClick={changeLang(EventTarget)}
-												>
+												<p className='lang-btn' onClick={changeLang}>
 													{elem.key}
 												</p>
 											</li>
@@ -146,10 +142,10 @@ const Navbar = () => {
 							<ul className='lang-list'>
 								<li className='lang-item'>
 									<Link className='lang-btn' to='/'>
-										{home?.texts?.length > 0 ? (
+										{main?.texts?.length > 0 ? (
 											<div
 												dangerouslySetInnerHTML={{
-													__html: home?.texts[0].text,
+													__html: main?.texts[0].text,
 												}}
 											></div>
 										) : (
@@ -291,12 +287,6 @@ const Navbar = () => {
 										</li>
 									</ul>
 								</li>
-
-								{/* <li className='lang-item'>
-								<Link className='lang-btn' to='/contact'>
-									{language[lang].home.navbar.contact}
-								</Link>
-							</li> */}
 							</ul>
 						</div>
 					</div>
