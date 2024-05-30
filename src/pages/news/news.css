@@ -33,7 +33,7 @@
   .news-wrapper__img{
     width: 40%;
     margin-right: 16px;
-    float: none;
+    float: left;
   }
 
   .news-wrapper__text{

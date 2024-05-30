@@ -1,13 +1,12 @@
 import Navbar from '/src/components/navbar/navbar';
 import Footer from '../../components/footer/footer';
 // import Scholar from '../scholar/scholar';
-import language from '../../assets/lang/language';
 import './historical.css';
 // import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import LocomotiveScroll from 'locomotive-scroll';
 import api from '../../server/api';
-import Loading from '../../components/Animation/loading';
+import Loading from '../../components/Animation/loadingHome';
 import handleError from '../../server/handle';
 import { useNavigate } from 'react-router';
 import baseurl from '../../server/baseurl';

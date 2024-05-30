@@ -6,8 +6,9 @@ import LocomotiveScroll from 'locomotive-scroll';
 import util from '../../server/util';
 import api from '../../server/api';
 import baseurl from '../../server/baseurl';
-import Loading from '../../components/Animation/loading';
+import Loading from '../../components/Animation/loadingHome';
 const Media = () => {
+	let scroll;
 	const lang = localStorage.getItem('lang');
 	let body = {
 		search: '',
@@ -52,10 +53,12 @@ const Media = () => {
 	const scrollRef = useRef();
 	useEffect(() => {
 		getSettings();
-		const scroll = new LocomotiveScroll({
+		if (media.length > 0) {
+			setLoad(false);
+		}
+		scroll = new LocomotiveScroll({
 			el: scrollRef.current,
 			smooth: true,
-			class: 'is-inview',
 			getSpeed: true,
 			getDirection: true,
 			smartphone: {
@@ -65,8 +68,11 @@ const Media = () => {
 				smooth: false,
 			},
 		});
-		return () => scroll.destroy();
-	}, []);
+		scroll.update();
+		return () => {
+			if (scroll) scroll.destroy();
+		};
+	}, [media.length]);
 	return (
 		<>
 			<div className='wrapper' ref={scrollRef} data-scroll-container>

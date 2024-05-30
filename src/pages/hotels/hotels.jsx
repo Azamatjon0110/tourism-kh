@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import LocomotiveScroll from 'locomotive-scroll';
 import api from '../../server/api';
 import handleError from '../../server/handle';
-import Loading from '../../components/Animation/loading';
+import Loading from '../../components/Animation/loadingHome';
 import { useSelector } from 'react-redux';
 import baseurl from '../../server/baseurl';
 const Hotels = () => {

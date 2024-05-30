@@ -5,7 +5,7 @@ import './gid.css';
 import { useEffect, useRef, useState } from 'react';
 import LocomotiveScroll from 'locomotive-scroll';
 import { useSelector } from 'react-redux';
-import Loading from '../../components/Animation/loading';
+import Loading from '../../components/Animation/loadingHome';
 import api from '../../server/api';
 const Guides = () => {
 	// const token = useSelector((state) => state.token.token);

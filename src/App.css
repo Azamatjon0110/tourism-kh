@@ -46,6 +46,7 @@ body{
   margin: 0;
   padding: 0;
   font-family: "Roboto", "Arial", sans-serif;
+  overflow: hidden;
   /* font-size: 16px; */
   /* font-weight: 400; */
   /* line-height: var(--main-line-height); */
@@ -73,7 +74,8 @@ html.has-scroll-dragging {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none; }
+  user-select: none;
+}
 
 .has-scroll-smooth body {
   overflow: hidden; }

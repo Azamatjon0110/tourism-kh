@@ -1,5 +1,5 @@
 // import logo from '/src/assets/logo.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // import language from '/src/assets/lang/language';
 // import x6 from '/src/assets/images/x8.jpg';
 import x7 from '/src/assets/images/x10.jpg';
@@ -13,7 +13,6 @@ const Navbar = () => {
 	const [logo, setLogo] = useState();
 	const [offset, setOffset] = useState();
 	const [languages, setLanguage] = useState();
-	const [museum, setMuseum] = useState({});
 	const [main, setMain] = useState({});
 	const [hotel, setHotel] = useState({});
 	const [media, setMedia] = useState({});
@@ -22,6 +21,7 @@ const Navbar = () => {
 	const [plan, setPlan] = useState({});
 	const [gid, setGid] = useState({});
 	const lang = useSelector((state) => state.lang.lang);
+	const navigate = useNavigate();
 	const ToggleNavbar = () => {
 		document.querySelector('.hamburger').classList.toggle('active');
 		document.querySelector('.navbar').classList.toggle('active');
@@ -73,9 +73,7 @@ const Navbar = () => {
 			.then((res) => {
 				console.log(res.data);
 				res.data.data.map((elem) => {
-					if (elem.key == 'museum') {
-						setMuseum(elem);
-					} else if (elem.key == 'Asosiy') {
+					if (elem.key == 'Asosiy') {
 						setMain(elem);
 					} else if (elem.key == 'hotel') {
 						setHotel(elem);
@@ -108,7 +106,7 @@ const Navbar = () => {
 		<nav className='navbar'>
 			<div className='container'>
 				<div className='mobile-offset'>
-					<Link to='/' className='logo'>
+					<Link to='/' className=''>
 						<img
 							className='logo-site'
 							src={logo?.id > 0 ? baseurl + logo.image_url : ''}
@@ -117,7 +115,7 @@ const Navbar = () => {
 					</Link>
 
 					<div className='navbar-box'>
-						<div className='logo-box'>
+						<div className='logo-box mt-2'>
 							<Link to='/' className='logo'>
 								<img
 									className='logo-site'
@@ -155,7 +153,7 @@ const Navbar = () => {
 										)}
 									</Link>
 								</li>
-								<li className='lang-item dropdown-box d-none d-lg-block'>
+								<li className='lang-item'>
 									<Link className='lang-btn' to='/about'>
 										{history?.texts?.length > 0 ? (
 											<div
@@ -170,10 +168,10 @@ const Navbar = () => {
 								</li>
 								<li className='lang-item d-block d-lg-none'>
 									<Link className='lang-btn' to='/museum'>
-										{museum?.texts?.length > 0 ? (
+										{historical?.texts?.length > 0 ? (
 											<div
 												dangerouslySetInnerHTML={{
-													__html: museum?.texts[0].text,
+													__html: historical?.texts[0].text,
 												}}
 											></div>
 										) : (
@@ -332,6 +330,10 @@ const Navbar = () => {
 						<path className='line line-bottom' d='M0,21h30' />
 					</svg>
 				</div>
+				<i
+					className='fa-solid fa-right-to-bracket fa-xl ms-2'
+					onClick={() => navigate('/login')}
+				></i>
 			</div>
 		</nav>
 	);

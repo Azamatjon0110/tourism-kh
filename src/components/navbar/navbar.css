@@ -361,6 +361,7 @@
     padding: 18px 36px;
     z-index: 7;
     flex-wrap: nowrap !important;
+    top: 0;
   }
   .desktop{
     display: block !important;

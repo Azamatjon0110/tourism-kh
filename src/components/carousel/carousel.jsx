@@ -42,7 +42,7 @@ const settingsV = {
 // 	},
 // };
 const Carusel = () => {
-	const [crs] = useState([x1, x2, x3, x1, x2, x3]);
+	const [crs] = useState([x2, x3, x2, x3, x2, x3, x2, x3]);
 	// useEffect(() => {
 	// 	const btns = document.querySelectorAll('.slick-arrow');
 	// 	btns.forEach((item, index) => {

@@ -35,7 +35,9 @@ function App() {
 	}, []);
 	return (
 		<>
-			<MainRoutes />
+			<section data-scroll-container>
+				<MainRoutes />
+			</section>
 		</>
 	);
 }

@@ -1,9 +1,6 @@
 import 'react-multi-carousel/lib/styles.css';
 import Footer from '../../components/footer/footer.jsx';
 import s from '../../assets/m-images/bg4.jpg';
-import fes1 from '../../assets/m-images/fes1.jpg';
-import fes2 from '../../assets/m-images/fes2.jpg';
-import fes3 from '../../assets/m-images/fes3.jpg';
 import './home.css';
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router';
@@ -15,7 +12,10 @@ import api from '../../server/api.js';
 import baseurl from '../../server/baseurl.js';
 import frame from '/src/assets/frame.mp4';
 import Navbar from '../../components/navbar/navbar.jsx';
+import Loading from '../../components/Animation/loadingHome.jsx';
+let scroll;
 const Home = () => {
+	const [load, setLoad] = useState(false);
 	const lang = useSelector((state) => state.lang.lang);
 	let body = {
 		language: lang,
@@ -26,6 +26,7 @@ const Home = () => {
 		status: true,
 	};
 	const [news, setNews] = useState([]);
+	const [newsTitleBox, setNewsTitleBox] = useState([]);
 	const [arrMedia, setArrMedia] = useState([]);
 	const [museums, setMuseums] = useState([]);
 	const [newsTitle, setNewsTitle] = useState([]);
@@ -33,27 +34,6 @@ const Home = () => {
 	const [media, setMedia] = useState({});
 	const [history, setHistory] = useState({});
 	const [about, setAbout] = useState({});
-	const [textArr] = useState([
-		{
-			id: 1,
-			title: 'Atlas Festivali',
-			text: 'Margʼilonda oʼtkazilayotgan atlas bayrami doirasida «Zamonaviy dunyoda anʼanaviy toʼqimachilikning oʼrni» mavzusida xalqaro ilmiy amaliy anjuman boʼlib oʼtdi',
-			img: fes1,
-		},
-		{
-			id: 2,
-			title: 'Atlas Festivali',
-			text: `Marg‘ilonda “Atlas bayrami” festival doirasida “Zamonaviy dunyoda an’anaviy to‘qimachilikning o‘rni” mavzuida xalqaro ilmiy-amaliy konferensiya boshlandi. Tadbirda dunyoning 20 dan ortiq davlatidan ma’ruzachilar va dizaynerlar ishtirok etmoqda.
-			“Atlas bayram” xalqaro an’anaviy to‘qimachilik festivali 22-oktabrga qadar davom etadi.`,
-			img: fes2,
-		},
-		{
-			id: 3,
-			title: 'Atlas Festivali',
-			text: 'Margʼilonda oʼtkazilayotgan atlas bayrami doirasida «Zamonaviy dunyoda anʼanaviy toʼqimachilikning oʼrni» mavzusida xalqaro ilmiy amaliy anjuman boʼlib oʼtdi',
-			img: fes3,
-		},
-	]);
 	let navigate = useNavigate();
 	const scrollRef = useRef(null);
 	const settings = {
@@ -97,7 +77,7 @@ const Home = () => {
 			.get_media(body)
 			.then((res) => {
 				setArrMedia(res.data);
-				getMuseums();
+				getNews();
 			})
 			.catch((err) => console.log(err));
 	};
@@ -106,7 +86,6 @@ const Home = () => {
 			.get_museums(body)
 			.then((res) => {
 				setMuseums(res.data.data);
-				getNews();
 			})
 			.catch((err) => console.log(err));
 	};
@@ -127,8 +106,8 @@ const Home = () => {
 					} else if (elem.key == 'more') {
 						setMore(elem);
 					}
-					getMedia();
 				});
+				getMedia();
 			})
 			.catch((err) => {
 				console.log(err);
@@ -140,20 +119,30 @@ const Home = () => {
 			.get_news(body)
 			.then((res) => {
 				setNews(res.data.data);
-				console.log(res.data);
+				res.data.data.map((elem) => {
+					const regex = /<h2[^>]*>(.*?)<\/h2>/;
+					const match = elem.texts[0].text.match(regex);
+					if (match && match[1]) {
+						setNewsTitleBox([...newsTitleBox, match[1]]);
+					} else {
+						setNewsTitleBox([]);
+					}
+				});
+				getMuseums();
 			})
 			.catch((err) => console.log(err));
 	};
 
 	useEffect(() => {
-		// setArr([1, 2, 3]);
-		// document.querySelector('.ytp-large-play-button').onClick();
-		getSettings();
+		setLoad(true);
 
-		const scroll = new LocomotiveScroll({
+		getSettings();
+		if (museums.length > 0) {
+			setLoad(false);
+		}
+		scroll = new LocomotiveScroll({
 			el: scrollRef.current,
 			smooth: true,
-			class: 'is-inview',
 			getSpeed: true,
 			getDirection: true,
 			smartphone: {
@@ -163,12 +152,15 @@ const Home = () => {
 				smooth: false,
 			},
 		});
-		return () => scroll.destroy();
-	}, []);
+		scroll.update();
+		return () => {
+			if (scroll) scroll.destroy();
+		};
+	}, [museums.length]);
 	return (
 		<>
 			<div className='wrapper' ref={scrollRef} data-scroll-container>
-				<div data-scroll-section>
+				<div className='' data-scroll-section>
 					<Navbar />
 					<Carusel />
 					<div className='about position-relative'>
@@ -288,12 +280,6 @@ const Home = () => {
 							</div>
 						</div>
 					</div>
-					<div className='frame-box'>
-						<div></div>
-						<video className='frame' loop autoPlay muted>
-							<source src={frame} type='video/mp4' />
-						</video>
-					</div>
 					<div className='news'>
 						<div className='container'>
 							{newsTitle?.texts?.length > 0 ? (
@@ -307,25 +293,30 @@ const Home = () => {
 							) : (
 								''
 							)}
-							<div className='row'>
-								{news.map((item, index) => (
-									<div
-										className='col-12 col-md-6 col-lg-4 news-box'
-										key={item.id}
-										data-scroll
-										data-scroll-speed={index + 1}
-									>
-										<div className='card-news'>
-											<img
-												className='news-img text-center'
-												src={item.img}
-												alt=''
-											/>
-											<h3 className='news-title align-start'>{item.title}</h3>
-											<p className='news-text'>{item.text}</p>
-										</div>
-									</div>
-								))}
+							<div className='row' data-scroll>
+								{news.length > 0
+									? news.map((elem, ind) => (
+											<div className='col-12 col-md-6 col-lg-4' key={elem.id}>
+												<div className='card-news'>
+													<img
+														className='news-img w-100 me-0'
+														src={
+															elem.pictures.length > 0
+																? baseurl + elem.pictures[0].image_url
+																: ''
+														}
+														alt=''
+													/>
+													<h2
+														className='news-title'
+														dangerouslySetInnerHTML={{
+															__html: newsTitleBox[ind],
+														}}
+													></h2>
+												</div>
+											</div>
+									  ))
+									: ''}
 							</div>
 							<button className='news-btn' onClick={() => navigate('/news')}>
 								{more?.texts?.length > 0 ? (
@@ -340,6 +331,13 @@ const Home = () => {
 							</button>
 						</div>
 					</div>
+					<div className='frame-box'>
+						<div></div>
+						<video className='frame' loop autoPlay muted>
+							<source src={frame} type='video/mp4' />
+						</video>
+					</div>
+
 					<div className='galary'>
 						<div className='container'>
 							<h4 className='galary-title'>
@@ -381,8 +379,10 @@ const Home = () => {
 						</button>
 					</div>
 					<Footer />
-					<div className='' data-scroll></div>
 				</div>
+			</div>
+			<div className={load === true ? 'd-block' : 'd-none'}>
+				<Loading />
 			</div>
 		</>
 	);

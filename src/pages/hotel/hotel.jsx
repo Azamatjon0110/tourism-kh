@@ -9,9 +9,10 @@ import LocomotiveScroll from 'locomotive-scroll';
 import { useSelector } from 'react-redux';
 import api from '../../server/api';
 import handleError from '../../server/handle';
-import Loading from '../../components/Animation/loading';
+import Loading from '../../components/Animation/loadingHome';
 import baseurl from '../../server/baseurl';
 const Hotel = () => {
+	let scroll;
 	const lang = useSelector((state) => state.lang.lang);
 	const navigate = useNavigate();
 	const [load, setLoad] = useState(false);
@@ -30,12 +31,10 @@ const Hotel = () => {
 		current_page: 1,
 	};
 	const getHotels = () => {
-		setLoad(true);
 		api
 			.get_hotels(body)
 			.then((res) => {
 				setHotel(res.data);
-				setLoad(false);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -44,11 +43,12 @@ const Hotel = () => {
 	};
 	const scrollRef = useRef();
 	useEffect(() => {
+		setLoad(true);
 		getHotels();
-		const scroll = new LocomotiveScroll({
+
+		scroll = new LocomotiveScroll({
 			el: scrollRef.current,
 			smooth: true,
-			class: 'is-inview',
 			getSpeed: true,
 			getDirection: true,
 			smartphone: {
@@ -58,46 +58,56 @@ const Hotel = () => {
 				smooth: false,
 			},
 		});
-		return () => scroll.destroy();
+		if (hotel?.texts.length > 0) {
+			setLoad(false);
+		}
+		scroll.update();
+		return () => {
+			if (scroll) scroll.destroy();
+		};
 	}, []);
 	return (
 		<>
-			<div className='wrapper' ref={scrollRef} data-scroll-container>
-				<Navbar />
-				<div className='hotel'>
-					<div className='container'>
-						<p className='back' onClick={() => navigate(-1)}>
-							<i className='fa-regular fa-hand-point-left'></i> orqaga
-						</p>
-						<div className='album__box'>
-							<img
-								className='album__img'
-								src={
-									hotel.pictures.length > 0
-										? baseurl + hotel?.pictures[0].image_url
-										: ''
-								}
-								alt=''
-							/>
-							<div className='album__text'>
-								<h3>{hotel?.title}</h3>
-								{hotel.texts.length > 0 ? (
-									<div
-										dangerouslySetInnerHTML={{
-											__html: hotel?.texts[0].text,
-										}}
-									></div>
-								) : (
-									''
-								)}
+			<div className='' ref={scrollRef} data-scroll-container>
+				<div className='wrapper'>
+					<Navbar />
+					<div className='hotel'>
+						<div className='hotel-wrapper'>
+							<div className='container'>
+								<p className='back' onClick={() => navigate(-1)}>
+									<i className='fa-regular fa-hand-point-left'></i> orqaga
+								</p>
+								<div className='album__box'>
+									<img
+										className='album__img'
+										src={
+											hotel.pictures.length > 0
+												? baseurl + hotel?.pictures[0].image_url
+												: ''
+										}
+										alt=''
+									/>
+									<div className='album__text'>
+										<h3>{hotel?.title}</h3>
+										{hotel.texts.length > 0 ? (
+											<div
+												dangerouslySetInnerHTML={{
+													__html: hotel?.texts[0].text,
+												}}
+											></div>
+										) : (
+											''
+										)}
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
+					<Footer />
 				</div>
-				<Footer />
-				<div className={load === true ? 'd-block' : 'd-none'}>
-					<Loading />
-				</div>
+			</div>
+			<div className={load === true ? 'd-block' : 'd-none'}>
+				<Loading />
 			</div>
 		</>
 	);

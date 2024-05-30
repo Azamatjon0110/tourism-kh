@@ -4,9 +4,12 @@
 }
 
 .hotel{
+  padding-top: 120px;
+}
+
+.hotel-wrapper{
   padding: 30px;
-  margin-top: 150px;
-  background-color: rgba(250, 235, 215, 0.921);
+  background-color: rgba(250, 235, 215, 0.689);
 }
 
 .hotel__wrap{

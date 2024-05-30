@@ -1,13 +1,12 @@
 import Navbar from '../../components/navbar/navbar';
-import language from '../../assets/lang/language';
-import festival from '/src/assets/images/festival.jpg';
 import Footer from '../../components/footer/footer.jsx';
 import './news.css';
 import { useEffect, useRef, useState } from 'react';
 import api from '../../server/api.js';
 import handleError from '../../server/handle.js';
-import Loading from '../../components/Animation/loading.jsx';
+import Loading from '../../components/Animation/loadingHome.jsx';
 import LocomotiveScroll from 'locomotive-scroll';
+import baseurl from '../../server/baseurl.js';
 const News = () => {
 	const scrollRef = useRef();
 	const lang = localStorage.getItem('lang');
@@ -26,6 +25,7 @@ const News = () => {
 		api
 			.get_news(body)
 			.then((res) => {
+				console.log(res.data);
 				setNews(res.data.data);
 				setLoad(false);
 			})
@@ -38,7 +38,6 @@ const News = () => {
 		api
 			.get_menu(body)
 			.then((res) => {
-				console.log(res.data);
 				res.data.data.map((elem) => {
 					if (elem.key == 'news') {
 						setNewsTitle(elem);
@@ -98,30 +97,26 @@ const News = () => {
 					</div>
 					<div className='about-wrap bg-light'>
 						<div className='container'>
-							<h3 className='about-wrap__title news-title mb-4'>
-								{language[lang].news.news_box_title}
-							</h3>
-							<div className='news-wrapper'>
-								<img
-									className='news-wrapper__img me-0 me-lg-3'
-									src={festival}
-									alt=''
-								/>
-								<div className='news-wrapper__text'>
-									21-23 sentyabr kunlari Qo‘qon shahrida bo‘lib o‘tgan ikkinchi
-									Xalqaro hunarmandchilik festivali katta bayram shodiyonasi
-									bilan yakunlandi. 70 dan ziyod mamlakatdan 260 nafardan ortiq
-									mohir hunarmandlar ishtirokida tashkil etilgan festivalning
-									yopilish tadbirida festival g‘oliblari va sovrindorlari
-									taqdirlandilar. Farg‘ona viloyati hokimi Xayrullo Bozorov,
-									Jahon hunarmandlar kengashi prezidenti Saad al-Qaddumiy,
-									Respublika “Hunarmand” uyushmasi raisi Ulug‘bek Abdullayev va
-									Qo‘qon shahar hokimi Marufjon Usmonov festival g‘oliblariga
-									diplom va sovg‘alarni tantanali topshirdilar. Gʻoliblarni
-									tanishtiramiz qadimiy sulola davomchisi” nominatsiyasi
-									bo‘yicha: 1-o‘rin: Baxshillo Jumayev (O‘zbekiston).
-								</div>
-							</div>
+							{news.length > 0
+								? news.map((elem) => (
+										<div className='news-wrapper' key={elem.id}>
+											<img
+												className='news-wrapper__img me-0 me-lg-3'
+												src={
+													elem.pictures.length > 0
+														? baseurl + elem.pictures[0].image_url
+														: ''
+												}
+												alt=''
+											/>
+											<div
+												dangerouslySetInnerHTML={{
+													__html: elem?.texts[0].text,
+												}}
+											></div>
+										</div>
+								  ))
+								: ''}
 						</div>
 					</div>
 					<Footer />

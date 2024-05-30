@@ -20,8 +20,9 @@
 
 .slick-dots{
   position: absolute;
+
+  left: 15px !important;
   text-align: left !important;
-  left: 100px !important;
   bottom: 20px !important;
   z-index: 5;
 }
@@ -130,6 +131,11 @@
   z-index: 2;
 }
 
+.svg-morph{
+  display: none;
+}
+
+
 
 @media screen and (min-width:768px) {
   .crs-title{
@@ -137,10 +143,16 @@
     z-index: 4;
   }
 
+  .slick-dots{
+    left: 50px !important;
+  }
 }
 
 @media screen and (min-width:1200px) {
   .crs-title{
     font-size: 96px;
+  }
+  .slick-dots{
+    left: 100px !important;
   }
 }
