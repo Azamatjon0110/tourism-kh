@@ -170,7 +170,7 @@ const EditNews = () => {
 									util.toast('success', res1.data.data);
 									reset();
 									// setImg({});
-									navigate(-1);
+									// navigate(-1);
 									setFile(null);
 									setLoad(false);
 								}

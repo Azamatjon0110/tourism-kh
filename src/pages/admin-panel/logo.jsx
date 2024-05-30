@@ -49,8 +49,6 @@ const Logo = () => {
 	const updateLogo = (evt) => {
 		evt.preventDefault();
 		console.log(file);
-		const formData = new FormData();
-		formData.append('files', file);
 		// axios
 		// 	.put(
 		// 		`${baseurl}logo/update?source=${logo.source}&id=${logo.id}`,
@@ -60,7 +58,7 @@ const Logo = () => {
 		// 		}
 		// 	)
 		api
-			.update_logo({ source: logo.source, id: logo.id, files: file })
+			.update_logo({ source: logo.source, id: logo.id, file: file })
 			.then((res) => {
 				setImg();
 				console.log(res);

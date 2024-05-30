@@ -85,7 +85,7 @@ const Home = () => {
 		api
 			.get_museums(body)
 			.then((res) => {
-				setMuseums(res.data.data);
+				setMuseums(res.data.data.slice(0, 3));
 			})
 			.catch((err) => console.log(err));
 	};
@@ -118,7 +118,7 @@ const Home = () => {
 		api
 			.get_news(body)
 			.then((res) => {
-				setNews(res.data.data);
+				setNews(res.data.data.slice(0, 3));
 				res.data.data.map((elem) => {
 					const regex = /<h2[^>]*>(.*?)<\/h2>/;
 					const match = elem.texts[0].text.match(regex);
@@ -248,7 +248,11 @@ const Home = () => {
 													<div className='historical-places__card'>
 														<img
 															className='historical-places__img'
-															src={s}
+															src={
+																item?.pictures.length > 0
+																	? baseurl + item.pictures[0].image_url
+																	: ''
+															}
 															alt=''
 														/>
 														<div className='historical-places__body'>

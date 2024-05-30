@@ -32,9 +32,9 @@ const Navbar = () => {
 		document.querySelector('.desktop-offset').classList.toggle('active');
 	};
 
-	function changeLang() {
-		// localStorage.setItem('lang', )
-		// console.log(evt.target);
+	function changeLang(key) {
+		localStorage.setItem('lang', key);
+		location.reload();
 	}
 
 	const body = {
@@ -129,7 +129,12 @@ const Navbar = () => {
 								{languages?.length > 0
 									? languages.map((elem) => (
 											<li className='lang-item' key={elem.id}>
-												<p className='lang-btn' onClick={changeLang}>
+												<p
+													className='lang-btn'
+													onClick={() => {
+														changeLang(elem.key);
+													}}
+												>
 													{elem.key}
 												</p>
 											</li>
