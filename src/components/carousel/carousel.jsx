@@ -1,4 +1,4 @@
-import x1 from '/src/assets/m-images/bg3.jpg';
+import frame from '/src/assets/frame.mp4';
 import x2 from '/src/assets/s2.jpg';
 import x3 from '/src/assets/s1.jpg';
 import './carusel.css';
@@ -9,6 +9,7 @@ import 'react-multi-carousel/lib/styles.css';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { Link } from 'react-router-dom';
 // import { useEffect } from 'react';
 // import Navbar from '../navbar/navbar';
 const settingsV = {
@@ -78,6 +79,40 @@ const Carusel = () => {
 				</div>
 			</div>
 			<div className='img-box '>
+				<div
+					className='play-now'
+					data-bs-toggle='modal'
+					data-bs-target='#staticBackdrop12'
+				>
+					<p className='play-btn'></p>
+					<svg
+						version='1.1'
+						xmlns='http://www.w3.org/2000/svg'
+						x='0px'
+						y='0px'
+						width='300px'
+						height='300px'
+						viewBox='0 0 300 300'
+						enableBackground='new 0 0 300 300'
+						xmlSpace='preserve'
+					>
+						<defs>
+							<path
+								id='circlePath'
+								d='M 150, 150 m -60, 0 a 60,60 0 0,1 120,0 a 60,60 0 0,1 -120,0 '
+							/>
+						</defs>
+						<circle cx='150' cy='100' r='75' fill='none' />
+						<g>
+							<use xlinkHref='#circlePath' fill='none' />
+							<text>
+								<textPath xlinkHref='#circlePath'>
+									PLAY NOW - PLAY NOW - PLAY NOW -
+								</textPath>
+							</text>
+						</g>
+					</svg>
+				</div>
 				<div className='slider-container'>
 					<Slider {...settingsV}>
 						{crs.map((item) => (
@@ -86,6 +121,44 @@ const Carusel = () => {
 							</div>
 						))}
 					</Slider>
+				</div>
+			</div>
+			<div
+				className='modal fade'
+				id='staticBackdrop12'
+				data-bs-backdrop='static'
+				data-bs-keyboard='false'
+				tabIndex='-1'
+				aria-labelledby='staticBackdropLabel'
+				aria-hidden='true'
+			>
+				<div className='modal-dialog'>
+					<div className='modal-content'>
+						<div className='modal-header'>
+							<h1 className='modal-title fs-5' id='staticBackdropLabel'>
+								Modal title
+							</h1>
+							<button
+								type='button'
+								className='btn-close'
+								data-bs-dismiss='modal'
+								aria-label='Close'
+							></button>
+						</div>
+						<div className='modal-body'>...</div>
+						<div className='modal-footer'>
+							<button
+								type='button'
+								className='btn btn-secondary'
+								data-bs-dismiss='modal'
+							>
+								Close
+							</button>
+							<button type='button' className='btn btn-primary'>
+								Understood
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</>

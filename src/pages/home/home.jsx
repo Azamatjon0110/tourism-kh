@@ -119,9 +119,9 @@ const Home = () => {
 			.get_news(body)
 			.then((res) => {
 				setNews(res.data.data.slice(0, 3));
-				res.data.data.map((elem) => {
+				res.data.data.map((elem, i) => {
 					const regex = /<h2[^>]*>(.*?)<\/h2>/;
-					const match = elem.texts[0].text.match(regex);
+					const match = elem?.texts[i]?.text?.match(regex);
 					if (match && match[1]) {
 						setNewsTitleBox([...newsTitleBox, match[1]]);
 					} else {
