@@ -87,6 +87,7 @@ const Menu = () => {
 				body.pages = res.data.pages;
 				body.limit = res.data.limit;
 				body.current_page = res.data.current_page;
+				console.log(menu);
 				getLang();
 				setLoad(false);
 			})

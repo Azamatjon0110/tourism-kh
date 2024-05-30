@@ -35,7 +35,6 @@ const Album = () => {
 		api
 			.get_museums(body)
 			.then((res) => {
-				console.log(res);
 				setMuseum(res.data);
 				setLoad(false);
 			})

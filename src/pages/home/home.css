@@ -126,6 +126,10 @@
   background-color: #7e2cf1;
 }
 
+.news-btn p {
+  margin-bottom: 0;
+}
+
 .galary{
   padding: 70px 0;
   background-color: lightcyan;
@@ -177,6 +181,7 @@
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
+  margin-bottom: 100px;
   height: 100vh;
   background-color: #000;
 }

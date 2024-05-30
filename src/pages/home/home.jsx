@@ -1,13 +1,9 @@
-// import Carusel from '../../components/carousel/carousel.jsx';
 import 'react-multi-carousel/lib/styles.css';
 import Footer from '../../components/footer/footer.jsx';
-import language from '../../assets/lang/language.jsx';
-
 import s from '../../assets/m-images/bg4.jpg';
 import fes1 from '../../assets/m-images/fes1.jpg';
 import fes2 from '../../assets/m-images/fes2.jpg';
 import fes3 from '../../assets/m-images/fes3.jpg';
-import Globus from '/src/assets/m-images/globe-solid.svg';
 import './home.css';
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router';
@@ -29,10 +25,14 @@ const Home = () => {
 		current_page: 1,
 		status: true,
 	};
-	// const [arr, setArr] = useState([]);
-	const [arrMedia, setArrMedia] = useState([]);
-	const [hotels, setHotels] = useState([]);
 	const [news, setNews] = useState([]);
+	const [arrMedia, setArrMedia] = useState([]);
+	const [museums, setMuseums] = useState([]);
+	const [newsTitle, setNewsTitle] = useState([]);
+	const [more, setMore] = useState([]);
+	const [media, setMedia] = useState({});
+	const [history, setHistory] = useState({});
+	const [about, setAbout] = useState({});
 	const [textArr] = useState([
 		{
 			id: 1,
@@ -97,32 +97,59 @@ const Home = () => {
 			.get_media(body)
 			.then((res) => {
 				setArrMedia(res.data);
-				getHotels();
+				getMuseums();
 			})
 			.catch((err) => console.log(err));
 	};
-	const getHotels = () => {
+	const getMuseums = () => {
 		api
 			.get_museums(body)
 			.then((res) => {
-				setHotels(res.data.data);
+				setMuseums(res.data.data);
 				getNews();
 			})
 			.catch((err) => console.log(err));
 	};
+
+	const getSettings = () => {
+		api
+			.get_menu(body)
+			.then((res) => {
+				res.data.data.map((elem) => {
+					if (elem.key == 'about') {
+						setAbout(elem);
+					} else if (elem.key == 'media') {
+						setMedia(elem);
+					} else if (elem.key == 'historical') {
+						setHistory(elem);
+					} else if (elem.key == 'news') {
+						setNewsTitle(elem);
+					} else if (elem.key == 'more') {
+						setMore(elem);
+					}
+					getMedia();
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
 	const getNews = () => {
 		api
 			.get_news(body)
 			.then((res) => {
 				setNews(res.data.data);
-				console.log(news);
+				console.log(res.data);
 			})
 			.catch((err) => console.log(err));
 	};
+
 	useEffect(() => {
 		// setArr([1, 2, 3]);
 		// document.querySelector('.ytp-large-play-button').onClick();
-		getMedia();
+		getSettings();
+
 		const scroll = new LocomotiveScroll({
 			el: scrollRef.current,
 			smooth: true,
@@ -148,7 +175,16 @@ const Home = () => {
 						<div className='container'>
 							<div className=''>
 								<h3 className='about-title text-center'>
-									{language[lang].home.about_title}
+									{about?.texts?.length > 0 ? (
+										<div
+											style={{}}
+											dangerouslySetInnerHTML={{
+												__html: about?.texts[0].text,
+											}}
+										></div>
+									) : (
+										''
+									)}
 								</h3>
 							</div>
 							<div className='row mb-4'>
@@ -166,7 +202,6 @@ const Home = () => {
 								>
 									<div className='about-info'>
 										<div className='d-flex'>
-											<img className='about-info__img' src={Globus} alt='' />
 											<p className='about-text'>
 												Margʻilon (boshqa nomlari Margilan, Margelan) –
 												Oʻzbekiston shaharlaridan biri. Fargʻona viloyatida
@@ -180,7 +215,15 @@ const Home = () => {
 											className='news-btn'
 											onClick={() => navigate('/about')}
 										>
-											{language[lang].home.news_btn}
+											{more?.texts?.length > 0 ? (
+												<div
+													dangerouslySetInnerHTML={{
+														__html: more?.texts[0].text,
+													}}
+												></div>
+											) : (
+												''
+											)}
 										</button>
 									</div>
 								</div>
@@ -191,11 +234,19 @@ const Home = () => {
 						<div className='container'>
 							<div className='historical-places__box'>
 								<h4 className='galary-title'>
-									{language[lang].home.navbar.his_pl}
+									{history?.texts?.length > 0 ? (
+										<div
+											dangerouslySetInnerHTML={{
+												__html: history?.texts[0].text,
+											}}
+										></div>
+									) : (
+										''
+									)}
 								</h4>
 								<div className='row'>
-									{hotels.length > 0
-										? hotels.map((item) => (
+									{museums.length > 0
+										? museums.map((item) => (
 												<div
 													className='col-12 col-md-6 col-lg-4'
 													key={item.id}
@@ -222,7 +273,15 @@ const Home = () => {
 											className='news-btn'
 											onClick={() => navigate('/historical')}
 										>
-											{language[lang].home.news_btn}
+											{more?.texts?.length > 0 ? (
+												<div
+													dangerouslySetInnerHTML={{
+														__html: more?.texts[0].text,
+													}}
+												></div>
+											) : (
+												''
+											)}
 										</button>
 									</div>
 								</div>
@@ -237,9 +296,19 @@ const Home = () => {
 					</div>
 					<div className='news'>
 						<div className='container'>
-							<h3 className='about-title'>{language[lang].home.news_title}</h3>
+							{newsTitle?.texts?.length > 0 ? (
+								<h3 className='galary-title'>
+									<div
+										dangerouslySetInnerHTML={{
+											__html: newsTitle?.texts[0].text,
+										}}
+									></div>
+								</h3>
+							) : (
+								''
+							)}
 							<div className='row'>
-								{textArr.map((item, index) => (
+								{news.map((item, index) => (
 									<div
 										className='col-12 col-md-6 col-lg-4 news-box'
 										key={item.id}
@@ -259,14 +328,30 @@ const Home = () => {
 								))}
 							</div>
 							<button className='news-btn' onClick={() => navigate('/news')}>
-								{language[lang].home.news_btn}
+								{more?.texts?.length > 0 ? (
+									<div
+										dangerouslySetInnerHTML={{
+											__html: more?.texts[0].text,
+										}}
+									></div>
+								) : (
+									''
+								)}
 							</button>
 						</div>
 					</div>
-					<div className='galary' data-scroll-section>
+					<div className='galary'>
 						<div className='container'>
 							<h4 className='galary-title'>
-								{language[lang].home.galary_title}
+								{media?.texts?.length > 0 ? (
+									<div
+										dangerouslySetInnerHTML={{
+											__html: media?.texts[0].text,
+										}}
+									></div>
+								) : (
+									''
+								)}
 							</h4>
 						</div>
 						<Slider {...settings}>
@@ -283,11 +368,20 @@ const Home = () => {
 							className='news-btn mt-3 mt-lg-5'
 							onClick={() => navigate('/media')}
 						>
-							{language[lang].home.news_btn}
+							{' '}
+							{more?.texts?.length > 0 ? (
+								<div
+									dangerouslySetInnerHTML={{
+										__html: more?.texts[0].text,
+									}}
+								></div>
+							) : (
+								''
+							)}
 						</button>
 					</div>
-					<Footer data-scroll />
-					<div className='wrapper'></div>
+					<Footer />
+					<div className='' data-scroll></div>
 				</div>
 			</div>
 		</>

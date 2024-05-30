@@ -1,6 +1,5 @@
 import Navbar from '/src/components/navbar/navbar';
 import Footer from '../../components/footer/footer';
-import language from '../../assets/lang/language';
 import './hotels.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
@@ -13,15 +12,36 @@ import baseurl from '../../server/baseurl';
 const Hotels = () => {
 	const lang = useSelector((state) => state.lang.lang);
 	const navigate = useNavigate();
+	const scrollRef = useRef();
 	const [hotels, setHotels] = useState([]);
 	const [load, setLoad] = useState(false);
-	const scrollRef = useRef();
+	const [hotel, setHotel] = useState({});
+	const [more, setMore] = useState({});
 	const body = {
 		language: lang,
 		search: '',
 		pages: 1,
 		limit: 20,
 		current_page: 1,
+	};
+	const getSettings = () => {
+		api
+			.get_menu(body)
+			.then((res) => {
+				console.log(res.data);
+				res.data.data.map((elem) => {
+					if (elem.key == 'hotel_title') {
+						setHotel(elem);
+					} else if (elem.key == 'more') {
+						setMore(elem);
+					}
+
+					getHotels();
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 	const getHotels = () => {
 		setLoad(true);
@@ -37,7 +57,7 @@ const Hotels = () => {
 			});
 	};
 	useEffect(() => {
-		getHotels();
+		getSettings();
 		const scroll = new LocomotiveScroll({
 			el: scrollRef.current,
 			smooth: true,
@@ -68,12 +88,15 @@ const Hotels = () => {
 									></path>
 								</svg>
 								<div className='about-us'>
-									<h1 className=' hotel-title mt-4'>
-										{language[lang].hotel.main_title}
-									</h1>
-									<p className='about-us__text'>
-										{language[lang].hotel.main_text}
-									</p>
+									{hotel?.texts?.length > 0 ? (
+										<div
+											dangerouslySetInnerHTML={{
+												__html: hotel?.texts[0].text,
+											}}
+										></div>
+									) : (
+										''
+									)}
 								</div>
 							</div>
 						</div>
@@ -105,7 +128,15 @@ const Hotels = () => {
 																});
 															}}
 														>
-															{language[lang].home.news_btn}
+															{more?.texts?.length > 0 ? (
+																<div
+																	dangerouslySetInnerHTML={{
+																		__html: more?.texts[0].text,
+																	}}
+																></div>
+															) : (
+																''
+															)}
 														</button>
 													</div>
 												</div>

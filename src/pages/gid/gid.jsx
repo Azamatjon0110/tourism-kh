@@ -1,6 +1,6 @@
 import Navbar from '/src/components/navbar/navbar';
 import Footer from '../../components/footer/footer';
-import language from '../../assets/lang/language';
+// import language from '../../assets/lang/language';
 import './gid.css';
 import { useEffect, useRef, useState } from 'react';
 import LocomotiveScroll from 'locomotive-scroll';
@@ -12,20 +12,37 @@ const Guides = () => {
 	const lang = useSelector((state) => state.lang.lang);
 	const [guides, setGuides] = useState([]);
 	const [load, setLoad] = useState(false);
+	const [gid, setGid] = useState({});
 	const scrollRef = useRef();
 	let body = {
 		search: '',
+		language: lang,
 		pages: 1,
 		limit: 20,
 		current_page: 1,
 		status: true,
+	};
+	const getSettings = () => {
+		api
+			.get_menu(body)
+			.then((res) => {
+				res.data.data.map((elem) => {
+					if (elem.key == 'gid') {
+						setGid(elem);
+					}
+
+					getGuides();
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 	const getGuides = () => {
 		setLoad(true);
 		api
 			.get_guides(body)
 			.then((res) => {
-				console.log(res);
 				setGuides(res.data.data);
 				body.pages = res.data.pages;
 				body.limit = res.data.limit;
@@ -38,7 +55,7 @@ const Guides = () => {
 			});
 	};
 	useEffect(() => {
-		getGuides();
+		getSettings();
 		const scroll = new LocomotiveScroll({
 			el: scrollRef.current,
 			smooth: true,
@@ -58,7 +75,7 @@ const Guides = () => {
 		<>
 			<div className='wrapper' ref={scrollRef} data-scroll-container>
 				<Navbar />
-				<div className='bg-history'>
+				<div className='bg-history mb-3 mb-lg-5'>
 					<div className='container'>
 						<div className='position-relative'>
 							<svg width='580' height='400' className='svg-morph'>
@@ -67,10 +84,16 @@ const Guides = () => {
 									d='m261,30.4375c0,0 114,6 151,75c37,69 37,174 6,206.5625c-31,32.5625 -138,11.4375 -196,-19.5625c-58,-31 -86,-62 -90,-134.4375c12,-136.5625 92,-126.5625 129,-127.5625z'
 								></path>
 							</svg>
-							<div className='about-us'>
-								<h1 className='about-us__title mt-5'>
-									{language[lang].gid.main_title}
-								</h1>
+							<div className='about-us gid-title'>
+								{gid?.texts?.length > 0 ? (
+									<div
+										dangerouslySetInnerHTML={{
+											__html: gid?.texts[0].text,
+										}}
+									></div>
+								) : (
+									''
+								)}
 							</div>
 						</div>
 					</div>

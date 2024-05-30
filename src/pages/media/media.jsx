@@ -1,6 +1,5 @@
 import Navbar from '/src/components/navbar/navbar';
 import Footer from '../../components/footer/footer';
-import language from '../../assets/lang/language';
 import './media.css';
 import { useEffect, useRef, useState } from 'react';
 import LocomotiveScroll from 'locomotive-scroll';
@@ -12,6 +11,7 @@ const Media = () => {
 	const lang = localStorage.getItem('lang');
 	let body = {
 		search: '',
+		language: lang,
 		pages: 1,
 		limit: 20,
 		current_page: 1,
@@ -19,6 +19,22 @@ const Media = () => {
 	};
 	const [load, setLoad] = useState(false);
 	const [media, setMedia] = useState([]);
+	const [mtitle, setMtitle] = useState([]);
+	const getSettings = () => {
+		api
+			.get_menu(body)
+			.then((res) => {
+				res.data.data.map((elem) => {
+					if (elem.key == 'media') {
+						setMtitle(elem);
+					}
+					getMedia();
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 	const getMedia = () => {
 		setLoad(true);
 		api
@@ -26,7 +42,6 @@ const Media = () => {
 			.then((res) => {
 				setMedia(res.data);
 				setLoad(false);
-				console.log(res.data);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -36,7 +51,7 @@ const Media = () => {
 	};
 	const scrollRef = useRef();
 	useEffect(() => {
-		getMedia();
+		getSettings();
 		const scroll = new LocomotiveScroll({
 			el: scrollRef.current,
 			smooth: true,
@@ -51,12 +66,12 @@ const Media = () => {
 			},
 		});
 		return () => scroll.destroy();
-	}, [media.length]);
+	}, []);
 	return (
 		<>
 			<div className='wrapper' ref={scrollRef} data-scroll-container>
 				<Navbar />
-				<div className='bg-history'>
+				<div className='bg-history mb-3 mb-lg-5'>
 					<div className='container'>
 						<div className='position-relative'>
 							<svg width='580' height='400' className='svg-morph'>
@@ -65,9 +80,17 @@ const Media = () => {
 									d='m261,30.4375c0,0 114,6 151,75c37,69 37,174 6,206.5625c-31,32.5625 -138,11.4375 -196,-19.5625c-58,-31 -86,-62 -90,-134.4375c12,-136.5625 92,-126.5625 129,-127.5625z'
 								></path>
 							</svg>
-							<div className='about-us'>
+							<div className='about-us gid-title'>
 								<h1 className='about-us__title hotel-title mt-5'>
-									{language[lang].media.main_title}
+									{mtitle?.texts?.length > 0 ? (
+										<div
+											dangerouslySetInnerHTML={{
+												__html: mtitle?.texts[0].text,
+											}}
+										></div>
+									) : (
+										''
+									)}
 								</h1>
 							</div>
 						</div>

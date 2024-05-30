@@ -34,7 +34,6 @@ const Hotel = () => {
 		api
 			.get_hotels(body)
 			.then((res) => {
-				console.log(res.data);
 				setHotel(res.data);
 				setLoad(false);
 			})

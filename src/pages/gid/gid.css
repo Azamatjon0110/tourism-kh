@@ -1,0 +1,24 @@
+.gid-title p{
+  margin-bottom: 30px;
+  font-size: 56px;
+  font-weight: 400;
+  font-family: 'Cinzel', serif;
+  line-height: 1;
+  text-wrap: wrap;
+}
+
+@media screen and (min-width:768px) {
+  .gid-title p{
+    font-size: 65px;
+  }
+}
+@media screen and (min-width:992px) {
+  .about-us h2{
+    font-size: 85px;
+  }
+}
+
+@media screen and (min-width:1200px) {
+  .about-us h2{
+    font-size: 116px;
+  }}

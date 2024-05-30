@@ -15,6 +15,8 @@ const Historical = () => {
 	const navigate = useNavigate();
 	const lang = localStorage.getItem('lang');
 	const [museum, setMuseum] = useState([]);
+	const [mtitle, setMtitle] = useState({});
+	const [more, setMore] = useState({});
 	const [load, setLoad] = useState(false);
 	const scrollRef = useRef();
 	const body = {
@@ -24,6 +26,41 @@ const Historical = () => {
 		limit: 20,
 		current_page: 1,
 	};
+
+	const getSettings = () => {
+		setLoad(true);
+		api
+			.get_menu(body)
+			.then((res) => {
+				setLoad(false);
+				res.data.data.map((elem) => {
+					if (elem.key == 'his_title') {
+						setMtitle(elem);
+					} else if (elem.key == 'more') {
+						setMore(elem);
+					}
+					// else if (elem.key == 'hotel') {
+					// 	setHotel(elem);
+					// } else if (elem.key == 'gid') {
+					// 	setGid(elem);
+					// } else if (elem.key == 'offset') {
+					// 	setOffset(elem);
+					// } else if (elem.key == 'media') {
+					// 	setMedia(elem);
+					// } else if (elem.key == 'history') {
+					// 	setHistory(elem);
+					// } else if (elem.key == 'historical') {
+					// 	setHistorical(elem);
+					// } else if (elem.key == 'plan') {
+					// 	setPlan(elem);
+					// }
+					getMuseums();
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 	const getMuseums = () => {
 		setLoad(true);
 		api
@@ -32,7 +69,7 @@ const Historical = () => {
 				if (res.status == 200) {
 					setLoad(false);
 				}
-				console.log(res);
+				setLoad(false);
 				setMuseum(res.data.data);
 			})
 			.catch((err) => {
@@ -41,6 +78,7 @@ const Historical = () => {
 			});
 	};
 	useEffect(() => {
+		getSettings();
 		getMuseums();
 		const scroll = new LocomotiveScroll({
 			el: scrollRef.current,
@@ -71,12 +109,15 @@ const Historical = () => {
 								></path>
 							</svg>
 							<div className='about-us'>
-								<h1 className='about-us__title'>
-									{language[lang].home.navbar.his_pl}
-								</h1>
-								<p className='about-us__text'>
-									{language[lang].historical.main_text}
-								</p>
+								{mtitle?.texts?.length > 0 ? (
+									<div
+										dangerouslySetInnerHTML={{
+											__html: mtitle?.texts[0].text,
+										}}
+									></div>
+								) : (
+									''
+								)}
 							</div>
 						</div>
 					</div>
@@ -108,7 +149,15 @@ const Historical = () => {
 															});
 														}}
 													>
-														{language[lang].home.news_btn}
+														{more?.texts?.length > 0 ? (
+															<div
+																dangerouslySetInnerHTML={{
+																	__html: more?.texts[0].text,
+																}}
+															></div>
+														) : (
+															''
+														)}
 													</button>
 												</div>
 											</div>
@@ -118,10 +167,10 @@ const Historical = () => {
 						</div>
 					</div>
 				</div>
-				<Footer />
 				<div className={load === true ? 'd-block' : 'd-none'}>
 					<Loading />
 				</div>
+				<Footer />
 			</div>
 		</>
 	);

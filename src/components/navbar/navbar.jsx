@@ -12,13 +12,13 @@ import { useSelector } from 'react-redux';
 const Navbar = () => {
 	const [logo, setLogo] = useState();
 	const [offset, setOffset] = useState();
-	const [language, setLanguage] = useState();
-
+	const [languages, setLanguage] = useState();
 	const [museum, setMuseum] = useState({});
 	const [main, setMain] = useState({});
 	const [hotel, setHotel] = useState({});
 	const [media, setMedia] = useState({});
 	const [history, setHistory] = useState({});
+	const [historical, setHistorical] = useState({});
 	const [plan, setPlan] = useState({});
 	const [gid, setGid] = useState({});
 	const lang = useSelector((state) => state.lang.lang);
@@ -87,6 +87,8 @@ const Navbar = () => {
 						setMedia(elem);
 					} else if (elem.key == 'history') {
 						setHistory(elem);
+					} else if (elem.key == 'historical') {
+						setHistorical(elem);
 					} else if (elem.key == 'plan') {
 						setPlan(elem);
 					}
@@ -126,8 +128,8 @@ const Navbar = () => {
 						</div>
 						<div className='custom-menu'>
 							<ul className='lang-list'>
-								{language?.length > 0
-									? language.map((elem) => (
+								{languages?.length > 0
+									? languages.map((elem) => (
 											<li className='lang-item' key={elem.id}>
 												<p className='lang-btn' onClick={changeLang}>
 													{elem.key}
@@ -167,7 +169,7 @@ const Navbar = () => {
 									</Link>
 								</li>
 								<li className='lang-item d-block d-lg-none'>
-									<Link className='lang-btn' to='/about'>
+									<Link className='lang-btn' to='/museum'>
 										{museum?.texts?.length > 0 ? (
 											<div
 												dangerouslySetInnerHTML={{
@@ -235,10 +237,10 @@ const Navbar = () => {
 									<ul className='list-ustyled nav-dropdown'>
 										<li className='dropdown-item'>
 											<Link className='dropdown-link' to='/historical_places'>
-												{museum?.texts?.length > 0 ? (
+												{historical?.texts?.length > 0 ? (
 													<div
 														dangerouslySetInnerHTML={{
-															__html: museum?.texts[0].text,
+															__html: historical?.texts[0].text,
 														}}
 													></div>
 												) : (

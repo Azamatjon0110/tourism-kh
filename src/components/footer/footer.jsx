@@ -1,17 +1,67 @@
+import { useEffect, useState } from 'react';
 import language from '../../assets/lang/language';
 import './footer.css';
+import api from '../../server/api';
 const Footer = () => {
 	const lang = localStorage.getItem('lang');
+	const [text, setText] = useState({});
+	const [contact, setContact] = useState({});
+	const body = {
+		language: lang,
+		pages: 1,
+		limit: 40,
+		status: true,
+	};
+	const getSettings = () => {
+		api
+			.get_menu(body)
+			.then((res) => {
+				console.log(res.data);
+				res.data.data.map((elem) => {
+					if (elem.key == 'ft-text') {
+						setText(elem);
+					} else if (elem.key == 'contact') {
+						setContact(elem);
+					}
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+	useEffect(() => {
+		getSettings();
+	}, []);
 	return (
 		<>
 			<div className='footer'>
 				<div className='container'>
 					<div className='footer-box'>
 						<div className='ft-wrap'>
-							<p className='ft-text'>{language[lang].home.ft_text}</p>
+							<p className='ft-text'>
+								{text?.texts?.length > 0 ? (
+									<div
+										dangerouslySetInnerHTML={{
+											__html: text?.texts[0].text,
+										}}
+									></div>
+								) : (
+									''
+								)}
+							</p>
 						</div>
 						<div className='ft-contact'>
-							<h3 className='ft-title'>{language[lang].home.ft_title}</h3>
+							<h3 className='ft-title'>
+								{contact?.texts?.length > 0 ? (
+									<div
+										dangerouslySetInnerHTML={{
+											__html: contact?.texts[0].text,
+										}}
+									></div>
+								) : (
+									''
+								)}
+							</h3>
 							<ul className='list-unstyled'>
 								<li className='ct-item'>
 									<a
@@ -20,7 +70,7 @@ const Footer = () => {
 										target='blank'
 									>
 										<i className='fa-solid fa-location-dot me-2'></i>
-										{language[lang].home.ct_loc}
+										Marg`ilon
 									</a>
 								</li>
 								<li className='ct-item'>

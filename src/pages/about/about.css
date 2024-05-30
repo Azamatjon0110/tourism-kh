@@ -14,7 +14,7 @@
   z-index: 4;
 }
 
-.about-us__title{
+.about-us h2{
   margin-bottom: 30px;
   font-size: 56px;
   font-weight: 400;
@@ -23,7 +23,7 @@
   text-wrap: wrap;
 }
 
-.about-us__text{
+.about-us p{
   padding-left: 8px;
   z-index: 2;
   font-size: 19px;
@@ -69,7 +69,7 @@
   animation-play-state: running;
 }
 
-.about-wrapper__text{
+.about-us__text{
   margin-bottom: 0;
   color: #080808;
   opacity: 0.8;
@@ -104,7 +104,7 @@
 }
 
 @media screen and (min-width:768px) {
-  .about-us__title{
+  .about-us h2{
     font-size: 65px;
   }
 
@@ -118,13 +118,13 @@
 }
 
 @media screen and (min-width:992px) {
-  .about-us__title{
+  .about-us h2{
     font-size: 85px;
   }
 }
 
 @media screen and (min-width:1200px) {
-  .about-us__title{
+  .about-us h2{
     font-size: 116px;
   }
 

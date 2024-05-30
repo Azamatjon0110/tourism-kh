@@ -9,11 +9,54 @@ import Footer from '../../components/footer/footer.jsx';
 import './about.css';
 import { Link } from 'react-router-dom';
 import LocomotiveScroll from 'locomotive-scroll';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import api from '../../server/api.js';
 const About = () => {
 	const lang = localStorage.getItem('lang');
+	const [about, setAbout] = useState({});
+	const [historical, setHistorical] = useState({});
+	const body = {
+		language: lang,
+		pages: 1,
+		limit: 40,
+		status: true,
+	};
+	const getSettings = () => {
+		api
+			.get_menu(body)
+			.then((res) => {
+				res.data.data.map((elem) => {
+					if (elem.key == 'about_title') {
+						setAbout(elem);
+					}
+					// else if (elem.key == 'Asosiy') {
+					// 	setMain(elem);
+					// } else if (elem.key == 'hotel') {
+					// 	setHotel(elem);
+					// } else if (elem.key == 'gid') {
+					// 	setGid(elem);
+					// } else if (elem.key == 'offset') {
+					// 	setOffset(elem);
+					// } else if (elem.key == 'media') {
+					// 	setMedia(elem);
+					// } else if (elem.key == 'history') {
+					// 	setHistory(elem);
+					// }
+					else if (elem.key == 'history') {
+						setHistorical(elem);
+					}
+					// else if (elem.key == 'plan') {
+					// 	setPlan(elem);
+					// }
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 	const scrollRef = useRef();
 	useEffect(() => {
+		getSettings();
 		const scroll = new LocomotiveScroll({
 			el: scrollRef.current,
 			smooth: true,
@@ -44,22 +87,31 @@ const About = () => {
 									></path>
 								</svg>
 								<div className='about-us'>
-									<h1 className='about-us__title'>
-										{language[lang].about.about_title}
-									</h1>
-									<p className='about-us__text'>
-										Bu sahifada Marg`ilonning tashkil topishi va u haqida umumiy
-										ma`lumotlarga ega bo`lishingiz mumkin.
-									</p>
+									{about?.texts?.length > 0 ? (
+										<div
+											dangerouslySetInnerHTML={{
+												__html: about?.texts[0].text,
+											}}
+										></div>
+									) : (
+										''
+									)}
 								</div>
 							</div>
 						</div>
 					</div>
 					<div className='about-wrap ' data-scroll>
 						<div className='container'>
-							<img className='shape mb-2' src={shape} alt='' />
 							<h3 className='about-wrap__title'>
-								{language[lang].about.about_wrap_title}
+								{historical?.texts?.length > 0 ? (
+									<div
+										dangerouslySetInnerHTML={{
+											__html: historical?.texts[0].text,
+										}}
+									></div>
+								) : (
+									''
+								)}
 							</h3>
 							<div className='about-wrapper row'>
 								<div className='col-12 mb-5 position-relative'>
