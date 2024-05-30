@@ -1,6 +1,5 @@
 import Navbar from '../../components/navbar/navbar';
 import language from '../../assets/lang/language';
-import shape from '/src/assets/images/title-shape.png';
 import festival from '/src/assets/images/festival.jpg';
 import Footer from '../../components/footer/footer.jsx';
 import './news.css';

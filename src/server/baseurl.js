@@ -1,1 +1,1 @@
-export default 'http://test.m14.uz/';
+export default 'https://test.m14.uz/';
