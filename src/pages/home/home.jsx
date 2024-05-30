@@ -263,7 +263,7 @@ const Home = () => {
 									<div className='d-flex mt-3'>
 										<button
 											className='news-btn'
-											onClick={() => navigate('/historical')}
+											onClick={() => navigate('/historical_places')}
 										>
 											{more?.texts?.length > 0 ? (
 												<div

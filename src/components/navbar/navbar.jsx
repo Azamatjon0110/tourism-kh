@@ -167,7 +167,7 @@ const Navbar = () => {
 									</Link>
 								</li>
 								<li className='lang-item d-block d-lg-none'>
-									<Link className='lang-btn' to='/museum'>
+									<Link className='lang-btn' to='/historical_places'>
 										{historical?.texts?.length > 0 ? (
 											<div
 												dangerouslySetInnerHTML={{
