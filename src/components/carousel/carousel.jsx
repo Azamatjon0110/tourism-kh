@@ -164,6 +164,7 @@ const Carusel = () => {
 									document
 										.querySelector('.modal-video')
 										.classList.remove('active-m');
+									document.querySelector('.atlas-video').pause();
 								}}
 							></button>
 						</div>

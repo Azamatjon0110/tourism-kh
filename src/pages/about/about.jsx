@@ -16,7 +16,8 @@ const About = () => {
 	const [about, setAbout] = useState({});
 	const [historical, setHistorical] = useState({});
 	const [aboutText, setAboutText] = useState([]);
-	// const [aboutText2, setAboutText2] = useState({});
+	const [scholars, setScholar] = useState([]);
+	const [alloma, setAlloma] = useState({});
 	const body = {
 		language: lang,
 		pages: 1,
@@ -30,9 +31,22 @@ const About = () => {
 			.then((res) => {
 				console.log(res.data.data);
 				setAboutText(res.data.data);
+				getScholar();
 			})
 			.catch((err) => {
 				console.log(err);
+			});
+	};
+	const getScholar = () => {
+		api
+			.get_scholar(body)
+			.then((res) => {
+				setScholar(res.data.data);
+				console.log(scholars);
+			})
+			.catch((err) => {
+				console.log(err);
+				setLoad(false);
 			});
 	};
 	const getSettings = () => {
@@ -44,6 +58,8 @@ const About = () => {
 						setAbout(elem);
 					} else if (elem.key == 'history') {
 						setHistorical(elem);
+					} else if (elem.key == 'alloma') {
+						setAlloma(elem);
 					}
 				});
 				getAbout();
@@ -55,9 +71,8 @@ const About = () => {
 	const scrollRef = useRef();
 	useEffect(() => {
 		setLoad(true);
-		// getAbout();
 		getSettings();
-		if (aboutText?.length > 0) {
+		if (scholars.length > 0) {
 			setLoad(false);
 		}
 		scroll = new LocomotiveScroll({
@@ -76,7 +91,7 @@ const About = () => {
 		return () => {
 			if (scroll) scroll.destroy();
 		};
-	}, [aboutText.length]);
+	}, [scholars.length]);
 	return (
 		<>
 			<div className='wrapper' ref={scrollRef} data-scroll-section>
@@ -211,26 +226,38 @@ const About = () => {
 										''
 									)}
 								</div>
-								{/* <div className='col-12 mb-4 mb-lg-5 album__box'>
-									{aboutText2?.pictures?.length > 0 ? (
-										<img
-											className=' album__img'
-											src={baseurl + aboutText2.pictures[0].image_url}
-											alt=''
-										/>
-									) : (
-										''
-									)}
-									{aboutText2?.texts?.length > 0 ? (
-										<p
-											dangerouslySetInnerHTML={{
-												__html: aboutText2?.texts[0].text,
-											}}
-										></p>
-									) : (
-										''
-									)}
-								</div> */}
+								{scholars.length > 0 ? (
+									<div className=''>
+										{alloma?.texts?.length > 0 ? (
+											<div
+												dangerouslySetInnerHTML={{
+													__html: alloma?.texts[0].text,
+												}}
+											></div>
+										) : (
+											''
+										)}
+										{scholars.map((elem) => (
+											<div className='' key={elem.id}>
+												<div className='d-flex flex-column album__img'>
+													<img
+														className='w-100  mb-2'
+														src={baseurl + elem.pictures[0].image_url}
+														alt=''
+													/>
+													<span>{elem.age}</span>
+												</div>
+												<p
+													dangerouslySetInnerHTML={{
+														__html: elem?.texts[0].text,
+													}}
+												></p>
+											</div>
+										))}
+									</div>
+								) : (
+									''
+								)}
 							</div>
 						</div>
 					</div>

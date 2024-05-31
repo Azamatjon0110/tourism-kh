@@ -36,7 +36,6 @@ const Navbar = () => {
 
 	function changeLang(evt) {
 		console.log(evt.target.value);
-		// location.reload();
 		dispatch(setLang(evt.target.value));
 		getLanguage();
 		localStorage.setItem('lang', evt.target.value);
@@ -149,8 +148,8 @@ const Navbar = () => {
 								className='select-lang d-none d-lg-block'
 								onChange={changeLang}
 							>
-								<option value='' hidden>
-									UZB
+								<option value='' selected hidden>
+									{lang}
 								</option>
 								{languages?.length > 0
 									? languages.map((elem) => (

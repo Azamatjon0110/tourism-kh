@@ -122,14 +122,12 @@ const Home = () => {
 			.get_news(body)
 			.then((res) => {
 				setNews(res.data.data.slice(0, 3));
-				console.log(news);
-				news.map((elem, i) => {
+				news.map((elem) => {
 					const regex = /<h2[^>]*>(.*?)<\/h2>/;
 					elem.texts.map((item) => {
 						const match = item.text.match(regex);
-						console.log(match);
 						if (match && match[1]) {
-							setNewsTitleBox([...newsTitleBox, match[0]]);
+							setNewsTitleBox([...newsTitleBox, match]);
 						} else {
 							setNewsTitleBox([]);
 						}
@@ -320,12 +318,12 @@ const Home = () => {
 														}
 														alt=''
 													/>
-													<h2
+													{/* <h2
 														className='news-title'
 														dangerouslySetInnerHTML={{
 															__html: newsTitleBox[ind],
 														}}
-													></h2>
+													></h2> */}
 												</div>
 											</div>
 									  ))
