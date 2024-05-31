@@ -121,7 +121,7 @@ const Navbar = () => {
 					</Link>
 
 					<div className='navbar-box'>
-						<div className='logo-box mt-2'>
+						<div className='logo-box mt-2 d-flex align-items-center justify-content-between'>
 							<Link to='/' className='logo'>
 								<img
 									className='logo-site'
@@ -129,9 +129,26 @@ const Navbar = () => {
 									alt='Logo'
 								/>
 							</Link>
+							<span className='close-navbar pe-2' onClick={ToggleNavbar}>
+								<i className='fa-solid fa-xmark fa-xl'></i>
+							</span>
 						</div>
 						<div className='custom-menu'>
-							<select className='select-lang' onChange={changeLang}>
+							<ul className='lang-list d-block d-lg-none'>
+								{languages?.length > 0
+									? languages.map((elem) => (
+											<li className='lang-item' key={elem.id}>
+												<p className='lang-btn' onClick={changeLang}>
+													{elem.key}
+												</p>
+											</li>
+									  ))
+									: ''}
+							</ul>
+							<select
+								className='select-lang d-none d-lg-block'
+								onChange={changeLang}
+							>
 								<option value='' hidden>
 									UZB
 								</option>
@@ -322,12 +339,25 @@ const Navbar = () => {
 						''
 					)}
 				</div>
-				<div className='hamburger-menu mobile' onClick={ToggleNavbar}>
-					<svg className='hamburger' width='30' height='30' viewBox='0 0 30 30'>
-						<path className='line line-top' d='M0,9h30' />
-						<path className='line line-center' d='M0,15h30' />
-						<path className='line line-bottom' d='M0,21h30' />
-					</svg>
+				<div className='d-flex flex-row-reverse align-items-center'>
+					<div className='hamburger-menu mobile' onClick={ToggleNavbar}>
+						<svg
+							className='hamburger'
+							width='30'
+							height='30'
+							viewBox='0 0 30 30'
+						>
+							<path className='line line-top' d='M0,9h30' />
+							<path className='line line-center' d='M0,15h30' />
+							<path className='line line-bottom' d='M0,21h30' />
+						</svg>
+					</div>
+					<span
+						className='d-inline-block d-lg-none'
+						onClick={() => navigate('/login')}
+					>
+						<i className='fa-solid fa-right-to-bracket fa-xl ms-2 d-inline-block d-lg-none'></i>
+					</span>
 				</div>
 				<div className='hamburger-menu desktop' onClick={ToggleNavbarDs}>
 					<svg
@@ -342,7 +372,7 @@ const Navbar = () => {
 					</svg>
 				</div>
 				<i
-					className='fa-solid fa-right-to-bracket fa-xl ms-2'
+					className='fa-solid fa-right-to-bracket fa-xl ms-2 d-none d-lg-block'
 					onClick={() => navigate('/login')}
 				></i>
 			</div>

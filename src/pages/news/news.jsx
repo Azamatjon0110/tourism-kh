@@ -101,7 +101,7 @@ const News = () => {
 								? news.map((elem) => (
 										<div className='news-wrapper' key={elem.id}>
 											<img
-												className='news-wrapper__img me-0 me-lg-3'
+												className='news-wrapper__img me-0 me-lg-3 w-100'
 												src={
 													elem.pictures.length > 0
 														? baseurl + elem.pictures[0].image_url

@@ -9,6 +9,11 @@
   display: none;
 }
 
+.close-navbar{
+  color: #fff;
+  transform: rotate3d(45deg);
+}
+
 .desktop{
   display: none !important;
 }

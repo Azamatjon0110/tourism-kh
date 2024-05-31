@@ -30,8 +30,6 @@ const About = () => {
 			.then((res) => {
 				console.log(res.data.data);
 				setAboutText(res.data.data);
-				// setAboutText2(res.data.data[1]);
-				// setData(res.data.data);
 			})
 			.catch((err) => {
 				console.log(err);
