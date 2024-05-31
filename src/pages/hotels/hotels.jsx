@@ -28,7 +28,6 @@ const Hotels = () => {
 		api
 			.get_menu(body)
 			.then((res) => {
-				console.log(res.data);
 				res.data.data.map((elem) => {
 					if (elem.key == 'hotel_title') {
 						setHotel(elem);
@@ -44,7 +43,6 @@ const Hotels = () => {
 			});
 	};
 	const getHotels = () => {
-		setLoad(true);
 		api
 			.get_hotels(body)
 			.then((res) => {
@@ -57,7 +55,11 @@ const Hotels = () => {
 			});
 	};
 	useEffect(() => {
+		setLoad(true);
 		getSettings();
+		if (hotels.length > 0) {
+			setLoad(false);
+		}
 		const scroll = new LocomotiveScroll({
 			el: scrollRef.current,
 			smooth: true,

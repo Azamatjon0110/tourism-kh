@@ -311,7 +311,6 @@ const Menu = () => {
 								{fields.map((field, index) => (
 									<div key={field.id}>
 										{language.length > 0 ? language[index]?.name : ''}
-										{/* {field.language} */}
 										<Controller
 											name={`texts.${index}.text`}
 											control={control}

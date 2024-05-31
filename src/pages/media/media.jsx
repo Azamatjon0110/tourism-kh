@@ -37,21 +37,19 @@ const Media = () => {
 			});
 	};
 	const getMedia = () => {
-		setLoad(true);
 		api
 			.get_media(body)
 			.then((res) => {
 				setMedia(res.data);
-				setLoad(false);
 			})
 			.catch((err) => {
 				console.log(err);
 				util.toast('warning', err.message);
-				setLoad(false);
 			});
 	};
 	const scrollRef = useRef();
 	useEffect(() => {
+		setLoad(true);
 		getSettings();
 		if (media.length > 0) {
 			setLoad(false);

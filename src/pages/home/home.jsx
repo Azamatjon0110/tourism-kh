@@ -122,14 +122,18 @@ const Home = () => {
 			.get_news(body)
 			.then((res) => {
 				setNews(res.data.data.slice(0, 3));
-				res.data.data.map((elem, i) => {
+				console.log(news);
+				news.map((elem, i) => {
 					const regex = /<h2[^>]*>(.*?)<\/h2>/;
-					const match = elem?.texts[i]?.text?.match(regex);
-					if (match && match[1]) {
-						setNewsTitleBox([...newsTitleBox, match[1]]);
-					} else {
-						setNewsTitleBox([]);
-					}
+					elem.texts.map((item) => {
+						const match = item.text.match(regex);
+						console.log(match);
+						if (match && match[1]) {
+							setNewsTitleBox([...newsTitleBox, match[0]]);
+						} else {
+							setNewsTitleBox([]);
+						}
+					});
 				});
 				getMuseums();
 			})

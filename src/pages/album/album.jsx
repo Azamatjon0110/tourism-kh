@@ -31,7 +31,6 @@ const Album = () => {
 		current_page: 1,
 	};
 	const getMuseum = () => {
-		setLoad(true);
 		api
 			.get_museums(body)
 			.then((res) => {
@@ -44,6 +43,7 @@ const Album = () => {
 			});
 	};
 	useEffect(() => {
+		setLoad(true);
 		getMuseum();
 		if (museum?.texts?.length > 0) {
 			setLoad(false);
@@ -63,7 +63,7 @@ const Album = () => {
 		});
 		scroll.update();
 		return () => scroll.destroy();
-	}, []);
+	}, [museum.texts.length]);
 	return (
 		<>
 			<div ref={scrollRef} data-scroll-container>

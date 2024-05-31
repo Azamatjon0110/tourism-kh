@@ -221,26 +221,18 @@ const EditNews = () => {
 							</label>
 						</div>
 						<div className='col-8'>
-							{/* <label className='w-100 mb-3'>
-								Video linki
-								<input
-									type='text'
-									{...register('link')}
-									className='form-control w-100'
-								/>
-							</label> */}
 							{fields.map((field, index) => (
 								<div key={field.id}>
-									{languages.length > 0 ? languages[index].name : ''}
+									{field.language}
 									<Controller
-										name={`texts.${index}.text`}
+										name={`texts[${index}].text`}
 										control={control}
 										defaultValue={field.text}
 										render={({ field }) => (
 											<ReactQuill
 												modules={modules}
 												formats={formats}
-												value={field.value}
+												defaultValue={field.value}
 												onChange={field.onChange}
 												theme='snow'
 											/>

@@ -27,7 +27,6 @@ const Historical = () => {
 	};
 
 	const getSettings = () => {
-		setLoad(true);
 		api
 			.get_menu(body)
 			.then((res) => {
@@ -61,7 +60,6 @@ const Historical = () => {
 			});
 	};
 	const getMuseums = () => {
-		setLoad(true);
 		api
 			.get_museums(body)
 			.then((res) => {
@@ -77,8 +75,12 @@ const Historical = () => {
 			});
 	};
 	useEffect(() => {
+		setLoad(true);
 		getSettings();
 		getMuseums();
+		if (museum.length > 0) {
+			setLoad(false);
+		}
 		const scroll = new LocomotiveScroll({
 			el: scrollRef.current,
 			smooth: true,
@@ -92,6 +94,7 @@ const Historical = () => {
 				smooth: false,
 			},
 		});
+		scroll.update();
 		return () => scroll.destroy();
 	}, [museum.length]);
 	return (

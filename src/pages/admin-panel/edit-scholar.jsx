@@ -226,16 +226,16 @@ const EditScholar = () => {
 							</label>
 							{fields.map((field, index) => (
 								<div key={field.id}>
-									{languages.length > 0 ? languages[index].name : ''}
+									{field.language}
 									<Controller
-										name={`texts.${index}.text`}
+										name={`texts[${index}].text`}
 										control={control}
 										defaultValue={field.text}
 										render={({ field }) => (
 											<ReactQuill
 												modules={modules}
 												formats={formats}
-												value={field.value}
+												defaultValue={field.value}
 												onChange={field.onChange}
 												theme='snow'
 											/>

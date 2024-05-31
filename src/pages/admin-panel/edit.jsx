@@ -91,7 +91,7 @@ const Edit = () => {
 	};
 
 	const submit = (data) => {
-		console.log(data, query);
+		console.log(data);
 		setLoad(true);
 		data.texts.map((elem, i) => {
 			data.texts[i].language = languages[i].key;
@@ -178,7 +178,7 @@ const Edit = () => {
 	};
 	const { handleSubmit, register, control, reset } = useForm({
 		defaultValues: {
-			texts: [],
+			texts: [{ text: '', language: '' }],
 			title: '',
 			address: '',
 			file: '',
@@ -214,7 +214,7 @@ const Edit = () => {
 								<input
 									className='visually-hidden'
 									type='file'
-									{...register('file', { required: true })}
+									{...register('file')}
 									onChange={loadFile}
 								/>
 								Rasmni alishtirish
@@ -246,14 +246,14 @@ const Edit = () => {
 								<div key={field.id}>
 									{field.language}
 									<Controller
-										name={`element.texts.${index}.text`}
+										name={`texts[${index}].text`}
 										control={control}
 										defaultValue={field.text}
 										render={({ field }) => (
 											<ReactQuill
 												modules={modules}
 												formats={formats}
-												value={field.value}
+												defaultValue={field.value}
 												onChange={field.onChange}
 												theme='snow'
 											/>
@@ -266,12 +266,10 @@ const Edit = () => {
 								{/* <div id='editorjs'></div> */}
 								{/* <button onClick={saveContent}>Save Content</button> */}
 							</div>
+							<button className='btn btn-success d-inline' type='submit'>
+								Saqlash
+							</button>
 						</div>
-						{/* <div className=' d-flex justify-content-center mt-3'> */}
-						<button className='btn btn-success d-inline' type='submit'>
-							Saqlash
-						</button>
-						{/* </div> */}
 					</form>
 				</div>
 			</div>
