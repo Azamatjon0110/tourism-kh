@@ -99,11 +99,7 @@ const Edit = () => {
 					title: data.title,
 					address: data.address,
 					texts: data.texts,
-					videos: [
-						{
-							text: '',
-						},
-					],
+					videos: [],
 				})
 				.then((res) => {
 					console.log(res);
@@ -120,11 +116,7 @@ const Edit = () => {
 					title: data.title,
 					address: data.address,
 					texts: data.texts,
-					videos: [
-						{
-							text: '',
-						},
-					],
+					videos: [],
 				})
 				.then((res) => {
 					console.log(res);
@@ -167,7 +159,6 @@ const Edit = () => {
 			api
 				.museum_single(id)
 				.then((res) => {
-					console.log(res);
 					setPi(res.data.pictures[0].image_url);
 					reset({
 						texts: res.data.texts,

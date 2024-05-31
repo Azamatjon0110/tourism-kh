@@ -121,7 +121,7 @@ const Navbar = () => {
 					</Link>
 
 					<div className='navbar-box'>
-						<div className='logo-box mt-2 d-flex align-items-center justify-content-between'>
+						<div className='logo-box mt-2 d-flex align-items-center justify-content-between d-lg-none'>
 							<Link to='/' className='logo'>
 								<img
 									className='logo-site'
@@ -352,12 +352,6 @@ const Navbar = () => {
 							<path className='line line-bottom' d='M0,21h30' />
 						</svg>
 					</div>
-					<span
-						className='d-inline-block d-lg-none'
-						onClick={() => navigate('/login')}
-					>
-						<i className='fa-solid fa-right-to-bracket fa-xl ms-2 d-inline-block d-lg-none'></i>
-					</span>
 				</div>
 				<div className='hamburger-menu desktop' onClick={ToggleNavbarDs}>
 					<svg
