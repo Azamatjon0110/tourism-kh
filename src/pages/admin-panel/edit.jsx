@@ -17,7 +17,7 @@ const Edit = () => {
 	const navigate = useNavigate();
 	// const baseUrl = 'http://test.m14.uz/';
 	const lang = 'UZB';
-	const [, setLanguage] = useState([]);
+	const [languages, setLanguage] = useState([]);
 	const [load, setLoad] = useState(false);
 	const [file, setFile] = useState();
 	const [img, setImg] = useState();
@@ -63,7 +63,7 @@ const Edit = () => {
 			api: 'hotels',
 		},
 		museums: {
-			title: 'Muzeylar',
+			title: 'Muzey',
 			api: 'museum',
 		},
 		news: {
@@ -91,7 +91,11 @@ const Edit = () => {
 	};
 
 	const submit = (data) => {
+		console.log(data, query);
 		setLoad(true);
+		data.texts.map((elem, i) => {
+			data.texts[i].language = languages[i].key;
+		});
 		if (query == 'hotels') {
 			api
 				.update_hotel({
@@ -110,6 +114,7 @@ const Edit = () => {
 					setLoad(false);
 				});
 		} else if (query == 'museums') {
+			console.log(query);
 			api
 				.update_museum({
 					id: id,
@@ -262,11 +267,11 @@ const Edit = () => {
 								{/* <button onClick={saveContent}>Save Content</button> */}
 							</div>
 						</div>
-						<div className=' d-flex justify-content-center mt-3'>
-							<button className='btn btn-success d-inline' type='submit'>
-								Saqlash
-							</button>
-						</div>
+						{/* <div className=' d-flex justify-content-center mt-3'> */}
+						<button className='btn btn-success d-inline' type='submit'>
+							Saqlash
+						</button>
+						{/* </div> */}
 					</form>
 				</div>
 			</div>

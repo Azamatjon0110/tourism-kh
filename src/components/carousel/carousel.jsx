@@ -1,5 +1,5 @@
 import frame from '/src/assets/frame.mp4';
-import x2 from '/src/assets/s2.jpg';
+import x2 from '/src/assets/fonsiz2.jpg';
 import x3 from '/src/assets/s1.jpg';
 import './carusel.css';
 import { useState } from 'react';

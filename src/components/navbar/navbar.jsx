@@ -2,7 +2,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 // import language from '/src/assets/lang/language';
 // import x6 from '/src/assets/images/x8.jpg';
-import x7 from '/src/assets/images/x10.jpg';
+import x7 from '/src/assets/margilan.jpg';
 import './navbar.css';
 import { useEffect, useState } from 'react';
 import api from '../../server/api';
