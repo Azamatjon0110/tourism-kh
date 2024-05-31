@@ -65,7 +65,7 @@ const Hotel = () => {
 		return () => {
 			if (scroll) scroll.destroy();
 		};
-	}, []);
+	}, [hotel.texts.length]);
 	return (
 		<>
 			<div className='' ref={scrollRef} data-scroll-container>
