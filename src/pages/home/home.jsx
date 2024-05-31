@@ -32,6 +32,7 @@ const Home = () => {
 	const [newsTitle, setNewsTitle] = useState([]);
 	const [more, setMore] = useState([]);
 	const [media, setMedia] = useState({});
+	const [offset, setOffset] = useState({});
 	const [history, setHistory] = useState({});
 	const [about, setAbout] = useState({});
 	let navigate = useNavigate();
@@ -99,6 +100,8 @@ const Home = () => {
 						setAbout(elem);
 					} else if (elem.key == 'media') {
 						setMedia(elem);
+					} else if (elem.key == 'offset') {
+						setOffset(elem);
 					} else if (elem.key == 'historical') {
 						setHistory(elem);
 					} else if (elem.key == 'news') {
@@ -194,14 +197,16 @@ const Home = () => {
 								>
 									<div className='about-info'>
 										<div className='d-flex'>
-											<p className='about-text'>
-												Margʻilon (boshqa nomlari Margilan, Margelan) –
-												Oʻzbekiston shaharlaridan biri. Fargʻona viloyatida
-												joylashgan. Aholisi 246,7 ming kishi.[2] Shaharda 30 dan
-												artiq millat va elatlar istiqomat qiladi. Jumladan, 91,9
-												% oʻzbeklar, 3,1 % ruslar, 1,4 % tatarlar. Shahar iqlimi
-												– kontinental, qish yumshoq, yoz esa juda issiq keladi.
-											</p>
+											{offset?.texts?.length > 0 ? (
+												<div
+													style={{}}
+													dangerouslySetInnerHTML={{
+														__html: offset?.texts[0].text,
+													}}
+												></div>
+											) : (
+												''
+											)}
 										</div>
 										<button
 											className='news-btn'

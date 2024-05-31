@@ -20,6 +20,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px;
+  /* background-color: #fff; */
 }
 
 
@@ -66,9 +67,11 @@
 }
 
 
-.lang-list{
-  padding-top: 24px;
-  padding-left: 16px;
+.select-lang{
+  padding: 6px 10px;
+  border: 1px solid #080808;
+  background-color: transparent;
+  border-radius: 12px;
 }
 
 .lang-item{

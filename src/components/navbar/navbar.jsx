@@ -7,9 +7,11 @@ import './navbar.css';
 import { useEffect, useState } from 'react';
 import api from '../../server/api';
 import baseurl from '../../server/baseurl';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLang } from '../../redux/language/langAction';
 // import { Hidden } from '@mui/material';
 const Navbar = () => {
+	const dispatch = useDispatch();
 	const [logo, setLogo] = useState();
 	const [offset, setOffset] = useState();
 	const [languages, setLanguage] = useState();
@@ -32,9 +34,13 @@ const Navbar = () => {
 		document.querySelector('.desktop-offset').classList.toggle('active');
 	};
 
-	function changeLang(key) {
-		localStorage.setItem('lang', key);
-		location.reload();
+	function changeLang(evt) {
+		console.log(evt.target.value);
+		// location.reload();
+		dispatch(setLang(evt.target.value));
+		getLanguage();
+		localStorage.setItem('lang', evt.target.value);
+		navigate(0);
 	}
 
 	const body = {
@@ -100,7 +106,7 @@ const Navbar = () => {
 
 	useEffect(() => {
 		getLanguage();
-	}, []);
+	}, [lang]);
 
 	return (
 		<nav className='navbar'>
@@ -125,22 +131,22 @@ const Navbar = () => {
 							</Link>
 						</div>
 						<div className='custom-menu'>
-							<ul className='lang-list'>
+							<select className='select-lang' onChange={changeLang}>
+								<option value='' hidden>
+									UZB
+								</option>
 								{languages?.length > 0
 									? languages.map((elem) => (
-											<li className='lang-item' key={elem.id}>
-												<p
-													className='lang-btn'
-													onClick={() => {
-														changeLang(elem.key);
-													}}
-												>
-													{elem.key}
-												</p>
-											</li>
+											<option
+												className='lang-item'
+												key={elem.id}
+												value={elem.key}
+											>
+												{elem.key}
+											</option>
 									  ))
 									: ''}
-							</ul>
+							</select>
 						</div>
 
 						<div className='site-menu'>

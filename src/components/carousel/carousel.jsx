@@ -3,15 +3,13 @@ import x2 from '/src/assets/s2.jpg';
 import x3 from '/src/assets/s1.jpg';
 import './carusel.css';
 import { useState } from 'react';
-// import language from '../../assets/lang/language';
 import 'react-multi-carousel/lib/styles.css';
-// import Carousel from 'react-multi-carousel';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Link } from 'react-router-dom';
-// import { useEffect } from 'react';
-// import Navbar from '../navbar/navbar';
+import { useEffect } from 'react';
+import api from '../../server/api';
+import { useSelector } from 'react-redux';
 const settingsV = {
 	dots: true,
 	infinite: true,
@@ -43,46 +41,85 @@ const settingsV = {
 // 	},
 // };
 const Carusel = () => {
+	const lang = useSelector((state) => state.lang.lang);
+	const [open, setOpen] = useState(false);
+
+	const [home, setHome] = useState({});
 	const [crs] = useState([x2, x3, x2, x3, x2, x3, x2, x3]);
-	// useEffect(() => {
-	// 	const btns = document.querySelectorAll('.slick-arrow');
-	// 	btns.forEach((item, index) => {
-	// 		if (index % 2 == 0) {
-	// 			item.textContent = '';
-	// 			// item.style.backgroundImage = url(arrow);
-	// 			// const elem = document.createElement('i');
-	// 			// elem.classList.add('fa-solid');
-	// 			// elem.classList.add('fa-angle-up');
-	// 			// item.appendChild();
-	// 		} else {
-	// 			item.textContent = '';
-	// 			// const elem = document.createElement('i');
-	// 			// elem.classList.add('fa-solid');
-	// 			// elem.classList.add('fa-angle-down');
-	// 			// item.appendChild(elem);
-	// 		}
-	// 	});
-	// }, []);
+	let body = {
+		language: lang,
+		search: '',
+		pages: 1,
+		limit: 20,
+		current_page: 1,
+		status: true,
+	};
+	const getSettings = () => {
+		api
+			.get_menu(body)
+			.then((res) => {
+				setHome();
+				res.data.data.map((elem) => {
+					if (elem.key == 'home-text') {
+						setHome(elem);
+					}
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+	if (open == true) {
+		document.querySelector('.modal-menu').classList.add('active-m');
+		document.querySelector('.wrapper').classList.add('md-scroll');
+		document.querySelector('.atlas-video').play();
+	}
+	useEffect(() => {
+		getSettings();
+	}, []);
 	return (
 		<>
 			<div className=''>
 				<div className='container'>
-					<div className='crs-box position-relative'>
-						<svg width='580' height='400' className='svg-morph'>
-							<path
-								id='svg_morph'
-								d='m261,30.4375c0,0 114,6 151,75c37,69 37,174 6,206.5625c-31,32.5625 -138,11.4375 -196,-19.5625c-58,-31 -86,-62 -90,-134.4375c12,-136.5625 92,-126.5625 129,-127.5625z'
-							></path>
-						</svg>
-						<h1 className='crs-title'>Marg`ilon</h1>
+					<div className='crs-box '>
+						<div className='position-relative'>
+							<svg width='580' height='400' className='svg-morph'>
+								<path
+									id='svg_morph'
+									d='m261,30.4375c0,0 114,6 151,75c37,69 37,174 6,206.5625c-31,32.5625 -138,11.4375 -196,-19.5625c-58,-31 -86,-62 -90,-134.4375c12,-136.5625 92,-126.5625 129,-127.5625z'
+								></path>
+							</svg>
+							{home?.texts?.length > 0 ? (
+								<div
+									className=''
+									style={{ zIndex: 5 }}
+									dangerouslySetInnerHTML={{
+										__html: home?.texts[0].text,
+									}}
+								></div>
+							) : (
+								''
+							)}
+						</div>
 					</div>
 				</div>
 			</div>
 			<div className='img-box '>
+				<div className='slider-container'>
+					<Slider {...settingsV}>
+						{crs.map((item) => (
+							<div className='wrap-position' key={item}>
+								<img className='crs-img' src={item} alt='' />
+							</div>
+						))}
+					</Slider>
+				</div>
 				<div
 					className='play-now'
-					data-bs-toggle='modal'
-					data-bs-target='#staticBackdrop12'
+					onClick={() => {
+						setOpen(false);
+						document.querySelector('.modal-video').classList.add('active-m');
+					}}
 				>
 					<p className='play-btn'></p>
 					<svg
@@ -90,8 +127,7 @@ const Carusel = () => {
 						xmlns='http://www.w3.org/2000/svg'
 						x='0px'
 						y='0px'
-						width='300px'
-						height='300px'
+						className='video-svg'
 						viewBox='0 0 300 300'
 						enableBackground='new 0 0 300 300'
 						xmlSpace='preserve'
@@ -103,7 +139,7 @@ const Carusel = () => {
 							/>
 						</defs>
 						<circle cx='150' cy='100' r='75' fill='none' />
-						<g>
+						<g className='video-play'>
 							<use xlinkHref='#circlePath' fill='none' />
 							<text>
 								<textPath xlinkHref='#circlePath'>
@@ -113,50 +149,33 @@ const Carusel = () => {
 						</g>
 					</svg>
 				</div>
-				<div className='slider-container'>
-					<Slider {...settingsV}>
-						{crs.map((item) => (
-							<div className='wrap-position' key={item}>
-								<img className='crs-img' src={item} alt='' />
-							</div>
-						))}
-					</Slider>
-				</div>
 			</div>
-			<div
-				className='modal fade'
-				id='staticBackdrop12'
-				data-bs-backdrop='static'
-				data-bs-keyboard='false'
-				tabIndex='-1'
-				aria-labelledby='staticBackdropLabel'
-				aria-hidden='true'
-			>
-				<div className='modal-dialog'>
-					<div className='modal-content'>
+			<div className='modal-video'>
+				<div className='con-modal'>
+					<div className='video-body'>
 						<div className='modal-header'>
-							<h1 className='modal-title fs-5' id='staticBackdropLabel'>
-								Modal title
+							<h1 className='mb-0 fs-5 ' id='staticBackdropLabel'>
+								Atlas festivali
 							</h1>
 							<button
 								type='button'
-								className='btn-close'
-								data-bs-dismiss='modal'
-								aria-label='Close'
+								className='btn-close me-0'
+								onClick={() => {
+									document
+										.querySelector('.modal-video')
+										.classList.remove('active-m');
+								}}
 							></button>
 						</div>
-						<div className='modal-body'>...</div>
-						<div className='modal-footer'>
-							<button
-								type='button'
-								className='btn btn-secondary'
-								data-bs-dismiss='modal'
-							>
-								Close
-							</button>
-							<button type='button' className='btn btn-primary'>
-								Understood
-							</button>
+						<div className='modal-body'>
+							<video
+								className='w-100 atlas-video'
+								src={frame}
+								loop
+								autoPlay
+								muted
+								controls
+							></video>
 						</div>
 					</div>
 				</div>

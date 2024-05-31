@@ -4,6 +4,11 @@
   display: block;
 }
 
+.md-scroll{
+  max-width: 100vh !important;
+  overflow: hidden;
+}
+
 .slick-track{
   display: flex;
   height: 100vh;
@@ -77,24 +82,32 @@
 }
 
 .crs-box{
-  position: absolute;
-  top: 200px;
+  position: relative;
+  top: 120px;
+  left: 0;
   z-index: 2;
 }
 
-.crs-title{
-  /* position: absolute; */
+.crs-box h1{
+  position: absolute;
   width: 80%;
-  padding-left: 12px;
   font-family: 'Cinzel', serif;
   font-weight: 500;
   font-size: 42px;
   color: #080808;
-  border-left: 5px solid #080808;
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   top: 90px;
   left: 50px;
+}
+
+.crs-box p {
+  position: absolute;
+  padding-left: 12px;
+z-index: 3;
+top: 200px;
+left: 50px;
+  border-left: 5px solid #080808;
 }
 .img-box{
   position: relative;
@@ -137,21 +150,21 @@
 
 
 .play-now {
-  position: relative;
+  position: absolute !important;
   width: 340px;
   height: 340px;
-  position: absolute;
+  top: 370px;
   left: 50%;
   bottom: 0;
-  z-index: 5;
+  z-index: 6 !important;
   overflow: hidden;
-  margin-left: -100px;
+  margin-left: -220px;
 }
 .play-now .play-btn {
   position: absolute;
   left: 50%;
   top: 50%;
-  z-index: 5;
+  z-index: 6;
   width: 0;
   height: 0;
   border-style: solid;
@@ -193,10 +206,70 @@
   animation-timing-function: linear;
 }
 
+.video-play{
+  position: absolute !important;
+  z-index: 10;
+}
+
+.modal-video{
+  display: none;
+  position: absolute;
+  width: 100vw;
+  background-color: rgba(8, 8, 8, 0.63);
+  height: 100vh;
+  z-index: 5;
+  top: 0;
+  left: 0;
+}
+
+.active-m{
+  display: block;
+  z-index: 6 !important;
+  transition: 0.4s ease;
+}
+
+
+.active-m .con-modal{
+  transform: translateY(0px);
+}
+.con-modal{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  transform: translateY(-1000px);
+}
+
+.con-modal .modal-body{
+
+  margin-top: 20px;
+  z-index: 5 !important;
+}
+
+.video-body{
+  position: relative;
+  z-index: 7;
+  width: 100%;
+  max-width: 250px;
+  margin: 0 auto;
+  margin-top: 60px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.active-m .modal-video{
+  transform: translateY(0);
+}
+
+.atlas{
+  width: 100%;
+
+}
 
 
 @media screen and (min-width:768px) {
-  .crs-title{
+  .crs-box h1{
     font-size: 80px;
     z-index: 4;
   }
@@ -204,10 +277,14 @@
   .slick-dots{
     left: 50px !important;
   }
+
+  .video-body{
+    max-width: 700px;
+  }
 }
 
 @media screen and (min-width:1200px) {
-  .crs-title{
+  .crs-box h1{
     font-size: 96px;
   }
   .slick-dots{

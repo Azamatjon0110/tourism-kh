@@ -9,14 +9,14 @@ import { Controller, useForm, useFieldArray } from 'react-hook-form';
 // import axios from 'axios';
 import api from '../../server/api';
 import Loading from '../../components/Animation/loading';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import baseurl from '../../server/baseurl';
 
 const Edit = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	// const baseUrl = 'http://test.m14.uz/';
-	const lang = useSelector((state) => state.lang.lang);
+	const lang = 'UZB';
 	const [, setLanguage] = useState([]);
 	const [load, setLoad] = useState(false);
 	const [file, setFile] = useState();
@@ -116,6 +116,7 @@ const Edit = () => {
 		} else if (query == 'museums') {
 			api
 				.update_museum({
+					id: id,
 					title: data.title,
 					address: data.address,
 					texts: data.texts,

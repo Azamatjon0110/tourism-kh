@@ -1,8 +1,5 @@
 import Navbar from '../../components/navbar/navbar';
-import x6 from '/src/assets/m-images/bg1.jpg';
 import fes from '/src/assets/subnail.jpg';
-import fes1 from '/src/assets/m-images/bg32.jpg';
-// import fes2 from '/src/assets/m-images/img3.jfif';
 import Footer from '../../components/footer/footer.jsx';
 import './about.css';
 import { Link } from 'react-router-dom';
@@ -13,17 +10,32 @@ import baseurl from '../../server/baseurl.js';
 import Loading from '../../components/Animation/loadingHome.jsx';
 const About = () => {
 	let scroll;
-	const [load, setLoad] = useState(false);
 	const lang = localStorage.getItem('lang');
+	const [load, setLoad] = useState(false);
+	// const [data, setData] = useState([]);
 	const [about, setAbout] = useState({});
-	const [aboutText, setAboutText] = useState({});
-	const [aboutText2, setAboutText2] = useState({});
 	const [historical, setHistorical] = useState({});
+	const [aboutText, setAboutText] = useState([]);
+	// const [aboutText2, setAboutText2] = useState({});
 	const body = {
 		language: lang,
 		pages: 1,
 		limit: 40,
 		status: true,
+	};
+
+	const getAbout = () => {
+		api
+			.get_about(body)
+			.then((res) => {
+				console.log(res.data.data);
+				setAboutText(res.data.data);
+				// setAboutText2(res.data.data[1]);
+				// setData(res.data.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 	const getSettings = () => {
 		api
@@ -42,24 +54,12 @@ const About = () => {
 				console.log(err);
 			});
 	};
-	const getAbout = () => {
-		api
-			.get_about(body)
-			.then((res) => {
-				setAboutText(res.data.data[0]);
-				setAboutText2(res.data.data[1]);
-				console.log(aboutText2);
-				setLoad(false);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	};
 	const scrollRef = useRef();
 	useEffect(() => {
-		getSettings();
 		setLoad(true);
-		if (aboutText.length > 0) {
+		// getAbout();
+		getSettings();
+		if (aboutText?.length > 0) {
 			setLoad(false);
 		}
 		scroll = new LocomotiveScroll({
@@ -75,17 +75,16 @@ const About = () => {
 			},
 		});
 		scroll.update();
-
 		return () => {
 			if (scroll) scroll.destroy();
 		};
-	}, []);
+	}, [aboutText.length]);
 	return (
 		<>
-			<div className='wrapper' ref={scrollRef} data-scroll-container>
+			<div className='wrapper' ref={scrollRef} data-scroll-section>
 				<Navbar />
 				<div>
-					<div className='bg-history' data-scroll>
+					<div className='bg-history'>
 						<div className='container'>
 							<div className='position-relative'>
 								<svg width='580' height='400' className='svg-morph'>
@@ -108,7 +107,7 @@ const About = () => {
 							</div>
 						</div>
 					</div>
-					<div className='about-wrap ' data-scroll>
+					<div className='about-wrap '>
 						<div className='container'>
 							<h3 className='about-wrap__title'>
 								{historical?.texts?.length > 0 ? (
@@ -156,7 +155,7 @@ const About = () => {
 												top: '14px',
 											}}
 										>
-											Яндекс Карты
+											Яндекс Карты
 										</Link>
 										<iframe
 											src='https://yandex.uz/map-widget/v1/?ll=71.741096%2C40.466611&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgk3NzEzMTQ1OTUSLE_Ku3piZWtpc3RvbiwgRmFyZ8q7b25hIHZpbG95YXRpLCBNYXJnyrtpbG9uIgoNCXGPQhVS4CFC&z=13.79'
@@ -167,6 +166,33 @@ const About = () => {
 										></iframe>
 									</div>
 								</div>
+								{aboutText?.length > 0
+									? aboutText.map((elem) => (
+											<div
+												className='col-12 mb-4 mb-lg-5 album__box'
+												key={elem.id}
+											>
+												{elem?.pictures?.length > 0 ? (
+													<img
+														className=' album__img'
+														src={baseurl + elem.pictures[0].image_url}
+														alt=''
+													/>
+												) : (
+													''
+												)}
+												{elem?.texts?.length > 0 ? (
+													<p
+														dangerouslySetInnerHTML={{
+															__html: elem?.texts[0].text,
+														}}
+													></p>
+												) : (
+													''
+												)}
+											</div>
+									  ))
+									: ''}
 								<div className='col-12 mb-4 mb-lg-5 album__box'>
 									{aboutText?.pictures?.length > 0 ? (
 										<img
@@ -187,7 +213,7 @@ const About = () => {
 										''
 									)}
 								</div>
-								<div className='col-12 mb-4 mb-lg-5 album__box'>
+								{/* <div className='col-12 mb-4 mb-lg-5 album__box'>
 									{aboutText2?.pictures?.length > 0 ? (
 										<img
 											className=' album__img'
@@ -206,15 +232,15 @@ const About = () => {
 									) : (
 										''
 									)}
-								</div>
+								</div> */}
 							</div>
 						</div>
 					</div>
 					<Footer />
 				</div>
-			</div>
-			<div className={load === true ? 'd-block' : 'd-none'}>
-				<Loading />
+				<div className={load === true ? 'd-block' : 'd-none'}>
+					<Loading />
+				</div>
 			</div>
 		</>
 	);

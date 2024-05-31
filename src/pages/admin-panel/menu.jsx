@@ -193,7 +193,7 @@ const Menu = () => {
 							type='search'
 							placeholder='Qidirish...'
 						/>
-						{/* <i
+						<i
 							className='fa-solid fa-plus fa-xl pointer'
 							onClick={() => {
 								getMenu();
@@ -202,7 +202,7 @@ const Menu = () => {
 								document.querySelector('.modal-menu').classList.add('active-m');
 								setModal({ status: 'menu_add' });
 							}}
-						></i> */}
+						></i>
 					</div>
 				</div>
 				<div className='panel-bottom p-3'>

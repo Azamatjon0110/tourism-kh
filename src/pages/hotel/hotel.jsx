@@ -45,7 +45,9 @@ const Hotel = () => {
 	useEffect(() => {
 		setLoad(true);
 		getHotels();
-
+		if (hotel?.texts?.length > 0) {
+			setLoad(false);
+		}
 		scroll = new LocomotiveScroll({
 			el: scrollRef.current,
 			smooth: true,
@@ -58,9 +60,7 @@ const Hotel = () => {
 				smooth: false,
 			},
 		});
-		if (hotel?.texts.length > 0) {
-			setLoad(false);
-		}
+
 		scroll.update();
 		return () => {
 			if (scroll) scroll.destroy();

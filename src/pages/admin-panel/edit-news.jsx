@@ -5,11 +5,11 @@ import 'react-quill/dist/quill.snow.css';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import api from '../../server/api';
 import Loading from '../../components/Animation/loading';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import util from '../../server/util';
 import baseurl from '../../server/baseurl';
 const EditNews = () => {
-	const lang = useSelector((state) => state.lang.lang);
+	const lang = 'UZB';
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [load, setLoad] = useState(false);

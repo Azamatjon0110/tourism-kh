@@ -9,13 +9,13 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form';
 // import axios from 'axios';
 import api from '../../server/api';
 import Loading from '../../components/Animation/loading';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import util from '../../server/util';
 import handleError from '../../server/handle';
 import baseurl from '../../server/baseurl';
 // import baseurl from '../../server/baseurl';
 const EditScholar = () => {
-	const lang = useSelector((state) => state.lang.lang);
+	const lang = 'UZB';
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [load, setLoad] = useState(false);

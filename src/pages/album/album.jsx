@@ -36,7 +36,6 @@ const Album = () => {
 			.get_museums(body)
 			.then((res) => {
 				setMuseum(res.data);
-				setLoad(false);
 			})
 			.catch((err) => {
 				setLoad(false);
@@ -46,6 +45,9 @@ const Album = () => {
 	};
 	useEffect(() => {
 		getMuseum();
+		if (museum?.texts?.length > 0) {
+			setLoad(false);
+		}
 		const scroll = new LocomotiveScroll({
 			el: scrollRef.current,
 			smooth: true,
@@ -59,6 +61,7 @@ const Album = () => {
 				smooth: false,
 			},
 		});
+		scroll.update();
 		return () => scroll.destroy();
 	}, []);
 	return (
@@ -66,7 +69,7 @@ const Album = () => {
 			<div ref={scrollRef} data-scroll-container>
 				<div className='wrapper'>
 					<Navbar />
-					<div className='hotel py-5'>
+					<div className='hotel '>
 						<div className='hotel-wrapper'>
 							<div className='container'>
 								<p className='back' onClick={() => navigate(-1)}>

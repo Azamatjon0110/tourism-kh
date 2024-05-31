@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router';
 import baseurl from '../../server/baseurl';
 
 const Allomalar = () => {
-	const lang = useSelector((state) => state.lang.lang);
+	const lang = 'UZB';
 	const token = useSelector((state) => state.token.token);
 	const location = useNavigate();
 	const [load, setLoad] = useState(false);
