@@ -7,10 +7,14 @@ import { useForm } from 'react-hook-form';
 
 import pi from '/src/assets/m-images/pl.jpg';
 import baseurl from '../../server/baseurl';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 const Media = () => {
+	const token = useSelector((state) => state.token.token);
 	const [media, setMedia] = useState([]);
 	const [load, setLoad] = useState(false);
 	const [file, setFile] = useState();
+	const [id, setId] = useState();
 	const [image, setImg] = useState();
 	const [modal, setModal] = useState({
 		status: 'media_add',
@@ -70,6 +74,24 @@ const Media = () => {
 				setLoad(false);
 			});
 	};
+	const remove = () => {
+		setLoad(true);
+
+		axios
+			.delete(`${baseurl}picture/delete?id=${id}`, {
+				headers: { Authorization: `Bearer ${token}` },
+			})
+			.then((res) => {
+				setLoad(false);
+				util.toast('success', res.message);
+				getMedia();
+			})
+			.catch((err) => {
+				setLoad(false);
+				console.log(err);
+				util.toast('warning', err.message);
+			});
+	};
 
 	useEffect(() => {
 		getMedia();
@@ -108,18 +130,12 @@ const Media = () => {
 										/>
 										<div className='btn-gr'>
 											<button
-												className='btn btn-warning text-white media-edit'
-												onClick={() => {
-													setOpen(false);
-													setModal({ status: 'media_edit', elem: elem });
-													setFile(elem.image_url);
-													document
-														.querySelector('.modal-box')
-														.classList.add('active-m');
-													setImg(baseurl + elem.image_url);
-												}}
+												className='btn btn-danger me-2 '
+												data-bs-toggle='modal'
+												data-bs-target='#delete'
+												onClick={() => setId(elem.id)}
 											>
-												<i className='fa-solid fa-pen'></i>
+												<i className='fa-solid fa-trash'></i>
 											</button>
 										</div>
 									</div>
@@ -201,6 +217,37 @@ const Media = () => {
 							</div>
 						</div>
 					</form>
+				</div>
+				<div
+					className='modal fade'
+					id='delete'
+					tabIndex='-1'
+					aria-hidden='true'
+				>
+					<div className='modal-dialog modal-dialog-centered'>
+						<div className='modal-content'>
+							<div className='modal-body'>
+								<h1 className='m-title'>O`chirmoqchimisiz</h1>
+							</div>
+							<div className='modal-footer'>
+								<button
+									type='button'
+									className='btn btn-danger'
+									data-bs-dismiss='modal'
+								>
+									Yo`q
+								</button>
+								<button
+									type='button'
+									className='btn btn-success'
+									onClick={() => remove()}
+									data-bs-dismiss='modal'
+								>
+									Ha
+								</button>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div className={load === true ? 'd-block' : 'd-none'}>
 					<Loading />

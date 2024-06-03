@@ -84,10 +84,6 @@ const Menu = () => {
 			.get_menu(body)
 			.then((res) => {
 				setMenu(res.data.data);
-				body.pages = res.data.pages;
-				body.limit = res.data.limit;
-				body.current_page = res.data.current_page;
-				console.log(menu);
 				getLang();
 				setLoad(false);
 			})
@@ -97,13 +93,12 @@ const Menu = () => {
 			});
 	};
 	const getSingle = (id) => {
-		setModal({ status: 'modal_edit' });
+		setModal({ status: 'menu_edit' });
 		setLoad(true);
 		setId(id);
 		api
 			.menu_single(id)
 			.then((res) => {
-				console.log(res.data);
 				setOpen(true);
 				reset({
 					key: res.data.key,
@@ -137,14 +132,14 @@ const Menu = () => {
 		data.texts.map((elem, i) => {
 			elem.language = language[i].key;
 		});
-		console.log(data);
 		setLoad(true);
 		if (modal.status == 'menu_add') {
 			api
 				.create_menu(data)
 				.then((res) => {
-					reset();
+					console.log(res);
 					setOpen(false);
+					util.toast('success', res.message);
 					document.querySelector('.modal-menu').classList.remove('active-m');
 					util.toast('success', res.message);
 					reset();
@@ -157,7 +152,7 @@ const Menu = () => {
 					setOpen(false);
 					util.toast('warning', err.message);
 				});
-		} else if (modal.status == 'menu_edit') {
+		} else {
 			setLoad(true);
 			api
 				.update_menu({
@@ -167,6 +162,7 @@ const Menu = () => {
 				})
 				.then(() => {
 					getMenu();
+					document.querySelector('.modal-menu').classList.remove('active-m');
 					reset();
 					setOpen(false);
 					setLoad(false);
@@ -310,16 +306,16 @@ const Menu = () => {
 								</label>
 								{fields.map((field, index) => (
 									<div key={field.id}>
-										{language.length > 0 ? language[index]?.name : ''}
+										{field.language}
 										<Controller
-											name={`texts.${index}.text`}
+											name={`texts[${index}].text`}
 											control={control}
 											defaultValue={field.text}
 											render={({ field }) => (
 												<ReactQuill
 													modules={modules}
 													formats={formats}
-													value={field.value}
+													defaultValue={field.value}
 													onChange={field.onChange}
 													theme='snow'
 												/>

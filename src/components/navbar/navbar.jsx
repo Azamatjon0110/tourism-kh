@@ -111,7 +111,7 @@ const Navbar = () => {
 		<nav className='navbar'>
 			<div className='container'>
 				<div className='mobile-offset'>
-					<Link to='/' className=''>
+					<Link to='/' className='logo'>
 						<img
 							className='logo-site'
 							src={logo?.id > 0 ? baseurl + logo.image_url : ''}

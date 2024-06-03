@@ -118,12 +118,8 @@ export default {
 	},
 	update_img(data) {
 		let form_data = new FormData();
-		form_data.append('files', data.file);
-		return server(
-			`picture/update?source=${data.source}&source_id=${data.source_id}`,
-			'put',
-			[form_data]
-		);
+		form_data.append('file', data.file);
+		return server(`picture/update?id=${data.id}`, 'put', form_data);
 	},
 	// hotels
 	get_scholar(p = query) {
@@ -230,7 +226,7 @@ export default {
 
 	update_logo(data) {
 		let form_data = new FormData();
-		form_data.append('file', data.file);
+		form_data.append('files', data.file);
 		console.log(form_data);
 		return server(`logo/update?source=LOGO&id=13`, 'put', form_data);
 	},

@@ -11,15 +11,18 @@ import api from '../../server/api';
 import Loading from '../../components/Animation/loading';
 // import { useSelector } from 'react-redux';
 import baseurl from '../../server/baseurl';
+import util from '../../server/util';
+import handleError from '../../server/handle';
 
 const Edit = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
-	// const baseUrl = 'http://test.m14.uz/';
+
+	const [imgId, setImgId] = useState();
 	const lang = 'UZB';
 	const [languages, setLanguage] = useState([]);
 	const [load, setLoad] = useState(false);
-	const [file, setFile] = useState();
+	const [fileImage, setFile] = useState();
 	const [img, setImg] = useState();
 	const queryBox = location.search.split('&');
 	const query = queryBox[0].slice(3);
@@ -107,6 +110,27 @@ const Edit = () => {
 				})
 				.then((res) => {
 					console.log(res);
+					if (res.status == 200) {
+						const body = {
+							id: imgId,
+							file: fileImage,
+						};
+						api
+							.update_img(body)
+							.then((res1) => {
+								if (res1.status == 200) {
+									util.toast('success', res1.data.data);
+									reset();
+									// setImg({});
+									setFile('');
+									setLoad(false);
+								}
+							})
+							.catch((err) => {
+								handleError(err);
+								// setLoad(false);
+							});
+					}
 					setLoad(false);
 				})
 				.catch((err) => {
@@ -125,6 +149,27 @@ const Edit = () => {
 				})
 				.then((res) => {
 					console.log(res);
+					if (res.status == 200) {
+						const body = {
+							id: imgId,
+							file: fileImage,
+						};
+						api
+							.update_img(body)
+							.then((res1) => {
+								if (res1.status == 200) {
+									util.toast('success', res1.data.data);
+									reset();
+									// setImg({});
+									setFile('');
+									setLoad(false);
+								}
+							})
+							.catch((err) => {
+								handleError(err);
+								// setLoad(false);
+							});
+					}
 					setLoad(false);
 				})
 				.catch((err) => {
@@ -150,6 +195,7 @@ const Edit = () => {
 			api
 				.hotel_single(id)
 				.then((res) => {
+					setImgId(res.data.pictures[0].id);
 					setPi(res.data.pictures[0].image_url);
 					reset({
 						texts: res.data.texts,
@@ -164,6 +210,7 @@ const Edit = () => {
 			api
 				.museum_single(id)
 				.then((res) => {
+					setImgId(res.data.pictures[0].id);
 					setPi(res.data.pictures[0].image_url);
 					reset({
 						texts: res.data.texts,
@@ -204,7 +251,7 @@ const Edit = () => {
 					<form className='row' onSubmit={handleSubmit(submit)}>
 						<div className='col-4'>
 							<div className='img-load'>
-								{file ? (
+								{fileImage ? (
 									<img className='h-image' src={img} alt='' />
 								) : (
 									<img className='h-image' src={baseurl + pi} alt='' />

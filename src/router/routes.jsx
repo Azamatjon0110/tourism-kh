@@ -13,7 +13,7 @@ import MainAdmin from '../pages/admin-main/admin-main';
 function MainRoutes() {
 	return (
 		<Routes>
-			<Route path='/' Component={Home} />
+			<Route path='/*' Component={Home} />
 			<Route path='/about' Component={About} />
 			<Route path='/historical_places' Component={Historical} />
 			<Route path='/hotels' Component={Hotels} />

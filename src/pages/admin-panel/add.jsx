@@ -18,7 +18,7 @@ const Add = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [load, setLoad] = useState(false);
-	const [file, setFile] = useState();
+	const [fileImage, setFile] = useState();
 	const [image, setImg] = useState({});
 	const [languages, setLanguages] = useState([]);
 
@@ -143,7 +143,7 @@ const Add = () => {
 						const body = {
 							source: res.data.source,
 							source_id: res.data.source_id,
-							file: file,
+							file: fileImage,
 						};
 						api
 							.create_img(body)
@@ -181,9 +181,8 @@ const Add = () => {
 				.then((res) => {
 					if (res.status == 200) {
 						const body = {
-							source: res.data.source,
-							source_id: res.data.source_id,
-							file: file,
+							id: res.data.id,
+							file: fileImage,
 						};
 						api
 							.create_img(body)
@@ -224,7 +223,7 @@ const Add = () => {
 					<form className='row' onSubmit={handleSubmit(submit)}>
 						<div className='col-4'>
 							<div className='img-load'>
-								{file ? (
+								{fileImage ? (
 									<img className='h-image' src={image} alt='' />
 								) : (
 									<img className='h-image' src={pi} alt='' />
@@ -238,7 +237,7 @@ const Add = () => {
 									onChange={loadFile}
 									required
 								/>
-								{file ? 'Rasmni alishtirish ' : 'Rasm qo‘shish'}
+								{fileImage ? 'Rasmni alishtirish ' : 'Rasm qo‘shish'}
 							</label>
 						</div>
 						<div className='col-8'>

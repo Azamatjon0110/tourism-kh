@@ -38,37 +38,29 @@ const Home = () => {
 	let navigate = useNavigate();
 	const scrollRef = useRef(null);
 	const settings = {
-		infinite: true,
 		slidesToShow: 3,
 		slidesToScroll: 1,
+		speed: 5000,
 		autoplay: true,
-		speed: 3000,
+		infinite: true,
 		autoplaySpeed: 1000,
 		cssEase: 'linear',
 		responsive: [
 			{
-				breakpoint: 1024,
-				settings: {
-					slidesToShow: 3,
-					slidesToScroll: 3,
-					infinite: true,
-					dots: true,
-				},
+				breakpoint: { max: 4000, min: 3000 },
+				settings: { slidesToShow: 4 },
 			},
 			{
-				breakpoint: 600,
-				settings: {
-					slidesToShow: 2,
-					slidesToScroll: 2,
-					initialSlide: 2,
-				},
+				breakpoint: { max: 3000, min: 1024 },
+				settings: { slidesToShow: 3 },
 			},
 			{
-				breakpoint: 480,
-				settings: {
-					slidesToShow: 1,
-					slidesToScroll: 1,
-				},
+				breakpoint: { max: 1024, min: 768 },
+				settings: { slidesToShow: 2 },
+			},
+			{
+				breakpoint: { max: 768, min: 320 },
+				settings: { slidesToShow: 1 },
 			},
 		],
 	};
@@ -307,7 +299,7 @@ const Home = () => {
 							<div className='row' data-scroll>
 								{news.length > 0
 									? news.map((elem, ind) => (
-											<div className='col-12 col-md-6 col-lg-4' key={elem.id}>
+											<div className='col-12 col-md-6 col-lg-4' key={ind}>
 												<div className='card-news'>
 													<img
 														className='news-img w-100 me-0'
@@ -365,12 +357,13 @@ const Home = () => {
 						</div>
 						<Slider {...settings}>
 							{arrMedia.map((elem) => (
-								<img
-									className='galary-img'
-									src={baseurl + elem.image_url}
-									key={elem}
-									alt=''
-								/>
+								<div key={elem.id}>
+									<img
+										className='galary-img'
+										src={baseurl + elem.image_url}
+										alt=''
+									/>
+								</div>
 							))}
 						</Slider>
 						<button
@@ -389,8 +382,8 @@ const Home = () => {
 							)}
 						</button>
 					</div>
-					<Footer />
 				</div>
+				<Footer />
 			</div>
 			<div className={load === true ? 'd-block' : 'd-none'}>
 				<Loading />

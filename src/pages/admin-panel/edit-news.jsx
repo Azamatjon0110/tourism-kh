@@ -11,9 +11,10 @@ import baseurl from '../../server/baseurl';
 const EditNews = () => {
 	const lang = 'UZB';
 	const location = useLocation();
+	const [imgId, setImgId] = useState();
 	const navigate = useNavigate();
 	const [load, setLoad] = useState(false);
-	const [file, setFile] = useState(null);
+	const [fileImage, setFile] = useState(null);
 	const [image, setImg] = useState(null);
 	const [languages, setLanguages] = useState([]);
 
@@ -104,11 +105,11 @@ const EditNews = () => {
 			api
 				.news_single(id)
 				.then((res) => {
-					console.log(res);
+					setImgId(res.data?.pictures[0]?.id);
 					reset({
 						file: res.data.pictures[0]?.image_url,
 						texts: res.data.texts,
-						link: res.data.videos[0].video_url,
+						link: res.data.videos[0]?.video_url,
 					});
 					setImg(res.data.pictures[0]?.image_url);
 					setLoad(false);
@@ -120,6 +121,7 @@ const EditNews = () => {
 			api
 				.about_single(id)
 				.then((res) => {
+					setImgId(res.data?.pictures[0]?.id);
 					reset({
 						file: res.data.pictures[0].image_url,
 						texts: res.data.texts,
@@ -144,10 +146,10 @@ const EditNews = () => {
 			});
 	};
 	const submit = (data) => {
+		setLoad(true);
 		data.texts.map((elem, i) => {
 			data.texts[i].language = languages[i].key;
 		});
-		console.log(data);
 		if (query == 'news') {
 			api
 				.update_news({
@@ -159,9 +161,8 @@ const EditNews = () => {
 					if (res.status == 200) {
 						console.log(res);
 						const body = {
-							source: res.data.source,
-							source_id: res.data.source_id,
-							file: file,
+							id: imgId,
+							file: fileImage,
 						};
 						api
 							.update_img(body)
@@ -169,8 +170,40 @@ const EditNews = () => {
 								if (res1.status == 200) {
 									util.toast('success', res1.data.data);
 									reset();
-									// setImg({});
-									// navigate(-1);
+									setFile(null);
+									setLoad(false);
+								}
+							})
+							.catch((err) => {
+								util.toastError('warning', err.message);
+								setLoad(false);
+							});
+					}
+				})
+				.catch((err) => {
+					console.log(err);
+					setLoad(false);
+				});
+		}
+		if (query == 'about') {
+			api
+				.update_about({
+					id: id,
+					texts: data.texts,
+					videos: [],
+				})
+				.then((res) => {
+					if (res.status == 200) {
+						const body = {
+							id: imgId,
+							file: fileImage,
+						};
+						api
+							.update_img(body)
+							.then((res1) => {
+								if (res1.status == 200) {
+									util.toast('success', res1.data.data);
+									reset();
 									setFile(null);
 									setLoad(false);
 								}
@@ -204,7 +237,7 @@ const EditNews = () => {
 					<form className='row' onSubmit={handleSubmit(submit)}>
 						<div className='col-4'>
 							<div className='img-load'>
-								{file != null ? (
+								{fileImage != null ? (
 									<img className='h-image' src={image} alt='' />
 								) : (
 									<img className='h-image' src={baseurl + image} alt='' />

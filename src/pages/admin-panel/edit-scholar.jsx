@@ -17,6 +17,7 @@ import baseurl from '../../server/baseurl';
 const EditScholar = () => {
 	const lang = 'UZB';
 	const location = useLocation();
+	const [imgId, setImgId] = useState();
 	const navigate = useNavigate();
 	const [load, setLoad] = useState(false);
 	const [fileImage, setFile] = useState();
@@ -99,7 +100,6 @@ const EditScholar = () => {
 		api
 			.get_lang(body)
 			.then((res) => {
-				console.log(res.data);
 				setLanguages(res.data.data);
 			})
 			.catch((err) => {
@@ -110,7 +110,7 @@ const EditScholar = () => {
 		api
 			.scholar_single(id)
 			.then((res) => {
-				console.log(res);
+				setImgId(res.data?.pictures[0]?.id);
 				reset({
 					texts: res.data.texts,
 					fullname: res.data.fullname,
@@ -144,12 +144,11 @@ const EditScholar = () => {
 				.then((res) => {
 					if (res.status == 200) {
 						const body = {
-							source: res.data.source,
-							source_id: res.data.source_id,
+							id: imgId,
 							file: fileImage,
 						};
 						api
-							.create_img(body)
+							.update_img(body)
 							.then((res1) => {
 								if (res1.status == 200) {
 									util.toast('success', res1.data.data);
